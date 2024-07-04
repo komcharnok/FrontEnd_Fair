@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function About() {
+export default function Home() {
   return (
     <div className='max-w-[1200px] px-4 mx-auto'>
-      AboutPage
+      HomePage
     </div>
   )
 }
