@@ -1,15 +1,11 @@
-
+import HomePage from "./pages/home/HomePage";
 
 function App() {
-  
-
   return (
-    <>
-      <div className="bg-red-400">
-        <h1 className="">adad</h1>
-      </div>
-    </>
-  )
+    <div data-theme="light">
+      {/* <HomePage /> */}
+    </div>
+  );
 }
 
-export default App
+export default App;
