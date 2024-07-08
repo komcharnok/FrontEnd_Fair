@@ -42,6 +42,23 @@ const useChat = create((set) => ({
       console.error("Failed to getConversations", error);
     }
   },
+  open_create_conversation: async (values) => {
+    try {
+      const { token, receiver_id } = values;
+      const response = await axios.post(
+        "http://localhost:8080/conversation",
+        { receiver_id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      set({ activeConversation: response.data });
+    } catch (error) {
+      console.error("Failed to open_create_conversation", error);
+    }
+  },
 }));
 
 export { useTodos, useUser, useChat };
