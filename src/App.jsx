@@ -1,8 +1,7 @@
 import AppRouter from "./routes/AppRouter"
+import './App.css';
 
-
-function App() {
-  
+function App() { 
 
   return (
     <>

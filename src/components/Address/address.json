@@ -1,0 +1,64 @@
+{
+    "address": [
+      {
+        "id": "01",
+        "name": "Kay Khamcha-I",
+        "address": "123 หมู่ 1 บ้าน แม่สันทราย , ตำบล สันทรายหลวง",
+        "province": "เชียงใหม่",
+        "district": "แม่สันทราย",
+        "code": "50180",
+        "phone": "(+66) 925146875",
+        "email": "kaykha09@gmail.com"
+      },
+      {
+        "id": "02",
+        "name": "Koy Koy",
+        "address": "124 หมู่ 1 บ้าน คำชะอี , ตำบล คำชะอี",
+        "province": "มุกดาหาร",
+        "district": "คำชะอี",
+        "code": "49110",
+        "phone": "(+66) 925148752",
+        "email": "koykoy09@gmail.com"
+      },
+      {
+        "id": "3e6f",
+        "name": "andy",
+        "address": "445 หมู่ 8 บ้าน คำชะอี ตำบล คำชะอี",
+        "province": "สกลนคร",
+        "district": "ชะอำ",
+        "code": "48000",
+        "phone": "191",
+        "email": "ss@"
+      },
+      {
+        "id": "c8e7",
+        "name": "k12",
+        "address": "445 หมู่ 8 บ้าน คำชะอี ตำบล คำชะอี",
+        "province": "สกลนคร",
+        "district": "คำชะอี",
+        "code": "49110",
+        "phone": "191",
+        "email": "lc@hotmail.co"
+      },
+      {
+        "id": "9a65",
+        "name": "candy",
+        "address": "445 หมู่ 8 บ้าน คำชะอี ตำบล คำชะอี",
+        "province": "สกลนคร",
+        "district": "ชะอำ",
+        "code": "49110",
+        "phone": "191",
+        "email": "ss@"
+      },
+      {
+        "id": "cfe9",
+        "name": "hee",
+        "address": "445 หมู่ 8 บ้าน คำชะอี ตำบล คำชะอี",
+        "province": "สกลนคร",
+        "district": "คำชะอี",
+        "code": "49110",
+        "phone": "191",
+        "email": "k12@gmail.com"
+      }
+    ]
+  }
