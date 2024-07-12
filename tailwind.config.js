@@ -5,6 +5,9 @@ export default {
     extend: {},
     daisyui: {
       themes: ["light"],
+      fontFamily:{
+        'Prompt' : ["Prompt"]
+      }
     },
   },
   plugins: [require("daisyui")],
