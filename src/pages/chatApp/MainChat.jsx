@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import Sidebar from "../../components/chatApp/sidebar/Sidebar";
 import { useUser, useChat } from "../../store/store";
+import ChatContainer from "../../components/chatApp/Chat/ChatContainer";
+import WhatsappHome from "../../components/chatApp/Chat/Welcome/WhatsappHome";
 
 function MainChat() {
   const { user } = useUser();
-  const { getConversations, conversations } = useChat();
+  const { getConversations, conversations, activeConversation } = useChat();
 
   // console.log("conversations = ", conversations);
   useEffect(() => {
@@ -19,6 +21,7 @@ function MainChat() {
       <div className="container h-screen flex py-[19px]">
         {/*Sidebar*/}
         <Sidebar />
+        {activeConversation.id ? <ChatContainer /> : <WhatsappHome />}
       </div>
     </div>
   );

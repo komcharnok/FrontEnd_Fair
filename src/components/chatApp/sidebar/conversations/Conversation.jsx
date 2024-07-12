@@ -9,7 +9,7 @@ import { dateHandler } from "../../../../utils/date";
 
 function Conversation({ convo }) {
   const { open_create_conversation, activeConversation } = useChat();
-  console.log("activeConversation = ", activeConversation);
+  // console.log("activeConversation = ", activeConversation);
   const { user } = useUser();
   const { token } = user;
   const values = {
