@@ -5,7 +5,23 @@ import LoginForm from '../pages/LoginForm'
 import RegisterForm from '../pages/RegisterForm'
 import { RouterProvider } from 'react-router-dom'
 import NavBar from './../components/home/NavBar';
+import useAuth from '../hooks/useAuth'
+import HomePage from './../pages/home/HomePage';
 
+
+const userRouter = createBrowserRouter([
+    {
+        path: '/',
+        element: <>
+            <Outlet />
+        </>,
+        children: [
+            {index: true, element: <HomePage/>},
+            { path: "*", element: <h1>Page not found</h1> }
+        ]
+    }
+
+])
 
 const guestRouter = createBrowserRouter([
     {
@@ -14,20 +30,23 @@ const guestRouter = createBrowserRouter([
             <NavBar />
             <Outlet />
         </>,
-        errorElement: <h1>Wrong path</h1>,
         children: [
             {index: true, element:<LoginForm/>},
             {path: 'register', element: <RegisterForm/>},
+            { path: "*", element: <h1>Page not found</h1> }
         ]
     }
 ]
 )
 
+const finalRouter = (user) => {
+    if(!user) return guestRouter
+    if(user) return userRouter
+  }
 
 
-export default function AppRouter() {
-    return (
-      <RouterProvider router={guestRouter}/>
-    )
+  export default function AppRouter() {
+    const {user} = useAuth()
+    return <RouterProvider router={finalRouter(user)} />;
   }
   
