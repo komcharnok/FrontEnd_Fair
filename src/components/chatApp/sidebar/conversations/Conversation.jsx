@@ -1,17 +1,29 @@
-import React from "react";
 import {
+  getConversationId,
   getConversationName,
   getConversationPicture,
 } from "../../../../utils/chat";
-import { useUser } from "../../../../store/store";
+import { useChat, useUser } from "../../../../store/store";
 import { capitalize } from "../../../../utils/string";
 import { dateHandler } from "../../../../utils/date";
 
 function Conversation({ convo }) {
+  const { open_create_conversation, activeConversation } = useChat();
+  // console.log("activeConversation = ", activeConversation);
   const { user } = useUser();
-  console.log("convo = ", convo);
+  const { token } = user;
+  const values = {
+    receiver_id: getConversationId(user, convo.users),
+    token,
+  };
+  const openConversation = async () => {
+    await open_create_conversation(values);
+  };
   return (
-    <li className="list-none h-[72px] w-full dark:bg-dark_bg_1 hover cursor-pointer dark:text-dark_text_1 px-[10px]">
+    <li
+      onClick={() => openConversation()}
+      className="list-none h-[72px] w-full dark:bg-dark_bg_1 hover cursor-pointer dark:text-dark_text_1 px-[10px]"
+    >
       {/*Container */}
       <div className="relative w-full flex items-center justify-between py-[10px]">
         {/*Left*/}

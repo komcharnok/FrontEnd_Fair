@@ -1,9 +1,31 @@
 import React, { useState } from "react";
 import axios from "axios";
-import SearchIcon from '../../../../svg/Search';
-import FilterIcon from '../../../../svg/FilterIcon';
+import SearchIcon from "../../../../svg/Search";
+import FilterIcon from "../../../../svg/FilterIcon";
+import { useUser } from "../../../../store/store";
 
-export default function Search() {
+export default function Search({ setSearchResults }) {
+  const { user } = useUser();
+  const { token } = user;
+  const handleSearch = async (e) => {
+    if (e.target.value && e.key === "Enter") {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:8080/user?search=${e.target.value}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setSearchResults(data);
+      } catch (error) {
+        console.log(error.response.data.error.message);
+      }
+    } else {
+      setSearchResults([]);
+    }
+  };
   return (
     <div className="h-[49px] py-1.5">
       {/*Container*/}
@@ -18,6 +40,7 @@ export default function Search() {
               type="text"
               placeholder="Search or start a new chat"
               className="input-chatapp"
+              onKeyDown={(e) => handleSearch(e)}
             />
           </div>
           <button className="btn-chat">

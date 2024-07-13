@@ -3,7 +3,7 @@ import { useChat } from "../../../../store/store";
 import Conversation from "./Conversation";
 function Conversations() {
   const { conversations } = useChat();
-//   console.log("conversations = ", conversations);
+  //   console.log("conversations = ", conversations);
   return (
     <div className="convos scrollbar">
       <ul>
@@ -11,12 +11,7 @@ function Conversations() {
           conversations
             // .filter((c) => c.latestMessage || c._id === activeConversation._id)
             .map((convo) => {
-              return (
-                <Conversation
-                  convo={convo}
-                  key={convo._id}
-                />
-              );
+              return <Conversation convo={convo} key={convo.id} />;
             })}
       </ul>
     </div>

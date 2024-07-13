@@ -42,6 +42,110 @@ const useChat = create((set) => ({
       console.error("Failed to getConversations", error);
     }
   },
+  open_create_conversation: async (values) => {
+    try {
+      const { token, receiver_id } = values;
+      const response = await axios.post(
+        "http://localhost:8080/conversation",
+        { receiver_id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      set({ activeConversation: response.data });
+    } catch (error) {
+      console.error("Failed to open_create_conversation", error);
+    }
+  },
+
+  getConversationMessages: async (values) => {
+    try {
+      const { token, convo_id } = values;
+      const response = await axios.get(
+        `http://localhost:8080/message/${convo_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      set({ messages: response.data });
+    } catch (error) {
+      console.error("Failed to getConversationMessages", error);
+    }
+  },
+
+  sendMessage: async (values) => {
+    try {
+      const { token, message, convo_id, files } = values;
+      const response = await axios.post(
+        "http://localhost:8080/message/",
+        {
+          message,
+          convo_id,
+          files,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      set((state) => {
+        const newMessage = response.data;
+        const newMessages = [...state.messages, newMessage];
+        const conversation = {
+          ...newMessage.conversation,
+          latestMessage: newMessage,
+        };
+
+        const newConversations = [
+          conversation,
+          ...state.conversations.filter((c) => c.id !== conversation.id),
+        ];
+
+        return {
+          messages: newMessages,
+          conversations: newConversations,
+        };
+      });
+
+      // set((state) => {
+      //   const news = state.messages.map((msg) => msg + " haha");
+      //   return { messages: news };
+      // });
+    } catch (error) {
+      console.error("Failed to sendMessage", error);
+    }
+  },
 }));
 
-export { useTodos, useUser, useChat };
+const useProduct = create((set) => ({
+  products: [],
+  searchProducts: [],
+
+  getProducts: async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/product");
+      set({ products: response.data });
+    } catch (error) {
+      console.error("Failed to getProducts", error);
+    }
+  },
+
+  searchProduct: async (keyword) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/search?keyword=${keyword}`
+      );
+      set({ searchProducts: response.data });
+    } catch (error) {
+      console.error("Failed to searchProducts", error);
+    }
+  },
+}));
+
+export { useTodos, useUser, useChat, useProduct };
