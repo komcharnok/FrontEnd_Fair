@@ -1,7 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+
+
+const guestNav = [
+  { to: "/", text: "Login" },
+  { to: "/register", text: "Register" },
+];
+
+const userNav = [
+  { to: "/", text: "" }
+  
+];
+
+const finalNav = (user) => {
+  if (!user) return guestNav;
+  if (user) return userNav;
+};
+
+
+
 
 function NavBar() {
+
+  const { user, logout } = useAuth();
+
+  const hdlLogout = () => {
+    logout();
+  };
+
   return (
     <header className="container mx-auto flex justify-between items-center p-4 border-b">
       <div className="text-red-500 text-2xl font-bold">FAIR</div>
@@ -28,12 +55,21 @@ function NavBar() {
           </svg>
         </button>
       </div>
-      
-      <ul>
-        <li><Link to="/">Login</Link></li>
-      </ul>
-      <ul>
-        <li><Link to="/register">Register</Link></li>
+      <p className="text-xl font-bold text-red-500 pl-7">{user}</p>
+      <ul className=" flex flex-row gap-5">
+      {finalNav(user).map((el) => (
+          <li key={el.to}>
+            <Link to={el.to}>{el.text}</Link>
+          </li>
+        ))}
+
+        {user && (
+          <li>
+            <Link to="/" onClick={hdlLogout}>
+              Logout
+            </Link>
+          </li>
+        )}
       </ul>
        
       
