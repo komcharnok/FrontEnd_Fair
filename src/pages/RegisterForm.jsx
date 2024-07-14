@@ -22,7 +22,7 @@ function RegisterForm() {
       e.preventDefault();
       const rs = await axios.post("http://localhost:8080/auth/register", input);
       if (rs.status === 201) {
-        alert("Register successfully");
+        alert("Register successfully, Please verify your email.");
         navigate("/");
       }
     } catch (err) {
