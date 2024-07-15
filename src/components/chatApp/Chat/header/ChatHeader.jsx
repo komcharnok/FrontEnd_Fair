@@ -6,7 +6,7 @@ import SearchLargeIcon from "../../../../svg/SearchLarge";
 
 function ChatHeader() {
   const { activeConversation } = useChat();
-  const { name, picture } = activeConversation;
+  const { username, picture } = activeConversation;
   return (
     <div className="h-[59px] dark:bg-dark_bg_2 flex items-center p16 select-none">
       {/*Container*/}
@@ -17,14 +17,15 @@ function ChatHeader() {
           <button className="btn-chat">
             <img
               src={picture}
-              alt={`${name} picture`}
+              alt={`${username} picture`}
               className="w-full h-full rounded-full object-cover"
             />
           </button>
           {/*Conversation name and online status*/}
           <div className="flex flex-col">
-            <h1 className="dark:text-white text-md font-bold">
-              {capitalize(name)}
+            {/* <h1 className="dark:text-white text-md font-bold"> */}
+            <h1 className="dark:text-black text-md font-bold">
+              {capitalize(username)}
               {/* {capitalize(name.split(" ")[0])} */}
             </h1>
             {/* <span className="text-xs dark:text-dark_svg_2">

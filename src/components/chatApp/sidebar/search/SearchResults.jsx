@@ -15,7 +15,7 @@ function SearchResults({ searchResults, setSearchResults }) {
             searchResults.map((user) => (
               <Contact
                 contact={user}
-                key={user.id}
+                key={user.user_id}
                 setSearchResults={setSearchResults}
               />
             ))}

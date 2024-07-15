@@ -19,7 +19,7 @@ function SidebarHeader() {
         <button className={btn}>
           <img
             src={user.picture}
-            alt={user.name}
+            alt={user.username}
             className="w-full h-full rounded-full object-cover"
           />
         </button>

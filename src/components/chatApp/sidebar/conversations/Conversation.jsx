@@ -10,6 +10,7 @@ import { dateHandler } from "../../../../utils/date";
 function Conversation({ convo }) {
   const { open_create_conversation, activeConversation } = useChat();
   // console.log("activeConversation = ", activeConversation);
+  console.log("convo = ", convo);
   const { user } = useUser();
   const { token } = user;
   const values = {
@@ -19,6 +20,13 @@ function Conversation({ convo }) {
   const openConversation = async () => {
     await open_create_conversation(values);
   };
+
+
+  // console.log("user = ", user)
+  // console.log("convo = ", convo)
+  
+
+
   return (
     <li
       onClick={() => openConversation()}

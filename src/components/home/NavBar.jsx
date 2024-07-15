@@ -1,6 +1,28 @@
 import React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
+  const navigator = useNavigate();
+  // const { searchProducts, searchProduct } = useProduct();
+  const [keyword, setKeyword] = useState("");
+
+  const handleInput = (e) => {
+    setKeyword(e.target.value);
+  };
+
+  const search = async (e) => {
+    e.preventDefault();
+
+    if (!keyword) {
+      return;
+    }
+
+    // await searchProduct(keyword);
+    setKeyword("");
+    navigator(`/search/${keyword}`);
+  };
+
   return (
     <header className="container mx-auto flex justify-between items-center p-4 border-b">
       <div className="text-red-500 text-2xl font-bold">FAIR</div>
@@ -9,8 +31,15 @@ function NavBar() {
           type="text"
           placeholder="ค้นหาสินค้า"
           className="w-full pl-10 pr-4 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-red-500"
+          name="keyword"
+          value={keyword}
+          onChange={(e) => handleInput(e)}
         />
-        <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+        <button
+          type="submit"
+          onClick={search}
+          className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
@@ -27,7 +56,7 @@ function NavBar() {
           </svg>
         </button>
       </div>
-      <div className="relative">
+      <div>
         <svg
           width="32"
           height="35"

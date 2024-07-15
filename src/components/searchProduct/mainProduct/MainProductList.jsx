@@ -211,17 +211,24 @@ import { useEffect } from "react";
 // ];
 
 function MainProductList() {
-  const { keyword } = useParams();
-  const { searchProducts, searchProduct } = useProduct();
+  const { keyword, category } = useParams();
+  const { searchProducts, searchProduct, searchCategory } = useProduct();
   const [paginatorData, setpaginatorData] = useState([]);
 
   // fetch search product
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchKeyword = async () => {
       await searchProduct(keyword);
     };
-    fetchData();
-  }, [keyword]);
+    const fetchCategory = async () => {
+      await searchCategory(category);
+    };
+    if (keyword) {
+      fetchKeyword();
+    } else if (category) {
+      fetchCategory();
+    }
+  }, [keyword, category]);
 
   return (
     <div className="px-4 py-12">

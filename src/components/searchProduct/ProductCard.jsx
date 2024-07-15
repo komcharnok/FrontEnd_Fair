@@ -16,7 +16,7 @@ function ProductCard({ product }) {
         <h2 className="text-sm font-semibold">{product.product_title}</h2>
         <div className="flex items-center mt-2">
           <span className="text-red-500 font-bold"> ฿{product.price}</span>
-          <span className="text-gray-500 line-through ml-2">฿{30000}</span>
+          <span className="text-gray-500 line-through ml-2">฿{product.real_price}</span>
         </div>
         <div className="flex items-center mt-2">
           <span className="text-yellow-500">

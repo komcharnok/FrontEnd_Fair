@@ -3,7 +3,7 @@ import { useChat } from "../../../../store/store";
 import Conversation from "./Conversation";
 function Conversations() {
   const { conversations } = useChat();
-  //   console.log("conversations = ", conversations);
+  // console.log("conversations = ", conversations);
   return (
     <div className="convos scrollbar">
       <ul>
