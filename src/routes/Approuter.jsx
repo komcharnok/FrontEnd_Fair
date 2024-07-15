@@ -18,7 +18,9 @@ const userRouter = createBrowserRouter([
         </>,
         children: [
             {index: true, element: <HomePage/>},
+            {path: 'register', element: <RegisterForm/>},
             { path: "review", element: <ReviewPage /> },
+            { path: "reviewcreate", element: <ReviewCreate /> },
             { path: "*", element: <h1>Page not found</h1> }
         ]
     }
@@ -34,9 +36,7 @@ const guestRouter = createBrowserRouter([
         </>,
         children: [
             {index: true, element:<LoginForm/>},
-            {path: 'register', element: <RegisterForm/>},
             { path: "review", element: <ReviewPage /> },
-            { path: "reviewcreate", element: <ReviewCreate /> },
             { path: "*", element: <h1>Page not found</h1> }
         ]
     }
