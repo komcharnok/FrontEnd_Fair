@@ -8,7 +8,7 @@ import NavBar from './../components/home/NavBar';
 import useAuth from '../hooks/useAuth'
 import HomePage from './../pages/home/HomePage';
 
-//QQQ
+//By.QQQ
 import ShopCard from './../pages/ShopCard/ShopCard';
 import Address from './../pages/Address/Address';
 import Pays from './../pages/Pay/Pays';
