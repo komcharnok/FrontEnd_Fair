@@ -1,32 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
-
-
-const guestNav = [
-  { to: "/", text: "Login" },
-  { to: "/register", text: "Register" },
-];
-
-const userNav = [
-  { to: "/", text: "" }
-  
-];
-
-const finalNav = (user) => {
-  if (!user) return guestNav;
-  if (user) return userNav;
-};
-
-
-
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
+  const navigator = useNavigate();
+  // const { searchProducts, searchProduct } = useProduct();
+  const [keyword, setKeyword] = useState("");
 
-  const { user, logout } = useAuth();
+  const handleInput = (e) => {
+    setKeyword(e.target.value);
+  };
 
-  const hdlLogout = () => {
-    logout();
+  const search = async (e) => {
+    e.preventDefault();
+
+    if (!keyword) {
+      return;
+    }
+
+    // await searchProduct(keyword);
+    setKeyword("");
+    navigator(`/search/${keyword}`);
   };
 
   return (
@@ -37,8 +31,15 @@ function NavBar() {
           type="text"
           placeholder="ค้นหาสินค้า"
           className="w-full pl-10 pr-4 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-red-500"
+          name="keyword"
+          value={keyword}
+          onChange={(e) => handleInput(e)}
         />
-        <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+        <button
+          type="submit"
+          onClick={search}
+          className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
@@ -55,25 +56,7 @@ function NavBar() {
           </svg>
         </button>
       </div>
-      <p className="text-xl font-bold text-red-500 pl-7">{user}</p>
-      <ul className=" flex flex-row gap-5">
-      {finalNav(user).map((el) => (
-          <li key={el.to}>
-            <Link to={el.to}>{el.text}</Link>
-          </li>
-        ))}
-
-        {user && (
-          <li>
-            <Link to="/" onClick={hdlLogout}>
-              Logout
-            </Link>
-          </li>
-        )}
-      </ul>
-       
-      
-      <div className="relative">
+      <div>
         <svg
           width="32"
           height="35"
