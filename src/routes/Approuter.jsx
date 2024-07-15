@@ -26,7 +26,17 @@ const userRouter = createBrowserRouter([
         </>,
         children: [
             { index: true, element: <HomePage /> },
-            { path: "*", element: <h1>Page not found</h1> }
+            { path: "*", element: <h1>Page not found</h1> },
+            { path: 'shopcart', element: <ShopCard /> },
+            { path: 'address', element: <Address /> },
+            { path: 'pays', element: <Pays /> },
+            { path: 'order', element: <Order /> },
+            { path: 'orderall', element: <OrderAll /> },
+            { path: 'paysucess', element: <PaySucess /> },
+            { path: 'nopay', element: <Nopay /> },
+            { path: 'revieworder', element: <Nopay /> },  
+
+
         ]
     }
 
@@ -42,14 +52,9 @@ const guestRouter = createBrowserRouter([
         children: [
             { index: true, element: <LoginForm /> },
             { path: 'register', element: <RegisterForm /> },
-            { path: 'shopcart', element: <ShopCard /> },
-            { path: 'address', element: <Address /> },
-            { path: 'pays', element: <Pays /> },
-            { path: 'order', element: <Order /> },
-            { path: 'orderall', element: <OrderAll /> },
-            { path: 'paysucess', element: <PaySucess /> },
-            { path: 'nopay', element: <Nopay /> },
-            { path: 'revieworder', element: <Nopay /> },          
+
+            
+              
             { path: "*", element: <h1>Page not found</h1> }
         ]
     }
