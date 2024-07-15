@@ -1,8 +1,12 @@
 /* eslint-disable no-unused-vars */
 import useAuth from "./hooks/useAuth";
+<<<<<<< HEAD
+=======
+
+>>>>>>> e32c6fe1966da936e000c0485524f37d6064dd79
 import SearchProduct from "./pages/searchProduct/SearchProduct";
-// import TodoList from "./pages/todo/TodoList";
-// import { useUser } from "./store/store";
+import TodoList from "./pages/todo/TodoList";
+import { useUser } from "./store/store";
 import MainChat from "./pages/chatApp/MainChat";
 import HomePage from "./pages/home/HomePage";
 import AppRouter from './routes/AppRouter';
