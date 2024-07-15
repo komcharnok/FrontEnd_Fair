@@ -17,13 +17,6 @@ const userRouter = createBrowserRouter([
             <Outlet />
         </>,
         children: [
-<<<<<<< HEAD
-            {index: true, element: <HomePage/>},
-            {path: 'register', element: <RegisterForm/>},
-            { path: "review", element: <ReviewPage /> },
-            { path: "reviewcreate", element: <ReviewCreate /> },
-            { path: "*", element: <h1>Page not found</h1> }
-=======
             { index: true, element: <HomePage /> },
             { path: "*", element: <h1>Page not found</h1> },
             { path: 'shopcart', element: <ShopCard /> },
@@ -33,10 +26,12 @@ const userRouter = createBrowserRouter([
             { path: 'orderall', element: <OrderAll /> },
             { path: 'paysucess', element: <PaySucess /> },
             { path: 'nopay', element: <Nopay /> },
-            { path: 'revieworder', element: <Nopay /> },  
+            { path: 'revieworder', element: <Nopay /> },
+            { path: "review", element: <ReviewPage /> },
+            { path: "reviewcreate", element: <ReviewCreate /> },
+              
 
 
->>>>>>> fbd50d392b6113301fcdea56588b5c50eb6616ca
         ]
     }
 
@@ -50,16 +45,12 @@ const guestRouter = createBrowserRouter([
             <Outlet />
         </>,
         children: [
-<<<<<<< HEAD
-            {index: true, element:<LoginForm/>},
-            { path: "review", element: <ReviewPage /> },
-=======
             { index: true, element: <LoginForm /> },
             { path: 'register', element: <RegisterForm /> },
+            { path: "review", element: <ReviewPage /> },
 
             
               
->>>>>>> fbd50d392b6113301fcdea56588b5c50eb6616ca
             { path: "*", element: <h1>Page not found</h1> }
         ]
     }
