@@ -28,6 +28,9 @@ export default {
     },
     daisyui: {
       themes: ["light"],
+      fontFamily:{
+        'Prompt' : ["Prompt"]
+      }
     },
   },
   plugins: [require("daisyui")],
