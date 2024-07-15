@@ -7,6 +7,7 @@ import { RouterProvider } from 'react-router-dom'
 import NavBar from './../components/home/NavBar';
 import useAuth from '../hooks/useAuth'
 import HomePage from './../pages/home/HomePage';
+import ReviewCreate from '../pages/review/ReviewCreate'
 
 
 const userRouter = createBrowserRouter([
@@ -16,8 +17,18 @@ const userRouter = createBrowserRouter([
             <Outlet />
         </>,
         children: [
-            {index: true, element: <HomePage/>},
-            { path: "*", element: <h1>Page not found</h1> }
+            { index: true, element: <HomePage /> },
+            { path: "*", element: <h1>Page not found</h1> },
+            { path: 'shopcart', element: <ShopCard /> },
+            { path: 'address', element: <Address /> },
+            { path: 'pays', element: <Pays /> },
+            { path: 'order', element: <Order /> },
+            { path: 'orderall', element: <OrderAll /> },
+            { path: 'paysucess', element: <PaySucess /> },
+            { path: 'nopay', element: <Nopay /> },
+            { path: 'revieworder', element: <Nopay /> },
+            { path: "review", element: <ReviewPage /> },
+            { path: "reviewcreate", element: <ReviewCreate /> },
         ]
     }
 
@@ -31,9 +42,10 @@ const guestRouter = createBrowserRouter([
             <Outlet />
         </>,
         children: [
-            {index: true, element:<LoginForm/>},
-            {path: 'register', element: <RegisterForm/>},
-            { path: "*", element: <h1>Page not found</h1> }
+            { index: true, element: <LoginForm /> },
+            { path: 'register', element: <RegisterForm /> },
+            { path: "review", element: <ReviewPage /> },
+             { path: "*", element: <h1>Page not found</h1> }
         ]
     }
 ]
