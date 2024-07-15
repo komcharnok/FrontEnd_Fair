@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { createBrowserRouter } from "react-router-dom";
@@ -20,7 +21,7 @@ import PreOderHome from "../pages/preorderhome/PreOderHome";
 import VendorHome from "../pages/vendor/vendorHome";
 import ReviewCreate from "../pages/review/ReviewCreate";
 import ReviewPage from "./../pages/review/Review";
-import SearchProduct from "../pages/searchProduct/SearchProduct";
+import SearchProduct from '../pages/searchProduct/SearchProduct';
 import MainChat from "../pages/chatApp/MainChat";
 
 const userRouter = createBrowserRouter([
