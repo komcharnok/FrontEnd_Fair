@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { createBrowserRouter } from "react-router-dom";
@@ -8,7 +9,7 @@ import NavBar from "../components/home/NavBar";
 import useAuth from "../hooks/useAuth";
 import HomePage from "../pages/home/HomePage";
 
-//By.QQQ
+
 import ShopCard from "../pages/ShopCard/ShopCard";
 import Address from "../pages/Address/Address";
 import Pays from "../pages/Pay/Pays";
@@ -21,6 +22,7 @@ import VendorHome from "../pages/vendor/vendorHome";
 import ReviewCreate from "../pages/review/ReviewCreate";
 import ReviewPage from "./../pages/review/Review";
 import SearchProduct from '../pages/searchProduct/SearchProduct';
+import MainChat from "../pages/chatApp/MainChat";
 
 const userRouter = createBrowserRouter([
   {
