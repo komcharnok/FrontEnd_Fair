@@ -146,6 +146,19 @@ const useProduct = create((set) => ({
       console.error("Failed to searchProducts", error);
     }
   },
+
+  searchCategory: async (category) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/search/category?category=${category}`
+      );
+      set({ searchProducts: response.data });
+    } catch (error) {
+      console.error("Failed to searchCategory", error);
+    }
+  },
+
+
 }));
 
 export { useTodos, useUser, useChat, useProduct };
