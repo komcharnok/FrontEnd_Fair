@@ -11,9 +11,12 @@ const AddressList = () => {
 
 
     return (
-        <div className='shadow p-4 mt-2'>
-            <div className='flex justify-between items-center w-full'>
-                <h2 className='text-2xl font-semibold mt-2 text-black'>ที่อยู่การจัดส่ง</h2>
+        <div className='shadow-md p-4 mt-9 '>
+            <div className='flex justify-between items-center w-full  '>
+                <div className="flex items-center  ">
+                    <div className="bg-red-500 w-2 h-6 mr-2 rounded-sm"></div>
+                    <h2 className="text-red-500 text-xl font-semibold">ที่อยู่จัดส่ง</h2>
+                </div>
                 <button onClick={hdlOpenAddname} className="btn btn-sm border-black text-black text-xs bg-white">
                     <p className='font font-normal '>+ เพิ่มที่อยู่ใหม่</p>
                 </button>

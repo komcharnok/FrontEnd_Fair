@@ -55,6 +55,7 @@ function ProductList() {
         {products.map((product, index) => (
           <ProductCard key={index} product={product} />
         ))}
+        
       </div>
       <div className="flex justify-center mt-6">
         <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-8 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">

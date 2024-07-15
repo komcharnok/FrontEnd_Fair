@@ -6,11 +6,9 @@ const AddressContext = createContext();
 const AddressProvider = ({ children }) => {
     const [opencloseAddname, setOpencloseAddname] = useState(false);
     const [opencloseEdit, setOpencloseEdit] = useState(false);
-    const [opencloseCard, setOpencloseCard] = useState(false);
 
     const [editAddress, setEditAddress] = useState(null);
     const [address, setAddress] = useState([]);
-    const [data, setData] = useState([]);
 
     // api
     const apiAddress = async () => {
@@ -25,7 +23,7 @@ const AddressProvider = ({ children }) => {
     useEffect(() => {
         apiAddress();
     }, []);
-    
+
     const hdlDelete = async (e, id) => {
         try {
             e.stopPropagation();
@@ -33,36 +31,15 @@ const AddressProvider = ({ children }) => {
                 return;
             }
             const rs = await axios.delete(`http://localhost:8080/address/${id}`);
-            if (rs.status === 204) {
-                alert("Address deleted successfully.");
-                apiAddress(); // Refresh the address list after deletion
-            } else {
-                alert('Unexpected response status: ' + rs.status);
-            }
+            alert("Address deleted successfully.");
+            apiAddress();
+
         } catch (error) {
             console.error("Error deleting address:", error);
             alert('Error deleting address: ' + error.message);
         }
     };
 
-
-    const fetchApiData = async () => {
-        try {
-            const response = await axios.get("http://localhost:8585/data");
-            setData(response.data);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    };
-
-    useEffect(() => {
-        fetchApiData();
-    }, []);
-
-
-
-
-    
 
 
     //เปิด-ปิด FormAddName
@@ -94,11 +71,8 @@ const AddressProvider = ({ children }) => {
 
 
 
-
-
     const contextValue = {
         address,
-        data,
         opencloseAddname,
         opencloseEdit,
         editAddress,
@@ -107,7 +81,9 @@ const AddressProvider = ({ children }) => {
         hdlOpenFromEdit,
         hdlCloseFromEdit,
         hdlDelete,
-        apiAddress // Export fetchApiAddress
+        apiAddress
+
+
     };
 
     return (

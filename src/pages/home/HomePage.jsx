@@ -1,10 +1,10 @@
 
-import NavBar from '../../components/home/NavBar';
-import Banner from '../../components/home/Banner';
-import ProductList from '../../components/home/ProductList';
-import CategoryList from '../../components/home/category/CategoryList';
-import BestSellList from '../../components/home/bestSell/BestSellList';
-import MainProductList from '../../components/home/mainProduct/MainProductList';
+import NavBar from '../../components/Home/NavBar';
+import Banner from '../../components/Home/Banner';
+import ProductList from '../../components/Home/ProductList';
+import CategoryList from '../../components/Home/category/CategoryList';
+import BestSellList from '../../components/Home/bestSell/BestSellList';
+import MainProductList from '../../components/Home/mainProduct/MainProductList';
 function HomePage() {
   return (
     <div className="container mx-auto">

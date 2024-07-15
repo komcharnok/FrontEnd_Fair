@@ -1,4 +1,3 @@
-// ShopCardContext.jsx
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -9,9 +8,9 @@ const ShopCardProvider = ({ children }) => {
 
     const fetchAPI = async () => {
         try {
-            //  ./src/component/ShopCard/data.json
-            const response = await axios.get("http://localhost:8585/data");
-            setData(response.data);
+            const response = await axios.get('http://localhost:8080/cart/6'); // Replace with dynamic cart_id if needed
+            const cartItems = response.data.cart?.cartitem || []; // Adjust property name
+            setData(cartItems); // Update state with fetched data
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -21,20 +20,34 @@ const ShopCardProvider = ({ children }) => {
         fetchAPI();
     }, []);
 
-    const removeItem = (id) => {
-        setData(data.filter(item => item.id !== id));
+    const removeItem = async (product_id) => {
+        try {
+            await axios.delete(`http://localhost:8080/cartitem/${product_id}`); // Assuming endpoint for removing item
+            setData(prevData => prevData.filter(item => item.product_id !== product_id));
+        } catch (error) {
+            console.error("Error removing item:", error);
+        }
     };
 
-    const handleQuantityChange = (id, quantity) => {
-        setData(data.map(item => item.id === id ? { ...item, quantity: parseInt(quantity) } : item));
+    const handleQuantityChange = async (product_id, quantity) => {
+        try {
+            await axios.put(`http://localhost:8080/cartitem/${product_id}`, { quantity }); // Assuming endpoint for updating quantity
+            setData(prevData =>
+                prevData.map(item =>
+                    item.product_id === product_id ? { ...item, quantity: parseInt(quantity) } : item
+                )
+            );
+        } catch (error) {
+            console.error("Error updating quantity:", error);
+        }
     };
 
     const calculateTotalPrice = () => {
-        return data.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+        return data.reduce((total, item) => total + item.product.price * item.quantity, 0).toFixed(2);
     };
 
     return (
-        <ShopCardContext.Provider value={{ data, setData, removeItem, handleQuantityChange, calculateTotalPrice }}>
+        <ShopCardContext.Provider value={{ data, removeItem, handleQuantityChange, calculateTotalPrice }}>
             {children}
         </ShopCardContext.Provider>
     );

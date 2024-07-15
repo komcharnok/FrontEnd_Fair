@@ -19,7 +19,7 @@ export default function Navbar() {
                 </div>
             </div>
             <div className="mx-auto navbar border-b-2 border-gray-200 bg-white text-black">
-                <div className=" w-[1200px] mx-auto flex justify-between p-0  ">
+                <div className=" container mx-auto flex justify-between p-0  ">
 
                     <div className="">
                         <div className="dropdown">
@@ -45,16 +45,7 @@ export default function Navbar() {
                     </div>
                     <div className="">
                         <ul className="menu menu-horizontal px-1">
-                            <li>
-                                <Link to='/about'>
-                                    <a>เกี่ยวกับ</a>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to=''>
-                                    <a>ติดต่อ</a>
-                                </Link>
-                            </li>
+
 
                         </ul>
                     </div>
@@ -63,10 +54,15 @@ export default function Navbar() {
                             <div >
                                 <ul className="menu menu-horizontal px-1">
                                     <li>
-                                        {/* <Link to='/address'>
-                                            <a>ที่อยู่ เทส</a>
-                                        </Link> */}
-                                    </li>                          
+                                        <Link to='/about'>
+                                            <a>เกี่ยวกับ</a>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to=''>
+                                            <a>ติดต่อ</a>
+                                        </Link>
+                                    </li>
 
                                 </ul>
                             </div>

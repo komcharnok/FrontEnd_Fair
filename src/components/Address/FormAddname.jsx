@@ -4,8 +4,8 @@ import axios from 'axios';
 import { province } from '../Address/province';
 
 const FormAddname = () => {
-    const { hdlCloseAddname } = useContext(AddressContext);
-
+    const { hdlCloseAddname, apiAddress } = useContext(AddressContext);
+    const [errors, setErrors] = useState({});
     const [input, setInput] = useState({
         name: "",
         address: "",
@@ -16,39 +16,80 @@ const FormAddname = () => {
         email: ""
     });
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        let valid = true;
+        let newErrors = {};
+
+        // Validate inputs
+        for (let key in input) {
+            if (!input[key]) {
+                newErrors[key] = getErrorMessage(key);
+                valid = false;
+            }
+        }
+
+        setErrors(newErrors);
+
+        if (!valid) return;
+
+        try {
+            const rs = await axios.post('http://localhost:8080/address', input);
+            hdlCloseAddname();
+            apiAddress();
+            alert('Create Success');
+        } catch (err) {
+            console.log(err.message);
+            alert('Error: ' + err.message);
+        }
+    }
+
+
+
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         setInput(prev => ({
             ...prev,
             [name]: type === 'checkbox' ? checked : value
         }));
+        setErrors(prev => ({
+            ...prev,
+            [name]: value ? "" : getErrorMessage(name)
+        }));
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const rs = await axios.post('http://localhost:8080/address', input); // Pass input data to the backend
-            if (rs.status === 202) {
-                alert(rs.data.message); // Show alert with the backend message
-                hdlCloseAddname(); // Close the form after submission
-            } else {
-                alert('Unexpected response status: ' + rs.status); // Handle unexpected response status
-            }
-        } catch (err) {
-            console.log(err.message);
-            alert('Error: ' + err.message); // Show error message
+
+
+    const getErrorMessage = (fieldName) => {
+        switch (fieldName) {
+            case 'name':
+                return 'กรุณากรอกชื่อ นามสกุล';
+            case 'address':
+                return 'กรุณากรอกที่อยู่';
+            case 'province':
+                return 'กรุณาเลือกจังหวัด';
+            case 'district':
+                return 'กรุณากรอกอำเภอ';
+            case 'code':
+                return 'กรุณากรอกรหัสไปรษณีย์';
+            case 'phone':
+                return 'กรุณากรอกเบอร์โทร';
+            case 'email':
+                return 'กรุณากรอกอีเมล์';
+            default:
+                return 'กรุณากรอกข้อมูล';
         }
     }
 
+
+
     return (
         <>
-            <dialog id="FormAddName" className="modal"  >
-                <div className='w-2/6 min-w-[600px] bg-white rounded-2xl shadow-xl mx-auto  p-4 relative px-16'>
+            <dialog id="FormAddName" className="modal">
+                <div className='w-2/6 min-w-[600px] bg-white rounded-2xl shadow-xl mx-auto p-4 relative px-16'>
                     <h2 className='text-2xl mt-1 text-black pb-4'>ที่อยู่การจัดส่ง</h2>
                     <form className='flex flex-col' onSubmit={handleSubmit}>
                         <span className="label-text mt-2 pb-1">ชื่อ-นามสกุล</span>
-
-
                         <input
                             type="text"
                             className='input input-bordered input-info w-full max-w-xl'
@@ -57,11 +98,13 @@ const FormAddname = () => {
                             value={input.name}
                             onChange={handleChange}
                         />
+                        {errors.name && <p className="text-red-500">{errors.name}</p>}
+
                         <div className="flex gap-5">
-                            <div className="flex flex-col ">
+                            <div className="flex flex-col">
                                 <span className="label-text mt-2 pb-1">จังหวัด</span>
                                 <select
-                                    className="select select-info  max-w-xl"
+                                    className="select select-info max-w-xl"
                                     name='province'
                                     id='province'
                                     value={input.province}
@@ -72,7 +115,7 @@ const FormAddname = () => {
                                         <option key={p.id} value={p.name}>{p.name}</option>
                                     ))}
                                 </select>
-
+                                {errors.province && <p className="text-red-500">{errors.province}</p>}
                             </div>
                             <div className="flex flex-col">
                                 <span className="label-text mt-2 pb-1">อำเภอ</span>
@@ -84,29 +127,32 @@ const FormAddname = () => {
                                     value={input.district}
                                     onChange={handleChange}
                                 />
+                                {errors.district && <p className="text-red-500">{errors.district}</p>}
                             </div>
                         </div>
+
                         <span className="label-text mt-2 pb-1">ที่อยู่</span>
                         <textarea
-                            type="text"
-                            className='textarea textarea-info  max-w-xl'
+                            className='textarea textarea-info max-w-xl'
                             name="address"
                             id="address"
                             value={input.address}
                             onChange={handleChange}
-                        >
-                        </textarea>
+                        />
+                        {errors.address && <p className="text-red-500">{errors.address}</p>}
+
                         <div className="flex gap-6">
                             <div className="flex flex-col">
                                 <span className="label-text mt-2 pb-1">ไปรษณีย์</span>
                                 <input
                                     type="text"
-                                    className='input input-bordered input-info  max-w-xs w-40'
+                                    className='input input-bordered input-info max-w-xs w-40'
                                     name="code"
                                     id="code"
                                     value={input.code}
                                     onChange={handleChange}
                                 />
+                                {errors.code && <p className="text-red-500">{errors.code}</p>}
                             </div>
                             <div className="flex flex-col">
                                 <span className="label-text mt-2 pb-1">เบอร์โทร</span>
@@ -118,31 +164,28 @@ const FormAddname = () => {
                                     value={input.phone}
                                     onChange={handleChange}
                                 />
+                                {errors.phone && <p className="text-red-500">{errors.phone}</p>}
                             </div>
                         </div>
+
                         <span className="label-text mt-2 pb-1">อีเมลล์</span>
                         <input
                             type="text"
-                            className='input input-bordered input-info  max-w-xl'
+                            className='input input-bordered input-info max-w-xl'
                             name="email"
                             id="email"
                             value={input.email}
                             onChange={handleChange}
                         />
-                        <div className="flex mt-7 gap-6">
-                            <button type="submit" className='btn btn-outline btn-success w-72 rounded-xl   '>บันทึก</button>
-                            <button type="submit" className='btn btn-outline btn-error w-40 rounded-xl ' onClick={hdlCloseAddname}>ยกเลิก</button>
+                        {errors.email && <p className="text-red-500">{errors.email}</p>}
 
-                        </div>
-                        <div className='flex mx-auto items-center justify-center gap-2 pb-3'>
-                            {/* <button type="button" className='btn mt-4 w-32 bg-red-500 hover:bg-red-700 text-white' onClick={hdlCloseAddname}>ยกเลิก</button> */}
+                        <div className="flex mt-7 gap-6">
+                            <button type="submit" className='btn btn-outline btn-success w-72 rounded-xl'>บันทึก</button>
+                            <button type="button" className='btn btn-outline btn-error w-40 rounded-xl' onClick={hdlCloseAddname}>ยกเลิก</button>
                         </div>
                     </form>
                 </div>
-
             </dialog>
-            <div className='' ></div>
-
         </>
     );
 }

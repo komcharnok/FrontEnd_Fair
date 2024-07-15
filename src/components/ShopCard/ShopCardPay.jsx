@@ -14,7 +14,7 @@ const ShopCardPay = () => {
         <div className="mt-3">
             <div className='flex justify-between w-full mr-5 text-black'>
                 <p>ยอดรวมย่อย</p>
-                <p>${calculateTotalPrice()}</p>
+                <p>$</p>
             </div>
             <div className='flex justify-between w-full h-auto pb-5 mr-5 border-b-2 text-black'>
                 <p>ค่าธรรมเนียมการจัดส่งและดำเนินการโดยประมาณ</p>
@@ -22,7 +22,7 @@ const ShopCardPay = () => {
             </div>
             <div className='flex justify-between w-full h-auto pb-5 mr-5 border-b-2 mt-5 text-black'>
                 <p>ยอดรวม</p>
-                <p className='font-semibold'>${calculateTotalPrice()}</p>
+                <p className='font-semibold'>$</p>
             </div>
             <Link to={`/address?data=${encodeURIComponent(JSON.stringify(data))}`}>
                 <button className="btn btn-error hover:bg-red-700 w-full mt-3 text-white">ทำการสั่งซื้อ</button>

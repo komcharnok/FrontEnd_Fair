@@ -4,7 +4,7 @@ import axios from 'axios';
 import { province } from '../Address/province';
 
 const FormEdit = () => {
-    const { hdlCloseFromEdit, editAddress, fetchApiAddress } = useContext(AddressContext);
+    const { hdlCloseFromEdit, editAddress, apiAddress } = useContext(AddressContext);
     const [input, setInput] = useState({
         name: "",
         address: "",
@@ -33,13 +33,9 @@ const FormEdit = () => {
         e.preventDefault();
         try {
             const rs = await axios.put(`http://localhost:8080/address/${editAddress.address_id}`, input);
-            if (rs.status === 202) {
-                alert(rs.data.message);
-                hdlCloseFromEdit();
-                fetchApiAddress(); // อัปเดตข้อมูลที่อยู่หลังจากการแก้ไขสำเร็จ
-            } else {
-                alert('Unexpected response status: ' + rs.status);
-            }
+            hdlCloseFromEdit();
+            apiAddress(); 
+            alert('Update Success')
         } catch (err) {
             console.log(err.message);
             alert('Error: ' + err.message);
