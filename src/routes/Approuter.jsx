@@ -19,6 +19,8 @@ import PaySucess from '../components/Pay/PaySucess';
 import Nopay from '../components/Order/Nopay';
 import PreOderHome from '../pages/preorderhome/PreOderHome'
 import VendorHome from '../pages/vendor/vendorHome'
+import ReviewCreate from '../pages/review/ReviewCreate'
+import ReviewPage from './../pages/review/Review';
 
 
 const userRouter = createBrowserRouter([
@@ -39,6 +41,9 @@ const userRouter = createBrowserRouter([
             { path: 'nopay', element: <Nopay /> },
             { path: 'revieworder', element: <Nopay /> },  
             { path: 'vendorhome', element: <VendorHome /> },  
+            { path: "review", element: <ReviewPage /> },
+            { path: "reviewcreate", element: <ReviewCreate /> },
+              
 
 
         ]
@@ -57,7 +62,7 @@ const guestRouter = createBrowserRouter([
             { index: true, element: <LoginForm /> },
             { path: 'register', element: <RegisterForm /> },
             { path: 'preoderhome', element: <PreOderHome /> },
-
+            { path: "review", element: <ReviewPage /> },
 
             
               
