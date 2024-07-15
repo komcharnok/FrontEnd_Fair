@@ -6,7 +6,7 @@ function Contact({ contact }) {
   const { user } = useUser();
   const { token } = user;
   const values = {
-    receiver_id: contact.id,
+    receiver_id: contact.user_id,
     token,
   };
   const openConversation = async () => {
@@ -26,7 +26,7 @@ function Contact({ contact }) {
           <div className="relative min-w-[50px] max-w-[50px] h-[50px] rounded-full overflow-hidden">
             <img
               src={contact.picture}
-              alt={contact.name}
+              alt={contact.username}
               className="w-full h-full object-cover "
             />
           </div>
@@ -34,7 +34,7 @@ function Contact({ contact }) {
           <div className="w-full flex flex-col">
             {/*Conversation name*/}
             <h1 className="font-bold flex items-center gap-x-2">
-              {contact.name}
+              {contact.username}
             </h1>
             {/* Conversation status */}
             <div>

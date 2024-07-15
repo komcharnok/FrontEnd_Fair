@@ -25,7 +25,7 @@ function ChatMessages() {
             <Message
               message={message}
               key={message.id}
-              me={user.id == message.senderId}
+              me={user.user_id == message.senderId}
             />
           ))}
         {/* <div className="mt-2" ref={endRef}></div> */}

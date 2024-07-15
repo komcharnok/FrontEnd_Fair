@@ -1,6 +1,20 @@
+import { useNavigate } from "react-router-dom";
+
 function CategoryCard({ category }) {
+  const navigator = useNavigate();
+
+  const search = async (category) => {
+    if (!category) {
+      return;
+    }
+    navigator(`/search/category/${category}`);
+  };
+
   return (
-    <div className="bg-white shadow-md rounded-sm flex flex-col items-center p-2">
+    <button
+      onClick={() => search(category.category)}
+      className="bg-white shadow-md rounded-sm flex flex-col items-center p-2"
+    >
       <div className="bg-gray-100 rounded-full p-2 mb-2">
         <img
           src={category.image}
@@ -9,7 +23,7 @@ function CategoryCard({ category }) {
         />
       </div>
       <h3 className="text-sm font-semibold text-center">{category.name}</h3>
-    </div>
+    </button>
   );
 }
 

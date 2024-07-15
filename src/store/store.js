@@ -123,4 +123,42 @@ const useChat = create((set) => ({
   },
 }));
 
-export { useTodos, useUser, useChat };
+const useProduct = create((set) => ({
+  products: [],
+  searchProducts: [],
+
+  getProducts: async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/product");
+      set({ products: response.data });
+    } catch (error) {
+      console.error("Failed to getProducts", error);
+    }
+  },
+
+  searchProduct: async (keyword) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/search?keyword=${keyword}`
+      );
+      set({ searchProducts: response.data });
+    } catch (error) {
+      console.error("Failed to searchProducts", error);
+    }
+  },
+
+  searchCategory: async (category) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/search/category?category=${category}`
+      );
+      set({ searchProducts: response.data });
+    } catch (error) {
+      console.error("Failed to searchCategory", error);
+    }
+  },
+
+
+}));
+
+export { useTodos, useUser, useChat, useProduct };
