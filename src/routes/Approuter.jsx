@@ -16,8 +16,8 @@ import Order from "../pages/Order/Order";
 import OrderAll from "../components/Order/OrderAll";
 import PaySucess from "../components/Pay/PaySucess";
 import Nopay from "../components/Order/Nopay";
-import MainChat from "../pages/chatApp/MainChat";
 import SearchProduct from "../pages/searchProduct/SearchProduct";
+import MainChat from "../pages/chatApp/MainChat";
 
 const userRouter = createBrowserRouter([
   {
@@ -29,10 +29,18 @@ const userRouter = createBrowserRouter([
     ),
     children: [
       { index: true, element: <HomePage /> },
+      { path: "*", element: <h1>Page not found</h1> },
+      { path: "shopcart", element: <ShopCard /> },
+      { path: "address", element: <Address /> },
+      { path: "pays", element: <Pays /> },
+      { path: "order", element: <Order /> },
+      { path: "orderall", element: <OrderAll /> },
+      { path: "paysucess", element: <PaySucess /> },
+      { path: "nopay", element: <Nopay /> },
+      { path: "revieworder", element: <Nopay /> },
       { path: "search/:keyword", element: <SearchProduct /> },
       { path: "search/category/:category", element: <SearchProduct /> },
       { path: "/chat", element: <MainChat /> },
-      { path: "*", element: <h1>Page not found</h1> },
     ],
   },
 ]);
@@ -49,14 +57,6 @@ const guestRouter = createBrowserRouter([
     children: [
       { index: true, element: <LoginForm /> },
       { path: "register", element: <RegisterForm /> },
-      { path: "shopcart", element: <ShopCard /> },
-      { path: "address", element: <Address /> },
-      { path: "pays", element: <Pays /> },
-      { path: "order", element: <Order /> },
-      { path: "orderall", element: <OrderAll /> },
-      { path: "paysucess", element: <PaySucess /> },
-      { path: "nopay", element: <Nopay /> },
-      { path: "revieworder", element: <Nopay /> },
       { path: "search/:keyword", element: <SearchProduct /> },
       { path: "search/category/:category", element: <SearchProduct /> },
       { path: "*", element: <h1>Page not found</h1> },
