@@ -5,7 +5,7 @@ import SearchProduct from "./pages/searchProduct/SearchProduct";
 // import { useUser } from "./store/store";
 import MainChat from "./pages/chatApp/MainChat";
 import HomePage from "./pages/home/HomePage";
-import AppRouter from './routes/Approuter';
+import AppRouter from './routes/AppRouter';
 
 
 function App() {

@@ -4,9 +4,9 @@ import { createBrowserRouter } from "react-router-dom";
 import LoginForm from "../pages/LoginForm";
 import RegisterForm from "../pages/RegisterForm";
 import { RouterProvider } from "react-router-dom";
-import NavBar from "./../components/home/NavBar";
+import NavBar from "../components/home/NavBar";
 import useAuth from "../hooks/useAuth";
-import HomePage from "./../pages/home/HomePage";
+import HomePage from "../pages/home/HomePage";
 import searchProduct from "../pages/searchProduct/SearchProduct";
 import MainChat from "../pages/chatApp/MainChat";
 
