@@ -4,18 +4,18 @@ import { createBrowserRouter } from 'react-router-dom'
 import LoginForm from '../pages/LoginForm'
 import RegisterForm from '../pages/RegisterForm'
 import { RouterProvider } from 'react-router-dom'
-import NavBar from './../components/home/NavBar';
+import NavBar from '../components/home/NavBar';
 import useAuth from '../hooks/useAuth'
-import HomePage from './../pages/home/HomePage';
+import HomePage from '../pages/home/HomePage';
 
 //By.QQQ
-import ShopCard from './../pages/ShopCard/ShopCard';
-import Address from './../pages/Address/Address';
-import Pays from './../pages/Pay/Pays';
-import Order from './../pages/Order/Order';
+import ShopCard from '../pages/ShopCard/ShopCard';
+import Address from '../pages/Address/Address';
+import Pays from '../pages/Pay/Pays';
+import Order from '../pages/Order/Order';
 import OrderAll from '../components/Order/OrderAll'
-import PaySucess from './../components/Pay/PaySucess';
-import Nopay from './../components/Order/Nopay';
+import PaySucess from '../components/Pay/PaySucess';
+import Nopay from '../components/Order/Nopay';
 
 
 const userRouter = createBrowserRouter([
