@@ -8,8 +8,10 @@ const ShopCard = () => (
         <ShopCardContent />
     </ShopCardProvider>
 );
+
 const ShopCardContent = () => {
-    const { orderUser, getorderId } = useContext(ShopCardContext);
+    const { orderUser, getorderId,calculateTotalPrice } = useContext(ShopCardContext);
+    const totalPrice = calculateTotalPrice();
 
     useEffect(() => {
         getorderId();
@@ -20,7 +22,7 @@ const ShopCardContent = () => {
     }
 
     return (
-        <div className='container mx-auto px-4'>
+        <div className='container mx-auto px-16'>
             <div className="flex items-center mt-9">
                 <div className="bg-red-500 w-2 h-6 mr-2 rounded-sm"></div>
                 <h2 className="text-red-500 text-xl font-semibold">ตะกร้าสินค้า</h2>
@@ -28,10 +30,10 @@ const ShopCardContent = () => {
 
             <div className="container mx-auto mt-2 min-h-full flex justify-between bg-white">
                 <div className="flex-col w-3/5">
-                    <ShopCardList orderUser={orderUser} />
+                    <ShopCardList orderUser={orderUser}  />
                 </div>
                 <div className="sum h-72 w-1/2 ml-5 mt-2">
-                    <ShopCardPay orderUser={orderUser} />
+                    <ShopCardPay orderUser={orderUser} totalPrice={totalPrice} />
                 </div>
             </div>
         </div>
