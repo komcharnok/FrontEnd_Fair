@@ -4,10 +4,10 @@ import NavOrder from './NavOrder'
 export default function Nopay() {
     return (
         <div>
-            <NavOrder />
+            {/* <NavOrder /> */}
             <div className='container mx-auto px-4 mt-3'>
                 <div>
-                    <div className='bg-gray-500 h-12 items-center justify-between flex'>
+                    <div className='bg-red-700 h-12 items-center justify-between flex'>
                         <div className='ml-3'>
                             <span className='text-white'>เลขที่คำสั่งซื้อ : </span>
                             <span className='text-red-500'>1</span>

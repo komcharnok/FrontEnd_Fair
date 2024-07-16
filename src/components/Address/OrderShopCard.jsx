@@ -19,7 +19,7 @@ const OrderShopCard = () => {
         <div className=' p-4 mt-5 border-x-gray-50'>
             <div className="flex items-center  ">
                 <div className="bg-red-500 w-2 h-6 mr-2 rounded-sm"></div>
-                <Link to="/orderall">
+                <Link to="/order">
                     <h2 className="text-red-500 text-xl font-semibold">รายการสั่งซื้อสินค้า</h2>
                 </Link>
             </div>
