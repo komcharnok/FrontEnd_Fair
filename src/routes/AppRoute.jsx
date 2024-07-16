@@ -86,5 +86,6 @@ const finalRouter = (user) => {
 
 export default function AppRouter() {
   const { user } = useAuth();
+  // const user = true;
   return <RouterProvider router={finalRouter(user)} />;
 }
