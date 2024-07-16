@@ -8,8 +8,6 @@ import { RouterProvider } from "react-router-dom";
 import NavBar from "../components/home/NavBar";
 import useAuth from "../hooks/useAuth";
 import HomePage from "../pages/home/HomePage";
-
-
 import ShopCard from "../pages/ShopCard/ShopCard";
 import Address from "../pages/Address/Address";
 import Pays from "../pages/Pay/Pays";
@@ -23,13 +21,8 @@ import ReviewCreate from "../pages/review/ReviewCreate";
 import ReviewPage from "./../pages/review/Review";
 import SearchProduct from '../pages/searchProduct/SearchProduct';
 import MainChat from "../pages/chatApp/MainChat";
-<<<<<<< HEAD
-import ProductDetail from "../components/Product/productDetail";
-
-=======
 import Navbar from "../layouts/Navbar";
->>>>>>> 9ee191012ae626cb38e0bef3e500e6ca372d37a1
-
+import ProductDetail from "../components/Product/productDetail";
 const userRouter = createBrowserRouter([
   {
     path: "/",
