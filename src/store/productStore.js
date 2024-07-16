@@ -52,7 +52,15 @@ const productStore = (set) => ({
         } catch (error) {
             console.error('Error creating product', error)
         }
-    }
+    },
+    getProducts: async () => {
+        try {
+          const response = await axios.get("http://localhost:8080/product");
+          set({ products: response.data });
+        } catch (error) {
+          console.error("Failed to getProducts", error);
+        }
+      },
 })
 
 const useProduct = create(productStore)
