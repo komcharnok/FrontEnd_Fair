@@ -41,7 +41,6 @@ export default function PayMoney() {
                             className='input input-bordered input-info w-72 max-w-xs'
                             name=""
                             id=""
-
                         />
                     </div>
                 </div>
@@ -51,13 +50,16 @@ export default function PayMoney() {
                     className='input input-bordered input-info  max-w-xl mt-8'
                     name=""
                     id=""
-
                 />
-                <div className="flex mt-7 gap-6">
-                    <button type="submit" className='btn btn-outline btn-error w-40 rounded-xl '  >กลับ</button>
                     <Link to="/paysucess">
-                        <button type="submit" className='btn btn-outline btn-success w-72 rounded-xl   '>ชำระเงิน</button>
+                        <button type="submit" className='btn btn-outline btn-success mt-3 rounded-3xl w-full   text-center  '>
+                            <p>ชำระเงิน</p>
+                        </button>
                     </Link>
+                <div className="flex mt-7 gap-6">
+                    {/* <Link to="/address">
+                        <button type="submit" className='btn btn-outline btn-error w-40 rounded-3xl '  >กลับ</button>
+                    </Link> */}
                 </div>
                 <div className='flex mx-auto items-center justify-center gap-2 pb-3'>
                 </div>
