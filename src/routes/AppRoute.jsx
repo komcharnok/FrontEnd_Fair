@@ -23,6 +23,8 @@ import ReviewCreate from "../pages/review/ReviewCreate";
 import ReviewPage from "./../pages/review/Review";
 import SearchProduct from '../pages/searchProduct/SearchProduct';
 import MainChat from "../pages/chatApp/MainChat";
+import ProductDetail from "../components/Product/productDetail";
+
 
 const userRouter = createBrowserRouter([
   {
@@ -34,7 +36,6 @@ const userRouter = createBrowserRouter([
     ),
     children: [
       { index: true, element: <HomePage /> },
-      { path: "*", element: <h1>Page not found</h1> },
       { path: "shopcart", element: <ShopCard /> },
       { path: "address", element: <Address /> },
       { path: "pays", element: <Pays /> },
@@ -49,6 +50,7 @@ const userRouter = createBrowserRouter([
       { path: "search/:keyword", element: <SearchProduct /> },
       { path: "search/category/:category", element: <SearchProduct /> },
       { path: "/chat", element: <MainChat /> },
+      { path: "*", element: <h1>Page not found</h1> },
     ],
   },
 ]);
@@ -65,10 +67,13 @@ const guestRouter = createBrowserRouter([
     children: [
       { index: true, element: <LoginForm /> },
       { path: "register", element: <RegisterForm /> },
-      { path: "preoderhome", element: <PreOderHome /> },
       { path: "review", element: <ReviewPage /> },
       { path: "search/:keyword", element: <SearchProduct /> },
       { path: "search/category/:category", element: <searchProduct /> },
+      { path: "home", element: <HomePage /> },
+      { path: "home/productdetail/:product_id", element: <ProductDetail /> },
+      { path: "preoderhome", element: <PreOderHome /> },
+      { path: "preoderhome/productdetail/:product_id", element: <ProductDetail /> },
       { path: "*", element: <h1>Page not found</h1> },
     ],
   },
