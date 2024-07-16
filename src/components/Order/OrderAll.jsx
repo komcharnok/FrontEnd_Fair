@@ -1,9 +1,7 @@
 import React from 'react'
-import NavOrder from './NavOrder'
 function OrderAll() {
   return (
     <div>
-      <NavOrder />
       <div className='container mx-auto px-4 mt-3'>
         <div>
           <div className='bg-gray-500 h-12 items-center justify-between flex'>

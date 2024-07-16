@@ -15,7 +15,7 @@ function HomePage() {
 
   return (
     <div className="container mx-auto">
-      <NavBar />
+      {/* <NavBar /> */}
       <Banner />
       <ProductList />
       <CategoryList />

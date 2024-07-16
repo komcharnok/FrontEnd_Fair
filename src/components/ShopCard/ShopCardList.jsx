@@ -1,24 +1,19 @@
 import React, { useContext } from 'react';
 import { ShopCardContext } from '../../contexts/ShopCard-context/ShopCard-context';
 
-const ShopCardList = () => {
-    const { data, removeItem, handleQuantityChange } = useContext(ShopCardContext);
 
-    console.log( "ShopCardList",data); 
-
-    if (!data || data.length === 0) {
-        return <p>No items in the cart.</p>; 
-    }
+const ShopCardList = ({ orderUser }) => {
+    const { hdlDelete } = useContext(ShopCardContext);
 
     return (
         <>
-            {data.map((item) => (
+            {orderUser.map((item) => (
                 <div key={item.cartitem_id}>
                     <div className="item h-auto pb-5 border-b-2 border-gray-200 flex mt-3">
-                        <img 
-                            src={item.product.product_pic} 
-                            className='object-cover rounded shadow-lg h-44 w-52' 
-                            alt={item.product_title} 
+                        <img
+                            src={item.product.product_pic}
+                            className='object-cover rounded shadow-lg h-44 w-52'
+                            alt={item.product_title}
                         />
                         <div className="txt ml-2 flex-grow">
                             <div className='flex justify-between w-full mr-5'>
@@ -35,9 +30,9 @@ const ShopCardList = () => {
                                     min="1"
                                 />
                             </div>
-                            <button 
-                                className="btn btn-circle mt-14 float-right bg-slate-100" 
-                                onClick={() => removeItem(item.product_id)}
+                            <button
+                                className="btn btn-circle mt-14 float-right bg-slate-100"
+                                onClick={() => hdlDelete(item.order_id)}
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
