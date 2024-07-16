@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useProduct } from "../../../store/store";
-import Filter from "../Filter";
-import Pagination from "../Pagination";
-import ProductCard from "../ProductCard";
-import RecommendedShops from "../RecommendedShops";
+// import RecommendedShops from "../RecommendedShops";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { useProduct } from "../../../store/store";
+import Filter from "../../searchProduct/Filter";
+import Pagination from "../../searchProduct/Pagination";
+import ProductCard from "../ProductCard";
+import { getBestProductPage } from "../../../utils/bestSell";
 
 // const products = [
 //   {
@@ -210,31 +211,30 @@ import { useEffect } from "react";
 //   },
 // ];
 
-function MainProductList() {
-  const { keyword, category } = useParams();
-  const { searchProducts, searchProduct, searchCategory } = useProduct();
+function BestProductPage() {
+  const { keyword } = useParams();
+  const { searchProducts, searchProduct } = useProduct();
   const [paginatorData, setpaginatorData] = useState([]);
-
-  console.log("paginatorData = ", paginatorData);
+  const { products } = useProduct();
 
   // fetch search product
   useEffect(() => {
     const fetchKeyword = async () => {
       await searchProduct(keyword);
     };
-    const fetchCategory = async () => {
-      await searchCategory(category);
-    };
+    // const fetchCategory = async () => {
+    //   await searchCategory(category);
+    // };
     if (keyword) {
       fetchKeyword();
-    } else if (category) {
-      fetchCategory();
+    } else if (products) {
+      setpaginatorData(getBestProductPage(products));
     }
-  }, [keyword, category]);
+  }, [keyword, products]);
 
   return (
     <div className="px-4 py-12">
-      <RecommendedShops />
+      {/* <RecommendedShops /> */}
       <Filter
         paginatorData={paginatorData}
         setpaginatorData={setpaginatorData}
@@ -253,4 +253,4 @@ function MainProductList() {
   );
 }
 
-export default MainProductList;
+export default BestProductPage;

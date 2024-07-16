@@ -1,3 +1,4 @@
+import NavBar from "../../components/home/NavBar";
 import Banner from "../../components/home/Banner";
 import ProductList from "../../components/home/ProductList";
 import CategoryList from "../../components/home/category/CategoryList";
@@ -14,7 +15,7 @@ function HomePage() {
 
   return (
     <div className="container mx-auto">
-      {/* <NavBar /> */}
+      <NavBar />
       <Banner />
       <ProductList />
       <CategoryList />
