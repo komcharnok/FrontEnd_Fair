@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 function ProductCard({ product }) {
   const BACKEND_URL = `http://localhost:8080/image`;
   const imageUrl = `${BACKEND_URL}/${product.product_pic}`;

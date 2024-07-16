@@ -1,15 +1,20 @@
 // import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate  } from "react-router-dom";
 import useProductStore from "../../store/mocupstore/useProductStore";
 
 function ProductDetail() {
   const { product_id } = useParams();
+  const navigate = useNavigate();
   const products = useProductStore((state) => state.products);
   const product = products.find((p) => p.product_id === parseInt(product_id));
 
   if (!product) {
     return <div>Product not found</div>;
   }
+
+  const handleAddToCart = () => {
+    navigate("/order", { state: { product_id: product.product_id } });
+  };
 
   return (
     <div className="w-5/6 min-w-[600px] flex flex-col gap-3 mx-auto p-3">
@@ -62,7 +67,9 @@ function ProductDetail() {
                 <button className="btn btn-sm btn-outline btn-error">XXL</button>
               </div>
               <div className="flex justify-center">
-                <button className="bg-primary btn-sm px-20 text-white">
+                <button className="bg-primary btn-sm px-20 text-white"
+                onClick={handleAddToCart}
+                >
                   Add To Cart
                 </button>
               </div>
