@@ -23,14 +23,19 @@ import ReviewCreate from "../pages/review/ReviewCreate";
 import ReviewPage from "./../pages/review/Review";
 import SearchProduct from '../pages/searchProduct/SearchProduct';
 import MainChat from "../pages/chatApp/MainChat";
+<<<<<<< HEAD
 import ProductDetail from "../components/Product/productDetail";
 
+=======
+import Navbar from "../layouts/Navbar";
+>>>>>>> 9ee191012ae626cb38e0bef3e500e6ca372d37a1
 
 const userRouter = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
+        <Navbar/>
         <Outlet />
       </>
     ),
@@ -60,7 +65,7 @@ const guestRouter = createBrowserRouter([
     path: "/",
     element: (
       <>
-        <NavBar />
+        <Navbar />
         <Outlet />
       </>
     ),
