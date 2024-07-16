@@ -35,7 +35,6 @@ const userRouter = createBrowserRouter([
       </>
     ),
     children: [
-      { index: true, element: <HomePage /> },
       { path: "shopcart", element: <ShopCard /> },
       { path: "address", element: <Address /> },
       { path: "pays", element: <Pays /> },
@@ -98,5 +97,6 @@ const finalRouter = (user) => {
 
 export default function AppRouter() {
   const { user } = useAuth();
+  // const user = true;
   return <RouterProvider router={finalRouter(user)} />;
 }
