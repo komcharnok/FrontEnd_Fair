@@ -44,7 +44,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row mt-10">
       <img
         src="https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg"
         alt="Landing"
