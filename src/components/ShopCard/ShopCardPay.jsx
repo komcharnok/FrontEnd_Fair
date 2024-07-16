@@ -4,11 +4,8 @@ import { ShopCardContext } from '../../contexts/ShopCard-context/ShopCard-contex
 import { Link } from 'react-router-dom';
 
 
-const ShopCardPay = () => {
+const ShopCardPay = ({ orderUser }) => {
 
-
-    const { data,calculateTotalPrice } = useContext(ShopCardContext);
-    // console.log(data)
 
     return (
         <div className="mt-3">
@@ -24,10 +21,10 @@ const ShopCardPay = () => {
                 <p>ยอดรวม</p>
                 <p className='font-semibold'>$</p>
             </div>
-            <Link to={`/address?data=${encodeURIComponent(JSON.stringify(data))}`}>
+            <Link to={`/address?data=${encodeURIComponent(JSON.stringify(orderUser))}`}>
                 <button className="btn btn-error hover:bg-red-700 w-full mt-3 text-white">ทำการสั่งซื้อ</button>
             </Link>
-           
+
 
         </div>
     );

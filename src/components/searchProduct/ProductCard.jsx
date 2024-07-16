@@ -1,14 +1,18 @@
+import { Link } from "react-router-dom";
+
 function ProductCard({ product }) {
   const BACKEND_URL = `http://localhost:8080/image`;
   const imageUrl = `${BACKEND_URL}/${product.product_pic}`;
 
+  const link = `/home/productdetail/${product.product_id}`;
+
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden relative">
+    <Link to={link} className="bg-white shadow-md rounded-lg overflow-hidden relative">
       <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
         {/* -{product.discount}% */}-{35}%
       </div>
       <img
-        src={imageUrl}
+        src={product.product_pic}
         alt={product.product_id}
         className="w-full h-60 object-cover"
       />
@@ -16,7 +20,9 @@ function ProductCard({ product }) {
         <h2 className="text-sm font-semibold">{product.product_title}</h2>
         <div className="flex items-center mt-2">
           <span className="text-red-500 font-bold"> ฿{product.price}</span>
-          <span className="text-gray-500 line-through ml-2">฿{product.real_price}</span>
+          <span className="text-gray-500 line-through ml-2">
+            ฿{product.real_price}
+          </span>
         </div>
         <div className="flex items-center mt-2">
           <span className="text-yellow-500">
@@ -28,7 +34,7 @@ function ProductCard({ product }) {
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

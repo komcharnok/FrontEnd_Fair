@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function PaySum() {
   return (
-    <div className='max-w-[400px]'>
+    <div className='max-w-[400px] '>
           <div className='flex justify-between w-full mr-5 text-black mt-4'>
             <p>หมายเลขคำสั่งซื้อ</p>
             <p>1</p>
