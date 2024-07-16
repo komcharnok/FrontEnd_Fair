@@ -7,6 +7,7 @@ import RegisterForm from "../pages/RegisterForm";
 import { RouterProvider } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import HomePage from "../pages/home/HomePage";
+
 import ShopCard from "../pages/ShopCard/ShopCard";
 import Address from "../pages/Address/Address";
 import Pays from "../pages/Pay/Pays";
@@ -52,7 +53,10 @@ const userRouter = createBrowserRouter([
       { path: "home", element: <HomePage /> },
       { path: "home/productdetail/:product_id", element: <ProductDetail /> },
       { path: "preoderhome", element: <PreOderHome /> },
-      { path: "preoderhome/productdetail/:product_id",element: <ProductDetail />,},
+      {
+        path: "preoderhome/productdetail/:product_id",
+        element: <ProductDetail />,
+      },
       { path: "best", element: <MainBestProduct /> },
       { path: "/chat", element: <MainChat /> },
       { path: "*", element: <h1>Page not found</h1> },
