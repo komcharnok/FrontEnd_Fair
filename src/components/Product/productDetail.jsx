@@ -1,31 +1,34 @@
 // import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
-// import useProductStore from "../../store/mocupstore/useProductStore";
-import { useProduct } from "../../store/store";
+import { useParams } from "react-router-dom";
+import useProductStore from "../../store/mocupstore/useProductStore";
+import axios from "axios";
 
 function ProductDetail() {
   const { product_id } = useParams();
-  const navigate = useNavigate();
-  // const products = useProductStore((state) => state.products);
-  const { products } = useProduct();
+  const products = useProductStore((state) => state.products);
   const product = products.find((p) => p.product_id === parseInt(product_id));
+	
+
+  // console.log(product_id)
+  // console.log(product)
 
   if (!product) {
     return <div>Product not found</div>;
   }
-
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  const addproduct = async (id) => {
+    // id
+    console.log(id)
+    try {
+      const rs = await axios.post(`http://localhost:8080/order/${id}`,{}, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+      console.log(rs)
+    } catch (err) {
+      console.log(err);
+    }
   }
-
-  let randomRating = getRandomInt(1, 5);
-  let randomReview = getRandomInt(1, 150);
-
-  const handleAddToCart = () => {
-    navigate("/order", { state: { product_id: product.product_id } });
-  };
 
   return (
     <div className="w-5/6 min-w-[600px] flex flex-col gap-3 mx-auto p-3">
@@ -41,38 +44,26 @@ function ProductDetail() {
         <div className="container mx-auto px-2">
           <div className="flex flex-col lg:flex-row items-center">
             <div className="flex flex-1 mb-8 lg:mb-0 justify-center items-center">
-              <img
-                // src={product.image}
-                src={product.product_pic}
-                alt={product.product_id}
-                className="w-full h-80 object-cover"
-              />
+              <img className="max-w-[200px] lg:max-w-sm" src={product.image} alt={product.name} />
             </div>
             <div className="flex-1 text-center lg:text-left border p-2 ">
               <h1 className="text-[26px] text-center font-medium mb-2 max-w-[450px] mx-auto">
-                {product.product_title}
+                {product.name}
               </h1>
-              <div className="text-xl text-center font-medium mb-6">
-                <span className="text-red-500 font-bold"> ฿{product.price}</span>
-                <span className="text-gray-500 line-through ml-2">
-                  ฿{product.real_price}
-                  {/* ฿{product.originalPrice} */}
-                </span>
+              <div className="text-xl text-red-500 text-center font-medium mb-6">
+                ฿{product.price}
               </div>
               <h1 className="text-center mb-8">
-                ฿{product.description}
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, delectus?
               </h1>
               <div className="flex justify-center">
-                <div className="flex items-center mt-2">
-                  <span className="text-yellow-500">
-                    {"★".repeat(randomRating)}
-                    {"☆".repeat(5 - randomRating)}
-                    {/* {"★".repeat(product.rating)}
-            {"☆".repeat(5 - product.rating)} */}
-                  </span>
-                  <span className="text-gray-500 ml-2">
-                    ({randomReview}){/* ({product.reviews}) */}
-                  </span>
+                <div className="flex rating rating-sm">
+                  <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
+                  <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" defaultChecked />
+                  <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
+                  <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
+                  <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
+                  <h1>({product.reviews} reviews)</h1>
                 </div>
               </div>
               <hr />
@@ -90,9 +81,7 @@ function ProductDetail() {
                 <button className="btn btn-sm btn-outline btn-error">XXL</button>
               </div>
               <div className="flex justify-center">
-                <button className="bg-primary btn-sm px-20 text-white"
-                  onClick={handleAddToCart}
-                >
+                <button onClick={() => addproduct(product.product_id)} className="bg-primary btn-sm px-20 text-white">
                   Add To Cart
                 </button>
               </div>

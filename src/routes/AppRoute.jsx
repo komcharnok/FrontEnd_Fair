@@ -13,9 +13,8 @@ import ShopCard from "../pages/ShopCard/ShopCard";
 import Address from "../pages/Address/Address";
 import Pays from "../pages/Pay/Pays";
 import Order from "../pages/Order/Order";
-import OrderAll from "../components/Order/OrderAll";
+
 import PaySucess from "../components/Pay/PaySucess";
-import Nopay from "../components/Order/Nopay";
 import PreOderHome from "../pages/preorderhome/PreOderHome";
 import VendorHome from "../pages/vendor/vendorHome";
 import ReviewCreate from "../pages/review/ReviewCreate";
@@ -26,6 +25,9 @@ import ForgotPassword from "../pages/ForgotPassword";
 import ResetPassword from "../pages/ResetPassword";
 import ProductDetail from "../components/Product/productDetail";
 import MainBestProduct from "../components/home/bestSell/MainBestProduct";
+import OrderPayMoney from "../components/Order/OrderSucess/OrderPayMoney";
+import Nopay from "../components/Order/OrderNoPay/Nopay";
+import OrderAll from "../components/Order/OrderNoPay/OrderAll";
 
 const userRouter = createBrowserRouter([
   {
@@ -43,9 +45,10 @@ const userRouter = createBrowserRouter([
       { path: "pays", element: <Pays /> },
       { path: "order", element: <Order /> },
       { path: "orderall", element: <OrderAll /> },
+      { path: "orderpaymoney", element: <OrderPayMoney /> },
       { path: "paysucess", element: <PaySucess /> },
       { path: "nopay", element: <Nopay /> },
-      { path: "revieworder", element: <Nopay /> },
+      // { path: "revieworder", element: <Nopay /> },
       { path: "vendorhome", element: <VendorHome /> },
       { path: "review", element: <ReviewPage /> },
       { path: "reviewcreate", element: <ReviewCreate /> },

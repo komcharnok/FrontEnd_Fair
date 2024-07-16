@@ -3,12 +3,16 @@ import { ShopCardContext } from '../../contexts/ShopCard-context/ShopCard-contex
 
 
 const ShopCardList = ({ orderUser }) => {
-    const { hdlDelete } = useContext(ShopCardContext);
+    const { hdlDelete, updateQuantity, calculateTotalPrice } = useContext(ShopCardContext);
+
+    const handleQuantityChange = (productId, newQuantity) => {
+        updateQuantity(productId, newQuantity);
+    };
 
     return (
         <>
             {orderUser.map((item) => (
-                <div key={item.cartitem_id}>
+                <div key={item.order_id}>
                     <div className="item h-auto pb-5 border-b-2 border-gray-200 flex mt-3">
                         <img
                             src={item.product.product_pic}
