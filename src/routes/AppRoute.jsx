@@ -23,6 +23,7 @@ import SearchProduct from '../pages/searchProduct/SearchProduct';
 import MainChat from "../pages/chatApp/MainChat";
 import Navbar from "../layouts/Navbar";
 import ProductDetail from "../components/Product/productDetail";
+
 const userRouter = createBrowserRouter([
   {
     path: "/",
