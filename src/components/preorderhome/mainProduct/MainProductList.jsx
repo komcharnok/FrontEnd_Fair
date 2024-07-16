@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "../ProductCard";
-import useProductStore from "../../../store/mocupstore/useProductStore";
+import { useProduct } from "../../../store/store";
+// import useProductStore from "../../../store/mocupstore/useProductStore";
 
 function MainProductList() {
+  const { products } = useProduct();
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const products = useProductStore((state) => state.products);
-
+  // const products = useProductStore((state) => state.products);
+ 
   const moreDataHandle = () => {
     setItemsPerPage((prevItemsPerPage) => prevItemsPerPage + 10);
   };
