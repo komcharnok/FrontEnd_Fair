@@ -9,7 +9,6 @@ import NavBar from "../layouts/Navbar";
 import useAuth from "../hooks/useAuth";
 import HomePage from "../pages/home/HomePage";
 
-
 import ShopCard from "../pages/ShopCard/ShopCard";
 import Address from "../pages/Address/Address";
 import Pays from "../pages/Pay/Pays";
@@ -21,10 +20,12 @@ import PreOderHome from "../pages/preorderhome/PreOderHome";
 import VendorHome from "../pages/vendor/vendorHome";
 import ReviewCreate from "../pages/review/ReviewCreate";
 import ReviewPage from "./../pages/review/Review";
-import SearchProduct from '../pages/searchProduct/SearchProduct';
+import SearchProduct from "../pages/searchProduct/SearchProduct";
 import MainChat from "../pages/chatApp/MainChat";
 import ForgotPassword from "../pages/ForgotPassword";
 import ResetPassword from "../pages/ResetPassword";
+import ProductDetail from "../components/Product/productDetail";
+import MainBestProduct from "../components/home/bestSell/MainBestProduct";
 
 const userRouter = createBrowserRouter([
   {
@@ -36,7 +37,6 @@ const userRouter = createBrowserRouter([
       </>
     ),
     children: [
-      { index: true, element: <HomePage /> },
       { path: "*", element: <h1>Page not found</h1> },
       { path: "shopcart", element: <ShopCard /> },
       { path: "address", element: <Address /> },
@@ -51,6 +51,14 @@ const userRouter = createBrowserRouter([
       { path: "reviewcreate", element: <ReviewCreate /> },
       { path: "search/:keyword", element: <SearchProduct /> },
       { path: "search/category/:category", element: <SearchProduct /> },
+      { path: "home", element: <HomePage /> },
+      { path: "home/productdetail/:product_id", element: <ProductDetail /> },
+      { path: "preoderhome", element: <PreOderHome /> },
+      {
+        path: "preoderhome/productdetail/:product_id",
+        element: <ProductDetail />,
+      },
+      { path: "best", element: <MainBestProduct /> },
       { path: "/chat", element: <MainChat /> },
     ],
   },
@@ -69,11 +77,19 @@ const guestRouter = createBrowserRouter([
       { index: true, element: <LoginForm /> },
       { path: "register", element: <RegisterForm /> },
       { path: "forgot-password", element: <ForgotPassword /> },
-      { path: 'reset-password/:token', element: <ResetPassword /> },
+      { path: "reset-password/:token", element: <ResetPassword /> },
       { path: "preoderhome", element: <PreOderHome /> },
       { path: "review", element: <ReviewPage /> },
       { path: "search/:keyword", element: <SearchProduct /> },
       { path: "search/category/:category", element: <searchProduct /> },
+      { path: "home", element: <HomePage /> },
+      { path: "home/productdetail/:product_id", element: <ProductDetail /> },
+      { path: "preoderhome", element: <PreOderHome /> },
+      {
+        path: "preoderhome/productdetail/:product_id",
+        element: <ProductDetail />,
+      },
+      { path: "best", element: <MainBestProduct /> },
       { path: "*", element: <h1>Page not found</h1> },
     ],
   },
