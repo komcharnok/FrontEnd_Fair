@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import useAuth from "./../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const guestNav = [
   { to: "/", text: "เข้าสู่ระบบ" },
@@ -19,6 +21,26 @@ export default function Navbar() {
 
   const hdlLogout = () => {
     logout();
+  };
+
+  //Mix section
+  const navigator = useNavigate();
+  const [keyword, setKeyword] = useState("");
+
+  const handleInput = (e) => {
+    setKeyword(e.target.value);
+  };
+
+  const search = async (e) => {
+    e.preventDefault();
+
+    if (!keyword) {
+      return;
+    }
+
+    // await searchProduct(keyword);
+    setKeyword("");
+    navigator(`/search/${keyword}`);
   };
 
   return (
@@ -96,9 +118,39 @@ export default function Navbar() {
                   </li>
                 </ul>
               </div>
-              <Link to="/">
+              <Link to="/home">
                 <a className="btn btn-ghost text-xl">FAIR</a>
               </Link>
+            </div>
+            <div className="w-3/5 relative flex items-center">
+              <input
+                type="text"
+                placeholder="ค้นหาสินค้า"
+                className="w-full pl-10 pr-4 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                name="keyword"
+                value={keyword}
+                onChange={(e) => handleInput(e)}
+              />
+              <button
+                type="submit"
+                onClick={search}
+                className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1115 7.5a7.5 7.5 0 011.65 9.15z"
+                  />
+                </svg>
+              </button>
             </div>
             <div className="">
               <ul className="menu menu-horizontal px-1"></ul>
