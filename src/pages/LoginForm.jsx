@@ -3,8 +3,11 @@ import useAuth from "./../hooks/useAuth";
 import { useState } from "react";
 import axios from "axios";
 import { useUser } from "../store/store";
+import { useToast } from "@/components/ui/use-toast";
 
 function LoginForm() {
+  const { toast } = useToast();
+
   const { setUser } = useAuth();
   const [input, setInput] = useState({
     username: "",
@@ -73,7 +76,17 @@ function LoginForm() {
           />
 
           <div className="flex items-center justify-between pt-5">
-            <button type="submit" className="btn bg-red-500 text-white">
+            <button
+              onClick={() => {
+                toast({
+                  className: "bg-green-400",
+                  title: "Scheduled: Catch up",
+                  description: "Friday, February 10, 2023 at 5:57 PM",
+                });
+              }}
+              type="submit"
+              className="btn bg-red-500 text-white"
+            >
               Login
             </button>
             <a href="#">Forgot Password</a>

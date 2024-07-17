@@ -5,7 +5,6 @@ import { createBrowserRouter } from "react-router-dom";
 import LoginForm from "../pages/LoginForm";
 import RegisterForm from "../pages/RegisterForm";
 import { RouterProvider } from "react-router-dom";
-import NavBar from "../layouts/Navbar";
 import useAuth from "../hooks/useAuth";
 import HomePage from "../pages/home/HomePage";
 
@@ -29,16 +28,12 @@ import Nopay from "../components/Order/OrderNoPay/Nopay";
 import OrderAll from "../components/Order/OrderNoPay/OrderAll";
 import OrderSucess from "../pages/Order/OrderSucess/OrderSucess";
 import Order from "../pages/Order/OrderNoPay/Order";
+import Layout from "../layouts/Layout";
 
 const userRouter = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <>
-        <NavBar />
-        <Outlet />
-      </>
-    ),
+    element: <Layout />,
     children: [
       { index: true, element: <HomePage /> },
       { path: "*", element: <h1>Page not found</h1> },
@@ -73,12 +68,7 @@ const userRouter = createBrowserRouter([
 const guestRouter = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <>
-        <NavBar />
-        <Outlet />
-      </>
-    ),
+    element: <Layout />,
     children: [
       { index: true, element: <LoginForm /> },
       { path: "register", element: <RegisterForm /> },
