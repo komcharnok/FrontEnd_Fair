@@ -23,7 +23,7 @@ const ShopCardList = () => {
                                 <p className='text-black'>{item.product.price} บาท</p>
                             </div>
                             <div className="flex items-center mt-2">
-                                <p className='text-black'>{item.quantity}</p>
+                                {/* <p className='text-black'>{item.quantity}</p> */}
                                 <input
                                     type="number"
                                     className='w-16 p-2 border border-gray-300 rounded ml-5 text-black bg-white'

@@ -21,11 +21,8 @@ function Conversation({ convo }) {
     await open_create_conversation(values);
   };
 
-
   // console.log("user = ", user)
-  // console.log("convo = ", convo)
-  
-
+  console.log("convo = ", convo);
 
   return (
     <li

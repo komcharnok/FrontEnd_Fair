@@ -8,10 +8,10 @@ function MainChat() {
   const { user } = useUser();
   const { getConversations, conversations, activeConversation } = useChat();
 
-  // console.log("conversations = ", conversations);
+  console.log("conversations = ", conversations);
   useEffect(() => {
     if (user?.token) {
-      getConversations();
+      getConversations(user.token);
       // dispatch(getConversations(user.token));
     }
   }, [user]);
