@@ -1,14 +1,33 @@
 // import React from "react";
 import { useParams } from "react-router-dom";
 import useProductStore from "../../store/mocupstore/useProductStore";
+import axios from "axios";
 
 function ProductDetail() {
   const { product_id } = useParams();
   const products = useProductStore((state) => state.products);
   const product = products.find((p) => p.product_id === parseInt(product_id));
+	
+
+  // console.log(product_id)
+  // console.log(product)
 
   if (!product) {
     return <div>Product not found</div>;
+  }
+  const addproduct = async (id) => {
+    // id
+    console.log(id)
+    try {
+      const rs = await axios.post(`http://localhost:8080/order/${id}`,{}, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+      console.log(rs)
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -62,7 +81,7 @@ function ProductDetail() {
                 <button className="btn btn-sm btn-outline btn-error">XXL</button>
               </div>
               <div className="flex justify-center">
-                <button className="bg-primary btn-sm px-20 text-white">
+                <button onClick={() => addproduct(product.product_id)} className="bg-primary btn-sm px-20 text-white">
                   Add To Cart
                 </button>
               </div>
