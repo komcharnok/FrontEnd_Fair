@@ -19,13 +19,6 @@ const finalNav = (user) => {
 
 export default function Navbar() {
   const { user, logout } = useAuth();
-  const [userId, setUserId] = useState(null);
-
-  useEffect(() => {
-    if (user && user.user_id) {
-      setUserId(user.user_id);
-    }
-  }, [user]);
 
   const hdlLogout = () => {
     logout();
@@ -51,13 +44,13 @@ export default function Navbar() {
     navigator(`/search/${keyword}`);
   };
 
+
   const handleVendorHome = () => {
-    if (user?.user_id) {
+  
       navigator(`/vendorhome/${user.user_id}`);
-    }
+  
   };
 
-  console.log(user);
 
   return (
     <>

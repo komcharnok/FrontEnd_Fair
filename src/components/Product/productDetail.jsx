@@ -163,6 +163,7 @@ function ProductDetail() {
                 </div>
               </div>
               <hr />
+            {/*  */}
               <div className="flex gap-2 px-2 py-2">
                 <h1>Colors:</h1>
                 <input
@@ -195,13 +196,13 @@ function ProductDetail() {
                   XXL
                 </button>
               </div>
+              {/*  */}
               <div className="flex justify-center">
                 <div className="flex justify-center">
                   <button onClick={() => addproduct(product.product_id,1)} className="bg-primary btn-sm px-20 text-white">
                     Add To Cart
                   </button>
                 </div>
-
               </div>
             </div>
           </div>

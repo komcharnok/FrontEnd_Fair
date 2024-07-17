@@ -26,14 +26,14 @@ const productStore = (set) => ({
         store_id: 1
     }),
 
-    fetchProducts: async (store_id) => {
-        try {
-            const response = await axios.get(`http://localhost:8080/product/${store_id}`)
-            set({ products: response.data })
-        } catch (error) {
-            console.error('Error fetching products', error)
-        }
-    },
+    // fetchProducts: async (store_id) => {
+    //     try {
+    //         const response = await axios.get(`http://localhost:8080/product/${store_id}`)
+    //         set({ products: response.data })
+    //     } catch (error) {
+    //         console.error('Error fetching products', error)
+    //     }
+    // },
 
     createProduct: async (productData) => {
         try {
@@ -53,14 +53,27 @@ const productStore = (set) => ({
             console.error('Error creating product', error)
         }
     },
-    getProducts: async () => {
+    // method to fetch products by store_id
+    getProductsByStoreId: async (store_id) => {
         try {
-          const response = await axios.get("http://localhost:8080/product");
-          set({ products: response.data });
+            const response = await axios.get(`http://localhost:8080/product/store/${store_id}`);
+            set({ products: response.data });
         } catch (error) {
-          console.error("Failed to getProducts", error);
+            console.error('Error fetching products by store_id', error);
         }
-      },
+    },
+    deleteProduct: async (product_id, token) => {
+        try {
+          const response = await axios.delete(`http://localhost:8080/store/${product_id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          console.log('product deleted successfully', response.data);
+        } catch (error) {
+          console.error('Error deleting product', error);
+        }
+      }
 })
 
 const useProduct = create(productStore)

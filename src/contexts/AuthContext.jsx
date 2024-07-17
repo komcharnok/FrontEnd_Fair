@@ -21,7 +21,6 @@ function AuthContextProvider({children}) {
           headers : { Authorization : `Bearer ${token}`}
         })
         setUser(rs.data.user)
-        console.log(rs);
       }catch(err) {
         alert(err.response?.data?.error)
       }finally {
@@ -30,7 +29,7 @@ function AuthContextProvider({children}) {
     }
     run()
   }, [] )
-
+  
   const logout = () => {
     localStorage.removeItem('token')
     setUser(null)

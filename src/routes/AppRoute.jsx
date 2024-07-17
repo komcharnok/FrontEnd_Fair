@@ -67,7 +67,7 @@ const userRouter = createBrowserRouter([
       },
       { path: "best", element: <MainBestProduct /> },
       { path: "/chat", element: <MainChat /> },
-      { path: "/store/:user_id", element: <StorePage /> },
+      { path: "/product/store/:store_id", element: <StorePage /> },
 
     ],
   },

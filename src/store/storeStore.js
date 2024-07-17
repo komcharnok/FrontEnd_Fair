@@ -33,28 +33,54 @@ const storeStore = (set, get) => ({
         }
     },
 
-    createStore: async (token) => {
+    createStore: async (storeData) => {
         try {
-            const { store_name, store_description } = get(); // Retrieve current state
-            const response = await axios.post('http://localhost:8080/store', {
-                store_name,
-                store_description,
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            const response = await axios.post('http://localhost:8080/store', storeData);
             console.log('Store created successfully', response.data);
             set((state) => ({
-                stores: [...state.stores, response.data],
-                store_name: "",
-                store_description: "",
-                user_id: state.user_id // Keep the user_id intact
+                stores: [...state.stores, response.data.result],
+                store_name: '',
+                store_description: '',
+                user_id: state.user_id
             }));
         } catch (error) {
             console.error('Error creating store', error);
+            // Handle error state
         }
-    }
+    },
+    updateStore: async (store_id, ) => {
+        try {
+            const { store_name, store_description } = get();
+            const response = await axios.put(`http://localhost:8080/store/${store_id}`, {
+                store_name,
+                store_description,
+            }, 
+            // {
+            //     headers: {
+            //         Authorization: `Bearer ${token}`,
+            //     },
+            // }
+        );
+            console.log('Store updated successfully', response.data);
+            // Update the stores list or handle accordingly
+        } catch (error) {
+            console.error('Error updating store', error);
+        }
+    },
+
+    deleteStore: async (store_id, token) => {
+        try {
+          const response = await axios.delete(`http://localhost:8080/store/${store_id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          console.log('Store deleted successfully', response.data);
+          // Update the stores list or handle accordingly
+        } catch (error) {
+          console.error('Error deleting store', error);
+        }
+      }
 });
 
 const useStore = create(storeStore);
