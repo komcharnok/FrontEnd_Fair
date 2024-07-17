@@ -40,7 +40,6 @@ const userRouter = createBrowserRouter([
       </>
     ),
     children: [
-      { index: true, element: <HomePage /> },
       { path: "*", element: <h1>Page not found</h1> },
       { path: "shopcart", element: <ShopCard /> },
       { path: "address", element: <Address /> },
@@ -51,14 +50,13 @@ const userRouter = createBrowserRouter([
       { path: "ordersucess", element: <OrderSucess /> },
       { path: "paysucess", element: <PaySucess /> },
       { path: "nopay", element: <Nopay /> },
-      // { path: "revieworder", element: <Nopay /> },
       { path: "vendorhome", element: <VendorHome /> },
       { path: "review", element: <ReviewPage /> },
       { path: "reviewcreate", element: <ReviewCreate /> },
       { path: "search/:keyword", element: <SearchProduct /> },
       { path: "search/category/:category", element: <SearchProduct /> },
-
       { path: "home/productdetail/:product_id", element: <ProductDetail /> },
+      { path: "home", element: <HomePage /> },
       { path: "preoderhome", element: <PreOderHome /> },
       {
         path: "preoderhome/productdetail/:product_id",
@@ -111,3 +109,4 @@ export default function AppRouter() {
   // const user = true;
   return <RouterProvider router={finalRouter(user)} />;
 }
+
