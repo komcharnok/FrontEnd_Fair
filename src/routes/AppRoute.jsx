@@ -111,3 +111,4 @@ export default function AppRouter() {
   // const user = true;
   return <RouterProvider router={finalRouter(user)} />;
 }
+

@@ -37,6 +37,8 @@ function ProductDetail() {
     console.log(id,quantity)
   }
 
+  
+
 
   console.log("product = ", product);
 
