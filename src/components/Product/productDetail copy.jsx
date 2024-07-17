@@ -1,37 +1,39 @@
-import React, { useEffect } from "react";
+// import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
+// import useProductStore from "../../store/mocupstore/useProductStore";
 import { useChat, useProduct, useUser } from "../../store/store";
+import { useEffect } from "react";
 import axios from "axios";
 import useSocketStore from "../../store/storeSocket";
+
+// --------------- win ---------------------//
+import ReviewPage1 from "../../pages/review/ReviewId1";
+import ReviewPage2 from "../../pages/review/ReviewId2";
+import ReviewPage3 from "../../pages/review/ReviewId3";
+import ReviewPage4 from "../../pages/review/ReviewId4";
+import ReviewPage5 from "../../pages/review/ReviewId5";
+
 
 function ProductDetail() {
   const { product_id } = useParams();
   const navigate = useNavigate();
-  const { products, getProducts } = useProduct();
+  // const products = useProductStore((state) => state.products);
+  const { products } = useProduct();
+
+  // Mix Chat
+  // socket
   const { socket } = useSocketStore();
   const { resive_id, getStore_Id, user } = useUser();
   const { open_create_conversation, activeConversation } = useChat();
+  console.log("activeConversation = ", activeConversation);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await getProducts();
-    };
-    fetchData();
-  }, [getProducts]);
-
-  useEffect(() => {
-    const product = products.find((p) => p.product_id === parseInt(product_id));
-    if (product) {
-      getStore_Id(product.store_id);
-    }
-  }, [products, product_id, getStore_Id]);
-
+  console.log("resive_id = ", resive_id);
+  // Mix Chat
   const product = products.find((p) => p.product_id === parseInt(product_id));
 
   if (!product) {
     return <div>Product not found</div>;
   }
-
   const addproduct = async (id, quantity) => {
     try {
       const rs = await axios.post(
@@ -50,6 +52,8 @@ function ProductDetail() {
     console.log(id, quantity);
   };
 
+  console.log("product = ", product);
+
   function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -59,7 +63,16 @@ function ProductDetail() {
   let randomRating = getRandomInt(1, 5);
   let randomReview = getRandomInt(1, 150);
 
+  // Mix Chat
+  useEffect(() => {
+    const getStoreId = async (id) => {
+      await getStore_Id(id);
+    };
+    getStoreId(product.store_id);
+  }, []);
+
   const chat = async () => {
+    console.log("chat run");
     const { token } = user;
     const values = {
       receiver_id: resive_id.user_id,
@@ -69,6 +82,7 @@ function ProductDetail() {
     socket.emit("join conversation", activeConversation.id);
     navigate("/chat");
   };
+  // Mix Chat
 
   return (
     <div className="w-5/6 min-w-[600px] flex flex-col gap-3 mx-auto p-3">
@@ -78,8 +92,9 @@ function ProductDetail() {
             <a href="/">Home</a>
           </li>
           <li>
-          {product.product_title}
+            <a href="/">Documents</a>
           </li>
+          <li>Add Document</li>
         </ul>
         <span
           onClick={() => chat()}
@@ -89,16 +104,16 @@ function ProductDetail() {
             width="38px"
             height="38px"
             viewBox="0 0 1024 1024"
-            className="icon"
+            class="icon"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             fill="#000000"
           >
-            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
             <g
               id="SVGRepo_tracerCarrier"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             ></g>
             <g id="SVGRepo_iconCarrier">
               <path
@@ -157,20 +172,13 @@ function ProductDetail() {
                     {/* {"★".repeat(product.rating)}
             {"☆".repeat(5 - product.rating)} */}
                   </span>
-                  {/* <span className="text-gray-500 ml-2">
-                    ({randomReview}){/* ({product.reviews}) 
-                  </span> */}
+                  <span className="text-gray-500 ml-2">
+                    ({randomReview}){/* ({product.reviews}) */}
+                  </span>
                 </div>
               </div>
               <hr />
-              {/*  */}
-<<<<<<< HEAD
-              <div className="flex flex-wrap gap-3 py-2">
-                <div className="badge badge-outline">FREE Shipping</div>
-                <div className="badge badge-primary badge-outline">FAST Delivery</div>
-                <div className="badge badge-secondary badge-outline">Super Sale</div>
-                <div className="badge badge-accent badge-outline">recommend</div>
-=======
+            {/*  */}
               <div className="flex gap-2 px-2 py-2">
                 <h1>Colors:</h1>
                 <input
@@ -202,14 +210,13 @@ function ProductDetail() {
                 <button className="btn btn-sm btn-outline btn-error">
                   XXL
                 </button>
->>>>>>> e97d1cbc93787a92420d218c6057ad32f0450fe1
               </div>
               {/*  */}
               <div className="flex justify-center">
                 <div className="flex justify-center">
                   <button
                     onClick={() => addproduct(product.product_id, 1)}
-                    className="btn bg-red-500 px-20 text-white"
+                    className="bg-primary btn-sm px-20 text-white"
                   >
                     Add To Cart
                   </button>
@@ -217,6 +224,14 @@ function ProductDetail() {
               </div>
             </div>
           </div>
+
+          
+          <hr />
+          <ReviewPage1/>
+          <ReviewPage2/> 
+          <ReviewPage3/>
+          <ReviewPage4/>    
+          <ReviewPage5/>  
         </div>
       </section>
     </div>
