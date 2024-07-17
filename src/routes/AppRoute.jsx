@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { createBrowserRouter } from "react-router-dom";
 import LoginForm from "../pages/LoginForm";
 import RegisterForm from "../pages/RegisterForm";
@@ -40,6 +40,7 @@ const userRouter = createBrowserRouter([
       </>
     ),
     children: [
+      { index: true, element: <Navigate to="/home" replace /> },
       { path: "*", element: <h1>Page not found</h1> },
       { path: "shopcart", element: <ShopCard /> },
       { path: "address", element: <Address /> },
