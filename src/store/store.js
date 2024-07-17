@@ -1,32 +1,19 @@
 import create from "zustand";
 import axios from "axios";
 
-const useTodos = create((set) => ({
-  todos: [],
-  addTodo: (todo) => set((state) => ({ todos: [...state.todos, todo] })),
-  removeTodo: (id) =>
-    set((state) => ({ todos: state.todos.filter((todo) => todo.id !== id) })),
-  fetchTodos: async () => {
+const useUser = create((set) => ({
+  user: {},
+  resive_id: "",
+  getUser: (user) => set({ user: user }),
+  getStore_Id: async (id) => {
     try {
       const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/todos"
+        `http://localhost:8080/product/user/${id}`
       );
-      set({ todos: response.data });
+      set({ resive_id: response.data });
     } catch (error) {
-      console.error("Failed to fetch todos", error);
+      console.error("Failed to getStore_Id", error);
     }
-  },
-}));
-
-const useUser = create((set) => ({
-  user: {
-    id: "3",
-    name: "test1",
-    email: "test1@gmail.com",
-    picture:
-      "https://res-console.cloudinary.com/dce2p75s7/thumbnails/v1/image/upload/v1717686730/ZHV0bGN6c3Q2aHdtdHQyOHhmaDQ=/drilldown",
-    status: "hello test1",
-    token: "3",
   },
 }));
 
@@ -34,9 +21,14 @@ const useChat = create((set) => ({
   conversations: [],
   activeConversation: {},
   messages: [],
-  getConversations: async () => {
+  messageSocket: {},
+  getConversations: async (token) => {
     try {
-      const response = await axios.get("http://localhost:8080/conversation");
+      const response = await axios.get("http://localhost:8080/conversation", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       set({ conversations: response.data });
     } catch (error) {
       console.error("Failed to getConversations", error);
@@ -95,6 +87,7 @@ const useChat = create((set) => ({
       );
 
       set((state) => {
+        const msgSocket = response.data;
         const newMessage = response.data;
         const newMessages = [...state.messages, newMessage];
         const conversation = {
@@ -110,6 +103,7 @@ const useChat = create((set) => ({
         return {
           messages: newMessages,
           conversations: newConversations,
+          messageSocket: msgSocket,
         };
       });
 
@@ -157,8 +151,23 @@ const useProduct = create((set) => ({
       console.error("Failed to searchCategory", error);
     }
   },
-
-
 }));
 
-export { useTodos, useUser, useChat, useProduct };
+export { useUser, useChat, useProduct };
+
+// const useTodos = create((set) => ({
+//   todos: [],
+//   addTodo: (todo) => set((state) => ({ todos: [...state.todos, todo] })),
+//   removeTodo: (id) =>
+//     set((state) => ({ todos: state.todos.filter((todo) => todo.id !== id) })),
+//   fetchTodos: async () => {
+//     try {
+//       const response = await axios.get(
+//         "https://jsonplaceholder.typicode.com/todos"
+//       );
+//       set({ todos: response.data });
+//     } catch (error) {
+//       console.error("Failed to fetch todos", error);
+//     }
+//   },
+// }));

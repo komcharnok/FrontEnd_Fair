@@ -2,6 +2,8 @@ import React from "react";
 import useAuth from "./../hooks/useAuth";
 import { useState } from "react";
 import axios from "axios";
+import { useUser } from "../store/store";
+import ForgotPassword from "./ForgotPassword";
 
 function LoginForm() {
   const { setUser } = useAuth();
@@ -10,6 +12,11 @@ function LoginForm() {
     password: "",
   });
 
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+
+  const { getUser, user } = useUser();
+  console.log("user = ", user);
+
   const hdlChange = (e) => {
     setInput((prv) => ({ ...prv, [e.target.name]: e.target.value }));
   };
@@ -17,22 +24,38 @@ function LoginForm() {
   const hdlSubmit = async (e) => {
     try {
       e.preventDefault();
-      
-      const body = { username: input.username , password: input.password };
+
+      const body = { username: input.username, password: input.password };
       const rs = await axios.post("http://localhost:8080/auth/login", body);
       localStorage.setItem("token", rs.data);
       const rs2 = await axios.get("http://localhost:8080/auth/me", {
         headers: { Authorization: `Bearer ${rs.data}` },
       });
-      setUser(rs2.data.user);
+      // setUser(rs2.data.user);
+      setUser(rs2.data.username);
+      // console.log("rs2.data = ", rs2.data);
+      const userData = rs2.data;
+      const newUser = {
+        ...userData,
+        token: rs.data,
+      };
+      getUser(newUser);
     } catch (err) {
       alert(err.response?.data?.error);
-     
     }
   };
 
+  const handleForgotPasswordClick = (e) => {
+    e.preventDefault();
+    setShowForgotPassword(true);
+  };
+
+  const handleCloseForgotPassword = () => {
+    setShowForgotPassword(false);
+  };
+
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row mt-10">
       <img
         src="https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg"
         alt="Landing"
@@ -60,13 +83,28 @@ function LoginForm() {
             onChange={hdlChange}
             required
           />
-        
-        <div className="flex items-center justify-between pt-5">
-          <button type="submit" className="btn bg-red-500 text-white">Login</button>
-          <a href="#">Forgot Password</a>
-        </div>
+
+<div className="flex items-center justify-between pt-5">
+            <button type="submit" className="btn transition ease-in-out delay-150 bg-red-500 hover:-translate-y-1 hover:scale-110 hover:bg-red-400 duration-300 text-white">
+              Login
+            </button>
+            <a href="#!" onClick={handleForgotPasswordClick} className="text-red-500">
+              Forgot Password
+            </a>
+          </div>
         </form>
       </div>
+      {showForgotPassword && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 animate-fadeIn">
+          <ForgotPassword />
+          <button
+            className="absolute top-[280px] right-[645px] btn btn-sm btn-circle shadow-2xl"
+            onClick={handleCloseForgotPassword}
+          >
+            ✕
+          </button>
+        </div>
+      )}
     </div>
   );
 }

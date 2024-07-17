@@ -212,8 +212,12 @@ import { useEffect } from "react";
 
 function MainProductList() {
   const { keyword, category } = useParams();
+  console.log("keyword");
+  console.log("category");
   const { searchProducts, searchProduct, searchCategory } = useProduct();
   const [paginatorData, setpaginatorData] = useState([]);
+
+  console.log("paginatorData = ", paginatorData);
 
   // fetch search product
   useEffect(() => {
@@ -233,7 +237,10 @@ function MainProductList() {
   return (
     <div className="px-4 py-12">
       <RecommendedShops />
-      <Filter />
+      <Filter
+        paginatorData={paginatorData}
+        setpaginatorData={setpaginatorData}
+      />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {paginatorData.map((product) => (
           <ProductCard key={product.product_id} product={product} />

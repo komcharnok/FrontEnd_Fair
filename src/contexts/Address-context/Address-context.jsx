@@ -10,6 +10,7 @@ const AddressProvider = ({ children }) => {
     const [editAddress, setEditAddress] = useState(null);
     const [address, setAddress] = useState([]);
 
+
     // api
     const apiAddress = async () => {
         try {
@@ -38,9 +39,7 @@ const AddressProvider = ({ children }) => {
             console.error("Error deleting address:", error);
             alert('Error deleting address: ' + error.message);
         }
-    };
-
-
+    };  
 
     //เปิด-ปิด FormAddName
     const hdlOpenAddname = () => {
@@ -53,8 +52,6 @@ const AddressProvider = ({ children }) => {
         document.getElementById('FormAddName').showModal()
 
     };
-
-
 
     //เปิด-ปิด FormEdit
     const hdlOpenFromEdit = (address) => {
@@ -69,21 +66,22 @@ const AddressProvider = ({ children }) => {
         setEditAddress(null);
     };
 
-
+    const calculateTotalPrice = () => {
+        return orderUser.reduce((total, item) => total + (item.product.price * item.quantity), 0).toFixed(2);
+    };
 
     const contextValue = {
         address,
         opencloseAddname,
         opencloseEdit,
         editAddress,
+        calculateTotalPrice,
         hdlOpenAddname,
         hdlCloseAddname,
         hdlOpenFromEdit,
         hdlCloseFromEdit,
         hdlDelete,
         apiAddress
-
-
     };
 
     return (
