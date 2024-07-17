@@ -163,48 +163,14 @@ function ProductDetail() {
                 </div>
               </div>
               <hr />
-              {/*  */}
-<<<<<<< HEAD
+             
               <div className="flex flex-wrap gap-3 py-2">
                 <div className="badge badge-outline">FREE Shipping</div>
                 <div className="badge badge-primary badge-outline">FAST Delivery</div>
                 <div className="badge badge-secondary badge-outline">Super Sale</div>
                 <div className="badge badge-accent badge-outline">recommend</div>
-=======
-              <div className="flex gap-2 px-2 py-2">
-                <h1>Colors:</h1>
-                <input
-                  type="radio"
-                  name="radio-2"
-                  className="radio bg-red-400"
-                  defaultChecked
-                />
-                <input
-                  type="radio"
-                  name="radio-2"
-                  className="radio bg-orange-400"
-                />
-                <input
-                  type="radio"
-                  name="radio-2"
-                  className="radio bg-lime-500"
-                />
               </div>
-              <div className="flex gap-2 px-2 py-2">
-                <h1>Size:</h1>
-                <button className="btn btn-sm btn-outline btn-info">M</button>
-                <button className="btn btn-sm btn-outline btn-success">
-                  L
-                </button>
-                <button className="btn btn-sm btn-outline btn-warning">
-                  XL
-                </button>
-                <button className="btn btn-sm btn-outline btn-error">
-                  XXL
-                </button>
->>>>>>> e97d1cbc93787a92420d218c6057ad32f0450fe1
-              </div>
-              {/*  */}
+           
               <div className="flex justify-center">
                 <div className="flex justify-center">
                   <button

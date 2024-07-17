@@ -73,7 +73,23 @@ const productStore = (set) => ({
         } catch (error) {
           console.error('Error deleting product', error);
         }
-      }
+      },
+      updateProduct: async (product_id, productData) => {
+        try {
+            const response = await axios.put(`http://localhost:8080/product/${product_id}`, productData);
+            console.log('Product updated successfully', response.data);
+            set((state) => ({
+                products: state.products.map((product) => {
+                    if (product.product_id === product_id) {
+                        return { ...product, ...productData };
+                    }
+                    return product;
+                }),
+            }));
+        } catch (error) {
+            console.error('Error updating product', error);
+        }
+    },
 })
 
 const useProduct = create(productStore)
