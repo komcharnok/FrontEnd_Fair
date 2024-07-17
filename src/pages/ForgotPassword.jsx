@@ -5,9 +5,11 @@ function ForgotPassword() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false); // New state variable for loading
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when the form is submitted
     try {
       const response = await axios.post('http://localhost:8080/auth/forgot-password', {
         username,
@@ -16,12 +18,14 @@ function ForgotPassword() {
       setMessage(response.data.msg);
     } catch (error) {
       setMessage(error.response?.data?.message || 'Something went wrong');
+    } finally {
+      setLoading(false); // Set loading to false after the request is finished
     }
   };
 
   return (
     <div className="flex flex-col p-5 shadow-2xl rounded-lg justify-center items-center w-[600px] h-[400px] mt-10 bg-white">
-      <h2 className=" font-bold">Please enter your Email and Username.</h2>
+      <h2 className="font-bold">Please enter your Email and Username.</h2>
       <form className="flex flex-col gap-5 pt-5" onSubmit={handleSubmit}>
         <label className="input input-bordered flex items-center gap-2 w-[400px]">
           <svg
@@ -67,7 +71,7 @@ function ForgotPassword() {
           />
         </label>
         <button type="submit" className="btn bg-red-500 mt-4 text-white hover:bg-red-400">
-          Submit
+          {loading ? <span className="loading loading-spinner loading-sm"></span> : 'Submit'} {/* Display loading text when loading */}
         </button>
       </form>
       {message && <p className="pt-4">{message}</p>}
