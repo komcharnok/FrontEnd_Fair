@@ -1,9 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom';
 import PaySum from '../../components/Pay/PaySum'
 import PayMoney from '../../components/Pay/PayMoney'
 
 export default function Pays() {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const datas = JSON.parse(queryParams.get('data'));
+
+  if (!datas || !datas.orderUser || datas.orderUser.length === 0) {
+    return <div>No items to display.</div>;
+  }
   return (
     <><div className=' max-w-[1000px] mx-auto flex flex-col justify-between shadow-xl rounded-2xl pb-12 mt-3'>
 
@@ -12,8 +19,8 @@ export default function Pays() {
         <h2 className="text-red-500 text-xl font-semibold">ชำระเงิน</h2>
       </div>
       <div className='flex justify-center mx-8 gap-8 mt-8 '>
-        <PaySum />
-        <PayMoney />
+        <PaySum datas={datas}/>
+        <PayMoney datas={datas}/>
       </div>
     </div>
     </>
