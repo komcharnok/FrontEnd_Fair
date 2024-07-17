@@ -5,6 +5,14 @@ import { useChat, useProduct, useUser } from "../../store/store";
 import { useEffect } from "react";
 import axios from "axios";
 
+// --------------- win ---------------------//
+import ReviewPage1 from "../../pages/review/ReviewId1";
+import ReviewPage2 from "../../pages/review/ReviewId2";
+import ReviewPage3 from "../../pages/review/ReviewId3";
+import ReviewPage4 from "../../pages/review/ReviewId4";
+import ReviewPage5 from "../../pages/review/ReviewId5";
+
+
 function ProductDetail() {
   const { product_id } = useParams();
   const navigate = useNavigate();
@@ -209,6 +217,14 @@ function ProductDetail() {
               </div>
             </div>
           </div>
+
+          
+          <hr />
+          <ReviewPage1/>
+          <ReviewPage2/> 
+          <ReviewPage3/>
+          <ReviewPage4/>    
+          <ReviewPage5/>  
         </div>
       </section>
     </div>
