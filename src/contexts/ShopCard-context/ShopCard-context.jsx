@@ -18,7 +18,7 @@ const ShopCardProvider = ({ children }) => {
             console.log(err);
         }
     };
-
+    
     useEffect(() => {
         getorderId();
     }, []);
@@ -53,7 +53,7 @@ const ShopCardProvider = ({ children }) => {
 
     const calculateTotalPrice = () => {
         return orderUser.reduce((total, item) => total + (item.product.price * item.quantity), 0).toFixed(2);
-    };
+    }
     
 
     return (

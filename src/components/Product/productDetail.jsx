@@ -15,20 +15,19 @@ function ProductDetail() {
   if (!product) {
     return <div>Product not found</div>;
   }
-  const addproduct = async (id) => {
-    // id
-    console.log(id)
+  const addproduct = async (id, quantity) => {
     try {
-      const rs = await axios.post(`http://localhost:8080/order/${id}`,{}, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-      });
-      console.log(rs)
+        const rs = await axios.post(`http://localhost:8080/order/${id}`, { quantity }, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+        console.log(rs);
     } catch (err) {
-      console.log(err);
+        console.log(err);
     }
-  }
+}
+
 
   return (
     <div className="w-5/6 min-w-[600px] flex flex-col gap-3 mx-auto p-3">
@@ -81,7 +80,7 @@ function ProductDetail() {
                 <button className="btn btn-sm btn-outline btn-error">XXL</button>
               </div>
               <div className="flex justify-center">
-                <button onClick={() => addproduct(product.product_id)} className="bg-primary btn-sm px-20 text-white">
+                <button onClick={() => addproduct(product.product_id,1)} className="bg-primary btn-sm px-20 text-white">
                   Add To Cart
                 </button>
               </div>
