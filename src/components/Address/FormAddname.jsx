@@ -134,6 +134,7 @@ const FormAddname = () => {
                         <span className="label-text mt-2 pb-1">ที่อยู่</span>
                         <textarea
                             className='textarea textarea-info max-w-xl'
+                            placeholder="Bio"
                             name="address"
                             id="address"
                             value={input.address}

@@ -212,6 +212,8 @@ import { useEffect } from "react";
 
 function MainProductList() {
   const { keyword, category } = useParams();
+  console.log("keyword");
+  console.log("category");
   const { searchProducts, searchProduct, searchCategory } = useProduct();
   const [paginatorData, setpaginatorData] = useState([]);
 

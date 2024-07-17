@@ -4,6 +4,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useChat, useProduct, useUser } from "../../store/store";
 import { useEffect } from "react";
 import axios from "axios";
+import useSocketStore from "../../store/storeSocket";
+
+// --------------- win ---------------------//
+import ReviewPage1 from "../../pages/review/ReviewId1";
+import ReviewPage2 from "../../pages/review/ReviewId2";
+import ReviewPage3 from "../../pages/review/ReviewId3";
+import ReviewPage4 from "../../pages/review/ReviewId4";
+import ReviewPage5 from "../../pages/review/ReviewId5";
+
 
 function ProductDetail() {
   const { product_id } = useParams();
@@ -12,6 +21,8 @@ function ProductDetail() {
   const { products } = useProduct();
 
   // Mix Chat
+  // socket
+  const { socket } = useSocketStore();
   const { resive_id, getStore_Id, user } = useUser();
   const { open_create_conversation, activeConversation } = useChat();
   console.log("activeConversation = ", activeConversation);
@@ -25,18 +36,21 @@ function ProductDetail() {
   }
   const addproduct = async (id, quantity) => {
     try {
-      const rs = await axios.post(`http://localhost:8080/order/${id}`,{quantity:quantity} ,{
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+      const rs = await axios.post(
+        `http://localhost:8080/order/${id}`,
+        { quantity: quantity },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-      });
+      );
       console.log(rs);
     } catch (err) {
       console.log(err);
     }
-    console.log(id,quantity)
-  }
-
+    console.log(id, quantity);
+  };
 
   console.log("product = ", product);
 
@@ -48,10 +62,6 @@ function ProductDetail() {
 
   let randomRating = getRandomInt(1, 5);
   let randomReview = getRandomInt(1, 150);
-
-  // const handleAddToCart = () => {
-  //   navigate("/order", { state: { product_id: product.product_id } });
-  // };
 
   // Mix Chat
   useEffect(() => {
@@ -69,6 +79,7 @@ function ProductDetail() {
       token,
     };
     await open_create_conversation(values);
+    socket.emit("join conversation", activeConversation.id);
     navigate("/chat");
   };
   // Mix Chat
@@ -167,6 +178,7 @@ function ProductDetail() {
                 </div>
               </div>
               <hr />
+            {/*  */}
               <div className="flex gap-2 px-2 py-2">
                 <h1>Colors:</h1>
                 <input
@@ -199,16 +211,27 @@ function ProductDetail() {
                   XXL
                 </button>
               </div>
+              {/*  */}
               <div className="flex justify-center">
                 <div className="flex justify-center">
-                  <button onClick={() => addproduct(product.product_id,1)} className="bg-primary btn-sm px-20 text-white">
+                  <button
+                    onClick={() => addproduct(product.product_id, 1)}
+                    className="bg-primary btn-sm px-20 text-white"
+                  >
                     Add To Cart
                   </button>
                 </div>
-
               </div>
             </div>
           </div>
+
+          
+          <hr />
+          <ReviewPage1/>
+          <ReviewPage2/> 
+          <ReviewPage3/>
+          <ReviewPage4/>    
+          <ReviewPage5/>  
         </div>
       </section>
     </div>

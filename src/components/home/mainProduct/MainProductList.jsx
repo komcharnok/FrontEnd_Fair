@@ -30,7 +30,7 @@ function MainProductList() {
         >
           กดดูสินค้าเพิ่มเติม
         </button>
-      </div>
+      </div> 
       <hr className="my-10 border-b-2 border-gray-200" />
     </div>
   );
