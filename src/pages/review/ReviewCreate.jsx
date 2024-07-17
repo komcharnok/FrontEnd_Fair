@@ -1,10 +1,15 @@
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // ---------------------------- NO Header Navbar ----------------------------------//
 
-function ReviewCreate() {
 
+
+function ReviewCreate() {
+    const navigate = useNavigate()
+    const toProduct = () => {
+        navigate(`home/productdetail/1`)
+    }
 
     // const [rating, setRating] = useState(0);
     // const [content, setContent] = useState("");
@@ -52,17 +57,23 @@ function ReviewCreate() {
 
                         {/* <div class="card-review-content "> */}
                         {/* <textarea className="textarea textarea-bordered w-auto mt-5 " placeholder="กรอกรีวิวของคุณลงที่นี่"  ></textarea> */}
-                     
+
                         <textarea
                             type="text"
                             className='textarea textarea-bordered w-auto h-60'
                             placeholder="กรอกรีวิวของคุณลงที่นี่"
                         />
-                      
+
                         <div className="flex justify-end mt-6">
                             <Link to="/home/productdetail/1">
                                 <button type="button" className='btn mt-4 w-32 bg-red-500 hover:bg-red-700 text-white rounded-3xl'>สร้างรีวิว</button>
-                            </Link>
+                            </Link>  
+
+                          
+                                {/* <button onClick={()=>toProduct()} type="button" className='btn mt-4 w-32 bg-red-500 hover:bg-red-700 text-white rounded-3xl'>สร้างรีวิว</button>  */}
+                          
+
+
                         </div>
                         {/* </div> */}
                         {/* <div class="pic">
