@@ -64,7 +64,7 @@ const productStore = (set) => ({
     },
     deleteProduct: async (product_id, token) => {
         try {
-          const response = await axios.delete(`http://localhost:8080/store/${product_id}`, {
+          const response = await axios.delete(`http://localhost:8080/product/${product_id}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
