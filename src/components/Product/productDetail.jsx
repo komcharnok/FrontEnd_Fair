@@ -63,10 +63,6 @@ function ProductDetail() {
   let randomRating = getRandomInt(1, 5);
   let randomReview = getRandomInt(1, 150);
 
-  // const handleAddToCart = () => {
-  //   navigate("/order", { state: { product_id: product.product_id } });
-  // };
-
   // Mix Chat
   useEffect(() => {
     const getStoreId = async (id) => {
@@ -182,6 +178,7 @@ function ProductDetail() {
                 </div>
               </div>
               <hr />
+            {/*  */}
               <div className="flex gap-2 px-2 py-2">
                 <h1>Colors:</h1>
                 <input
@@ -214,6 +211,7 @@ function ProductDetail() {
                   XXL
                 </button>
               </div>
+              {/*  */}
               <div className="flex justify-center">
                 <div className="flex justify-center">
                   <button
