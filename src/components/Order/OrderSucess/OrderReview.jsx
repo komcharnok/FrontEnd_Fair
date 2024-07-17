@@ -33,9 +33,14 @@ export default function OrderReview({ orderUser }) {
                 </div>
               </div>
                 <div className='h-12 flex justify-end   mx-auto items-center  gap-2    '>
-                  <Link to={`/home/productdetail/${item.product.product_id}`} key={item.product.product_id}>
+                  {/* <Link to={`/home/productdetail/${item.product.product_id}`} key={item.product.product_id}>
+                    <button type="button" className='btn mt-4 w-32 bg-red-500 hover:bg-red-700 text-white rounded-3xl'>รีวิว</button>
+                  </Link> */}
+
+                  <Link to= "/reviewcreate">
                     <button type="button" className='btn mt-4 w-32 bg-red-500 hover:bg-red-700 text-white rounded-3xl'>รีวิว</button>
                   </Link>
+
                 </div>
             </div>
           ))}
