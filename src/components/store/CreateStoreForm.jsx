@@ -4,7 +4,7 @@ import React from 'react';
 import { useStore } from '../../store/storeStore';
 
 
-function CreateStoreForm({ closeModal, user_id }) {
+function CreateStoreForm({ closeModal, user_id }) { 
     const {
         store_name,
         store_description,
@@ -27,7 +27,8 @@ function CreateStoreForm({ closeModal, user_id }) {
         resetForm();
         closeModal(); // Close the modal after creating the store
     };
-
+    
+console.log(user_id);
     return (
         <div className="border flex flex-col mx-auto p-3">
             <h1 className="text-2xl">Join Your Store</h1>

@@ -1,16 +1,17 @@
-// vendorHome.jsx
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
+// vendorHome.jsx
+// vendorHome.jsx
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useStore } from '../../store/storeStore'
-import CustomModal from '../../components/Modal/CustomModal'
-import CreateStoreForm from '../../components/store/CreateStoreForm'
+import { useStore } from '../../store/storeStore';
+import CustomModal from '../../components/Modal/CustomModal';
+import CreateStoreForm from '../../components/store/CreateStoreForm';
 import { useUser } from '../../store/store';
 import EditStoreForm from './../../components/store/EditStoreForm';
 
 function VendorHome() {
-  const {user } = useUser();
-  const { stores, fetchStores, updateStore, deleteStore} = useStore();
+  const { user } = useUser();
+  const { stores, fetchStores, deleteStore } = useStore();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedStore, setSelectedStore] = useState(null);
@@ -18,7 +19,6 @@ function VendorHome() {
   useEffect(() => {
     fetchStores(user.user_id);
   }, [fetchStores, user.user_id]);
-  
 
   const handleOpenCreateModal = () => {
     setIsCreateModalOpen(true);
@@ -28,8 +28,9 @@ function VendorHome() {
     setIsCreateModalOpen(false);
   };
 
-  const handleOpenEditModal = (store) => {
-    setSelectedStore(store);
+  const handleOpenEditModal = (store_id) => {
+    const storeToEdit = stores.find(store => store.store_id === store_id);
+    setSelectedStore(storeToEdit);
     setIsEditModalOpen(true);
   };
 
@@ -40,21 +41,17 @@ function VendorHome() {
 
   const handleDeleteStore = async (store_id) => {
     await deleteStore(store_id);
-    // console.log(stores.store_id);
-    fetchStores(user.user_id);
-    // Optionally fetch updated stores list
-};
-  
-  // console.log(stores);
-  // console.log(user);
-  
+    await fetchStores(user.user_id); // รีเฟรชรายการร้านค้า
+  };
+
+
   return (
     <div className="container flex flex-col gap-2 items-center mx-auto">
       <div className="flex justify-between w-full pt-3">
         <h1 className="text-2xl font-bold">My Store</h1>
         <button className="btn  bg-red-600 text-white btn-sm" title="Create Store" onClick={handleOpenCreateModal}>
-          + Add Store
-        </button>
+          + Add Store       
+           </button>
       </div>
       <hr className="my-2 w-full" />
       <div className="bg-white shadow-md rounded-lg overflow-hidden relative">
@@ -73,14 +70,19 @@ function VendorHome() {
                 <p>{store.store_description}</p>
                 <div className="card-actions justify-between">
                   <div>
-                  <button className="btn bg-green-800 text-white"
-                  title="Edit Store"
-                  onClick={() => handleOpenEditModal(store)}
-                  >Edit</button>
-                  <button className="btn bg-red-600 text-white " 
-                  onClick={() => handleDeleteStore(store.store_id)}
-                  // onClick ={() => {console.log(store)}}
-                  >Delete</button>
+                    <button
+                      className="btn bg-green-800 text-white"
+                      title="Edit Store"
+                      onClick={() => handleOpenEditModal(store.store_id)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="btn bg-red-600 text-white "
+                      onClick={() => handleDeleteStore(store.store_id)}
+                    >
+                      Delete
+                    </button>
                   </div>
                   <Link to={`/product/store/${store.store_id}`} className="btn btn-primary">Visit</Link>
                 </div>
@@ -90,9 +92,10 @@ function VendorHome() {
         </div>
       </div>
 
-       {/* Modal for Create Store */}
-       <CustomModal isOpen={isCreateModalOpen} closeModal={handleCloseCreateModal} title="Create Store">
+      {/* Modal for Create Store */}
+      <CustomModal isOpen={isCreateModalOpen} closeModal={handleCloseCreateModal} title="Create Store">
         <CreateStoreForm closeModal={handleCloseCreateModal} user_id={user.user_id} />
+
       </CustomModal>
 
       {/* Modal for Edit Store */}
