@@ -12,7 +12,6 @@ import HomePage from "../pages/home/HomePage";
 import ShopCard from "../pages/ShopCard/ShopCard";
 import Address from "../pages/Address/Address";
 import Pays from "../pages/Pay/Pays";
-import Order from "../pages/Order/Order";
 
 import PaySucess from "../components/Pay/PaySucess";
 import PreOderHome from "../pages/preorderhome/PreOderHome";
@@ -28,6 +27,8 @@ import MainBestProduct from "../components/home/bestSell/MainBestProduct";
 import OrderPayMoney from "../components/Order/OrderSucess/OrderPayMoney";
 import Nopay from "../components/Order/OrderNoPay/Nopay";
 import OrderAll from "../components/Order/OrderNoPay/OrderAll";
+import OrderSucess from "../pages/Order/OrderSucess/OrderSucess";
+import Order from "../pages/Order/OrderNoPay/Order";
 
 const userRouter = createBrowserRouter([
   {
@@ -39,6 +40,7 @@ const userRouter = createBrowserRouter([
       </>
     ),
     children: [
+      { index: true, element: <HomePage /> },
       { path: "*", element: <h1>Page not found</h1> },
       { path: "shopcart", element: <ShopCard /> },
       { path: "address", element: <Address /> },
@@ -46,6 +48,7 @@ const userRouter = createBrowserRouter([
       { path: "order", element: <Order /> },
       { path: "orderall", element: <OrderAll /> },
       { path: "orderpaymoney", element: <OrderPayMoney /> },
+      { path: "ordersucess", element: <OrderSucess /> },
       { path: "paysucess", element: <PaySucess /> },
       { path: "nopay", element: <Nopay /> },
       // { path: "revieworder", element: <Nopay /> },
@@ -54,7 +57,7 @@ const userRouter = createBrowserRouter([
       { path: "reviewcreate", element: <ReviewCreate /> },
       { path: "search/:keyword", element: <SearchProduct /> },
       { path: "search/category/:category", element: <SearchProduct /> },
-      { path: "home", element: <HomePage /> },
+
       { path: "home/productdetail/:product_id", element: <ProductDetail /> },
       { path: "preoderhome", element: <PreOderHome /> },
       {

@@ -1,13 +1,11 @@
 import React, { useContext } from 'react';
 import { ShopCardContext } from '../../contexts/ShopCard-context/ShopCard-context';
 
+const ShopCardList = () => {
+    const { hdlDelete, orderUser } = useContext(ShopCardContext);
 
-const ShopCardList = ({ orderUser }) => {
-    const { hdlDelete, updateQuantity, calculateTotalPrice } = useContext(ShopCardContext);
-
-    const handleQuantityChange = (productId, newQuantity) => {
-        updateQuantity(productId, newQuantity);
-    };
+    // Calculate total price
+   
 
     return (
         <>
@@ -17,7 +15,7 @@ const ShopCardList = ({ orderUser }) => {
                         <img
                             src={item.product.product_pic}
                             className='object-cover rounded shadow-lg h-44 w-52'
-                            alt={item.product_title}
+                            alt={item.product.product_title}
                         />
                         <div className="txt ml-2 flex-grow">
                             <div className='flex justify-between w-full mr-5'>
@@ -25,7 +23,7 @@ const ShopCardList = ({ orderUser }) => {
                                 <p className='text-black'>{item.product.price} บาท</p>
                             </div>
                             <div className="flex items-center mt-2">
-                                <p className='text-black'>จำนวน</p>
+                                {/* <p className='text-black'>{item.quantity}</p> */}
                                 <input
                                     type="number"
                                     className='w-16 p-2 border border-gray-300 rounded ml-5 text-black bg-white'
@@ -33,6 +31,7 @@ const ShopCardList = ({ orderUser }) => {
                                     onChange={(e) => handleQuantityChange(item.product_id, e.target.value)}
                                     min="1"
                                 />
+                                
                             </div>
                             <button
                                 className="btn btn-circle mt-14 float-right bg-slate-100"
@@ -46,6 +45,7 @@ const ShopCardList = ({ orderUser }) => {
                     </div>
                 </div>
             ))}
+           
         </>
     );
 };
