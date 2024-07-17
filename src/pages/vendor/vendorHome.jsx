@@ -44,13 +44,14 @@ function VendorHome() {
     await fetchStores(user.user_id); // รีเฟรชรายการร้านค้า
   };
 
+
   return (
     <div className="container flex flex-col gap-2 items-center mx-auto">
       <div className="flex justify-between w-full pt-3">
         <h1 className="text-2xl font-bold">My Store</h1>
         <button className="btn  bg-red-600 text-white btn-sm" title="Create Store" onClick={handleOpenCreateModal}>
-          + Add Store
-        </button>
+          + Add Store       
+           </button>
       </div>
       <hr className="my-2 w-full" />
       <div className="bg-white shadow-md rounded-lg overflow-hidden relative">
@@ -94,6 +95,7 @@ function VendorHome() {
       {/* Modal for Create Store */}
       <CustomModal isOpen={isCreateModalOpen} closeModal={handleCloseCreateModal} title="Create Store">
         <CreateStoreForm closeModal={handleCloseCreateModal} user_id={user.user_id} />
+
       </CustomModal>
 
       {/* Modal for Edit Store */}
