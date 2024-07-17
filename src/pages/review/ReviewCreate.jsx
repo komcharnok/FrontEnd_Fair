@@ -1,32 +1,33 @@
-
+import { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 
 // ---------------------------- NO Header Navbar ----------------------------------//
 
 function ReviewCreate() {
 
 
-    const [rating, setRating] = useState(0);
-    const [content, setContent] = useState("");
+    // const [rating, setRating] = useState(0);
+    // const [content, setContent] = useState("");
 
-    const hdlRatingChange = (e) => {
-        setRating(e.target.value)
-    }
-    const hdlContentChange = (e) => {
-        setContent(e.target.value)
-    }
+    // const hdlRatingChange = (e) => {
+    //     setRating(e.target.value)
+    // }
+    // const hdlContentChange = (e) => {
+    //     setContent(e.target.value)
+    // }
 
-    const hdlSubmit = () => {
-        // console.log("rating", rating)
-        // console.log("content", content)
-        setRating(0)
-        setContent(" ")
-    }
+    // const hdlSubmit = () => {
+    //     console.log("rating", rating)
+    //     console.log("content", content)
+    //     setRating(0)
+    //     setContent(" ")
+    // }
 
-    const hdlCancel= () => {
-        // console.log("ยกเลิก")
-        setRating(0)
-        setContent(" ")
-    }
+    // const hdlCancel = () => {
+    //     console.log("ยกเลิก")
+    //     setRating(0)
+    //     setContent(" ")
+    // }
 
     return (
         <>
@@ -59,7 +60,7 @@ function ReviewCreate() {
                         />
                       
                         <div className="flex justify-end mt-6">
-                            <Link to="/preoderhome/productdetail/1">
+                            <Link to="/home/productdetail/1">
                                 <button type="button" className='btn mt-4 w-32 bg-red-500 hover:bg-red-700 text-white rounded-3xl'>สร้างรีวิว</button>
                             </Link>
                         </div>
