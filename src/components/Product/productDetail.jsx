@@ -9,7 +9,6 @@ import useSocketStore from "../../store/storeSocket";
 function ProductDetail() {
   const { product_id } = useParams();
   const navigate = useNavigate();
-  // const products = useProductStore((state) => state.products);
   const { products } = useProduct();
 
   // Mix Chat
@@ -170,7 +169,7 @@ function ProductDetail() {
                 </div>
               </div>
               <hr />
-            {/*  */}
+              {/*  */}
               <div className="flex gap-2 px-2 py-2">
                 <h1>Colors:</h1>
                 <input
