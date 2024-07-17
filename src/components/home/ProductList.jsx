@@ -3,7 +3,7 @@
 import { useProduct } from "../../store/store";
 import { getBestreOrder } from "../../utils/bestSell";
 import ProductCard from "./ProductCard";
-
+import { Link } from "react-router-dom";
 // const products = [
 //   {
 //     name: "HAVIT HV-G92 Gamepad",
@@ -54,13 +54,15 @@ function ProductList() {
   const bestPre = getBestreOrder(products, 4);
 
   // chage to productDetail
-  // const
+  // const 
 
   return (
     <div className="px-4 py-12">
       <div className="flex items-center my-6">
         <div className="bg-red-500 w-2 h-6 mr-2 rounded-sm"></div>
-        <h2 className="text-red-500 text-xl font-semibold">รับหัวสินค้า</h2>
+        <Link to="/preoderhome" className="text-red-500 text-xl font-semibold hover:underline">
+          รับหิ้วสินค้า
+        </Link>
       </div>
       <h2 className="text-2xl font-bold my-6">ได้รับความนิยมมากสุด</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

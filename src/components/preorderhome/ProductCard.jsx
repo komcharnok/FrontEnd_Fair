@@ -2,8 +2,8 @@
 import { Link } from "react-router-dom";
 
 function ProductCard({ product, typeProduct }) {
-  const BACKEND_URL = `http://localhost:8080/image`;
-  const imageUrl = `${BACKEND_URL}/${product.product_pic}`;
+  // const BACKEND_URL = `http://localhost:8080/image`;
+  // const imageUrl = `${BACKEND_URL}/${product.product_pic}`;
   // console.log("imageUrl = ", imageUrl);
 
   const percen =

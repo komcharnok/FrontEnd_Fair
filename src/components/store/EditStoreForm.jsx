@@ -29,7 +29,7 @@ function CreateStoreForm({ closeModal, user_id }) {
     };
 
     return (
-        <div className="border flex flex-col mx-auto p-3">
+        <div className="border flex flex-col  mx-auto p-3">
             <h1 className="text-2xl">Join Your Store</h1>
             <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
                 {/* store name */}
@@ -75,11 +75,11 @@ function CreateStoreForm({ closeModal, user_id }) {
                     <input type="file" className="file-input file-input-bordered w-full max-w-xs" />
                 </label>
 
-                <button className="btn btn-outline  btn-sm bg-red-600 text-white mt-2" type="submit">
-                    Create Store
+                <button className="btn btn-outline btn-sm bg-red-600 text-white mt-2" type="submit">
+                    Save edit Store
                 </button>
             </form>
-            <button className="btn btn-outline  btn-sm bg-red-600 text-white mt-2" onClick={closeModal}>
+            <button className="btn btn-outline btn-sm bg-red-600 text-white mt-2" onClick={closeModal}>
                 Close
             </button>
         </div>

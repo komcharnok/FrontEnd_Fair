@@ -27,6 +27,7 @@ import MainBestProduct from "../components/home/bestSell/MainBestProduct";
 import OrderPayMoney from "../components/Order/OrderSucess/OrderPayMoney";
 import Nopay from "../components/Order/OrderNoPay/Nopay";
 import OrderAll from "../components/Order/OrderNoPay/OrderAll";
+import StorePage from './../pages/vendor/storePage';
 import OrderSucess from "../pages/Order/OrderSucess/OrderSucess";
 import Order from "../pages/Order/OrderNoPay/Order";
 
@@ -50,11 +51,13 @@ const userRouter = createBrowserRouter([
       { path: "ordersucess", element: <OrderSucess /> },
       { path: "paysucess", element: <PaySucess /> },
       { path: "nopay", element: <Nopay /> },
-      { path: "vendorhome", element: <VendorHome /> },
+      // { path: "revieworder", element: <Nopay /> },
       { path: "review", element: <ReviewPage /> },
       { path: "reviewcreate", element: <ReviewCreate /> },
       { path: "search/:keyword", element: <SearchProduct /> },
       { path: "search/category/:category", element: <SearchProduct /> },
+      
+      { path: "vendorhome/:user_id", element: <VendorHome /> },
       { path: "home/productdetail/:product_id", element: <ProductDetail /> },
       { path: "home", element: <HomePage /> },
       { path: "preoderhome", element: <PreOderHome /> },
@@ -64,6 +67,8 @@ const userRouter = createBrowserRouter([
       },
       { path: "best", element: <MainBestProduct /> },
       { path: "/chat", element: <MainChat /> },
+      { path: "/product/store/:store_id", element: <StorePage /> },
+
     ],
   },
 ]);
