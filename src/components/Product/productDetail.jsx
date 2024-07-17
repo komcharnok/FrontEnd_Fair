@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 // import useProductStore from "../../store/mocupstore/useProductStore";
 import { useChat, useProduct, useUser } from "../../store/store";
 import { useEffect } from "react";
+import axios from "axios";
 
 function ProductDetail() {
   const { product_id } = useParams();
@@ -22,6 +23,20 @@ function ProductDetail() {
   if (!product) {
     return <div>Product not found</div>;
   }
+  const addproduct = async (id, quantity) => {
+    try {
+      const rs = await axios.post(`http://localhost:8080/order/${id}`,{quantity:quantity} ,{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+      console.log(rs);
+    } catch (err) {
+      console.log(err);
+    }
+    console.log(id,quantity)
+  }
+
 
   console.log("product = ", product);
 
@@ -34,9 +49,9 @@ function ProductDetail() {
   let randomRating = getRandomInt(1, 5);
   let randomReview = getRandomInt(1, 150);
 
-  const handleAddToCart = () => {
-    navigate("/order", { state: { product_id: product.product_id } });
-  };
+  // const handleAddToCart = () => {
+  //   navigate("/order", { state: { product_id: product.product_id } });
+  // };
 
   // Mix Chat
   useEffect(() => {
@@ -185,12 +200,12 @@ function ProductDetail() {
                 </button>
               </div>
               <div className="flex justify-center">
-                <button
-                  className="bg-primary btn-sm px-20 text-white"
-                  onClick={handleAddToCart}
-                >
-                  Add To Cart
-                </button>
+                <div className="flex justify-center">
+                  <button onClick={() => addproduct(product.product_id,1)} className="bg-primary btn-sm px-20 text-white">
+                    Add To Cart
+                  </button>
+                </div>
+
               </div>
             </div>
           </div>

@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 
-const ShopCardPay = ({ orderUser, totalPrice }) => {
+const ShopCardPay = ({ orderUser,calculateTotalPrice }) => {
+
+    const totalPrice = calculateTotalPrice();  
+    
     return (
         <div className="mt-3">
             <div className='flex justify-between w-full mr-5 text-black'>
