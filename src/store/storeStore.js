@@ -1,10 +1,10 @@
 import { create } from 'zustand';
 import axios from 'axios';
-
-const storeStore = (set) => ({
+  
+const storeStore = (set, get) => ({
     store_name: "",
     store_description: "",
-    user_id: null, // Default to null until set
+    user_id: null,
     stores: [],
 
     setStoreName: (name) => set({ store_name: name }),
@@ -13,12 +13,16 @@ const storeStore = (set) => ({
     resetForm: () => set({
         store_name: "",
         store_description: "",
-        user_id: null 
+        user_id: null
     }),
 
-    fetchStores: async (token) => {
+    fetchStores: async (user_id, token) => {
+        if (user_id === null || user_id === undefined) {
+            console.error('User ID is null or undefined');
+            return;
+        }
         try {
-            const response = await axios.get('http://localhost:8080/store', {
+            const response = await axios.get(`http://localhost:8080/store/${user_id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

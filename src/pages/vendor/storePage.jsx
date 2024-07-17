@@ -15,7 +15,7 @@ function StorePage() {
 
   const fetchStore = async () => {
       try {
-          const response = await axios.get(`http://localhost:8080/store/${store_id}`);
+          const response = await axios.get(`http://localhost:8080/store/${user_id}`);
           setStore(response.data);
       } catch (error) {
           console.error('Error fetching store', error);

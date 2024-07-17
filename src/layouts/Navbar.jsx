@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useAuth from "./../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState ,useEffect } from "react";
 
 const guestNav = [
   { to: "/", text: "เข้าสู่ระบบ" },
@@ -19,6 +19,13 @@ const finalNav = (user) => {
 
 export default function Navbar() {
   const { user, logout } = useAuth();
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    if (user && user.user_id) {
+      setUserId(user.user_id);
+    }
+  }, [user]);
 
   const hdlLogout = () => {
     logout();
@@ -45,9 +52,13 @@ export default function Navbar() {
   };
 
   const handleVendorHome = () => {
-    navigator(`/vendorhome/${user.id}`);
+    if (user?.user_id) {
+      navigator(`/vendorhome/${user.user_id}`);
+    }
   };
-  
+
+  console.log(user);
+
   return (
     <>
       <div className=" bg-zinc-800  flex items-center h-11 w-full">
@@ -194,7 +205,7 @@ export default function Navbar() {
                       </Link>
                     </li>
                     <li>
-                    <button onClick={handleVendorHome}>
+                      <button onClick={handleVendorHome}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
@@ -212,9 +223,9 @@ export default function Navbar() {
                     </li>
                   </ul>
                 </div>
-               
-                 
-               
+
+
+
                 <div
                   tabIndex={0}
                   role="button"
@@ -241,7 +252,7 @@ export default function Navbar() {
                       </span>
                     </div>
                   </Link>
-                  
+
                 </div>
               </div>
             </div>
