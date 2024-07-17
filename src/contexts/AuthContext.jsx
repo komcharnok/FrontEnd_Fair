@@ -29,7 +29,7 @@ function AuthContextProvider({children}) {
     }
     run()
   }, [] )
-
+  
   const logout = () => {
     localStorage.removeItem('token')
     setUser(null)

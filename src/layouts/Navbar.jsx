@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { Link } from "react-router-dom";
 import useAuth from "./../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState ,useEffect } from "react";
 
 const guestNav = [
   { to: "/", text: "เข้าสู่ระบบ" },
@@ -42,6 +43,14 @@ export default function Navbar() {
     setKeyword("");
     navigator(`/search/${keyword}`);
   };
+
+
+  const handleVendorHome = () => {
+  
+      navigator(`/vendorhome/${user.user_id}`);
+  
+  };
+
 
   return (
     <>
@@ -188,8 +197,28 @@ export default function Navbar() {
                         <a>ติดต่อ</a>
                       </Link>
                     </li>
+                    <li>
+                      <button onClick={handleVendorHome}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="#000000"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M6 2L3 6v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6l-3-4H6zM3.8 6h16.4M16 10a4 4 0 1 1-8 0" />
+                        </svg>
+                      </button>
+                    </li>
                   </ul>
                 </div>
+
+
+
                 <div
                   tabIndex={0}
                   role="button"
@@ -216,6 +245,7 @@ export default function Navbar() {
                       </span>
                     </div>
                   </Link>
+
                 </div>
               </div>
             </div>

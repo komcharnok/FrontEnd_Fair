@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 const ShopCardPay = ({ orderUser,calculateTotalPrice }) => {
-
+    
     const totalPrice = calculateTotalPrice();  
     
     return (

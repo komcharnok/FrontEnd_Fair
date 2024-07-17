@@ -1,14 +1,8 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 
-const PaySum = () => {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const datas = JSON.parse(queryParams.get('data'));
+const PaySum = ({datas}) => {
 
-  if (!datas || !datas.orderUser || datas.orderUser.length === 0) {
-    return <div>No items to display.</div>;
-  }
 
   return (
     <div className='max-w-[400px]'>

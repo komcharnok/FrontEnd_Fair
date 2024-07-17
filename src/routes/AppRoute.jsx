@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { createBrowserRouter } from "react-router-dom";
 import LoginForm from "../pages/LoginForm";
 import RegisterForm from "../pages/RegisterForm";
@@ -27,6 +27,7 @@ import MainBestProduct from "../components/home/bestSell/MainBestProduct";
 import OrderPayMoney from "../components/Order/OrderSucess/OrderPayMoney";
 import Nopay from "../components/Order/OrderNoPay/Nopay";
 import OrderAll from "../components/Order/OrderNoPay/OrderAll";
+import StorePage from './../pages/vendor/storePage';
 import OrderSucess from "../pages/Order/OrderSucess/OrderSucess";
 import Order from "../pages/Order/OrderNoPay/Order";
 
@@ -40,6 +41,7 @@ const userRouter = createBrowserRouter([
       </>
     ),
     children: [
+      { index: true, element: <Navigate to="/home" replace /> },
       { path: "*", element: <h1>Page not found</h1> },
       { path: "shopcart", element: <ShopCard /> },
       { path: "address", element: <Address /> },
@@ -50,11 +52,13 @@ const userRouter = createBrowserRouter([
       { path: "ordersucess", element: <OrderSucess /> },
       { path: "paysucess", element: <PaySucess /> },
       { path: "nopay", element: <Nopay /> },
-      { path: "vendorhome", element: <VendorHome /> },
+      // { path: "revieworder", element: <Nopay /> },
       { path: "review", element: <ReviewPage /> },
       { path: "reviewcreate", element: <ReviewCreate /> },
       { path: "search/:keyword", element: <SearchProduct /> },
       { path: "search/category/:category", element: <SearchProduct /> },
+      
+      { path: "vendorhome/:user_id", element: <VendorHome /> },
       { path: "home/productdetail/:product_id", element: <ProductDetail /> },
       { path: "home", element: <HomePage /> },
       { path: "preoderhome", element: <PreOderHome /> },
@@ -64,6 +68,8 @@ const userRouter = createBrowserRouter([
       },
       { path: "best", element: <MainBestProduct /> },
       { path: "/chat", element: <MainChat /> },
+      { path: "/product/store/:store_id", element: <StorePage /> },
+
     ],
   },
 ]);
@@ -109,3 +115,4 @@ export default function AppRouter() {
   // const user = true;
   return <RouterProvider router={finalRouter(user)} />;
 }
+
