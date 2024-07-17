@@ -1,48 +1,58 @@
-import { create } from 'zustand'
-import axios from 'axios'
+import { create } from 'zustand';
+import axios from 'axios';
 
 const storeStore = (set) => ({
-    opening_date: new Date().toLocaleDateString('en-CA'), // Setting default opening date in format YYYY-MM-DD
     store_name: "",
     store_description: "",
-    user_id: 1, // Assuming a default user ID for now
+    user_id: null, // Default to null until set
     stores: [],
 
     setStoreName: (name) => set({ store_name: name }),
     setStoreDescription: (description) => set({ store_description: description }),
+    setUserId: (user_id) => set({ user_id }),
     resetForm: () => set({
-        opening_date: new Date().toLocaleDateString('en-CA'),
         store_name: "",
         store_description: "",
-        user_id: 1
+        user_id: null 
     }),
 
-    fetchStores: async (user_id) => {
+    fetchStores: async (token) => {
         try {
-            const response = await axios.get(`http://localhost:8080/store/${user_id}`)
-            set({ stores: response.data })
+            const response = await axios.get('http://localhost:8080/store', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            set({ stores: response.data });
         } catch (error) {
-            console.error('Error fetching stores', error)
+            console.error('Error fetching stores', error);
         }
     },
 
-    createStore: async (storeData) => {
+    createStore: async (token) => {
         try {
-            const response = await axios.post('http://localhost:8080/store', storeData)
-            console.log('Store created successfully', response.data)
+            const { store_name, store_description } = get(); // Retrieve current state
+            const response = await axios.post('http://localhost:8080/store', {
+                store_name,
+                store_description,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            console.log('Store created successfully', response.data);
             set((state) => ({
                 stores: [...state.stores, response.data],
                 store_name: "",
                 store_description: "",
-                opening_date: new Date().toLocaleDateString('en-CA'),
-                user_id: 1
-            }))
+                user_id: state.user_id // Keep the user_id intact
+            }));
         } catch (error) {
-            console.error('Error creating store', error)
+            console.error('Error creating store', error);
         }
     }
-})
+});
 
-const useStore = create(storeStore)
+const useStore = create(storeStore);
 
-export { useStore }
+export { useStore };
