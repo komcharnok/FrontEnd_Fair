@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import OrderAll from '../../components/Order/OrderAll';
-import Nopay from '../../components/Order/Nopay';
+import OrderAll from '../../components/Order/OrderNoPay/OrderAll';
+import Nopay from '../../components/Order/OrderNoPay/Nopay';
 
 function Order() {
   const [activeSection, setActiveSection] = useState(null);

@@ -1,5 +1,5 @@
 import React from 'react'
-import NavOrder from './NavOrder'
+import NavOrder from '../NavOrder'
 
 export default function ReviewOrder() {
     return (

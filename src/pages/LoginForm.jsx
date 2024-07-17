@@ -2,6 +2,7 @@ import React from "react";
 import useAuth from "./../hooks/useAuth";
 import { useState } from "react";
 import axios from "axios";
+import { useUser } from "../store/store";
 
 function LoginForm() {
   const { setUser } = useAuth();
@@ -10,6 +11,9 @@ function LoginForm() {
     password: "",
   });
 
+  const { getUser, user } = useUser();
+  console.log("user = ", user);
+
   const hdlChange = (e) => {
     setInput((prv) => ({ ...prv, [e.target.name]: e.target.value }));
   };
@@ -17,22 +21,29 @@ function LoginForm() {
   const hdlSubmit = async (e) => {
     try {
       e.preventDefault();
-      
-      const body = { username: input.username , password: input.password };
+
+      const body = { username: input.username, password: input.password };
       const rs = await axios.post("http://localhost:8080/auth/login", body);
       localStorage.setItem("token", rs.data);
       const rs2 = await axios.get("http://localhost:8080/auth/me", {
         headers: { Authorization: `Bearer ${rs.data}` },
       });
-      setUser(rs2.data.user);
+      // setUser(rs2.data.user);
+      setUser(rs2.data.username);
+      // console.log("rs2.data = ", rs2.data);
+      const userData = rs2.data;
+      const newUser = {
+        ...userData,
+        token: rs.data,
+      };
+      getUser(newUser);
     } catch (err) {
       alert(err.response?.data?.error);
-     
     }
   };
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row mt-10">
       <img
         src="https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg"
         alt="Landing"
@@ -60,11 +71,13 @@ function LoginForm() {
             onChange={hdlChange}
             required
           />
-        
-        <div className="flex items-center justify-between pt-5">
-          <button type="submit" className="btn bg-red-500 text-white">Login</button>
-          <a href="#">Forgot Password</a>
-        </div>
+
+          <div className="flex items-center justify-between pt-5">
+            <button type="submit" className="btn bg-red-500 text-white">
+              Login
+            </button>
+            <a href="#">Forgot Password</a>
+          </div>
         </form>
       </div>
     </div>

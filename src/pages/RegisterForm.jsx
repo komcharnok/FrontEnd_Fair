@@ -111,7 +111,7 @@ function RegisterForm() {
             className="file-input file-input-bordered file-input-red-500 w-full max-w "
           />
         </label>
-        <button className="btn btn-outline bg-red-500  mt-6 text-white	">
+        <button className="btn  bg-red-500  hover:bg-red-400  mt-6 text-white	">
           Submit
         </button>
       </form>

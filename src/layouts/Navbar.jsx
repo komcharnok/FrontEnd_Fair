@@ -1,11 +1,30 @@
 import React from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import useAuth from "./../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+const guestNav = [
+  { to: "/", text: "เข้าสู่ระบบ" },
+  { to: "/register", text: "ลงทะเบียน" },
+];
+
+const userNav = [];
+
+const finalNav = (user) => {
+  if (!user) return guestNav;
+  if (user) return userNav;
+};
 
 export default function Navbar() {
+  const { user, logout } = useAuth();
+
+  const hdlLogout = () => {
+    logout();
+  };
+
+  //Mix section
   const navigator = useNavigate();
-  // const { searchProducts, searchProduct } = useProduct();
   const [keyword, setKeyword] = useState("");
 
   const handleInput = (e) => {
@@ -26,33 +45,32 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="container">
-        <div className=" bg-zinc-800  flex items-center h-11 w-full">
-          <div className="h-5 flex  mx-auto">
-            <p className=" text-white text-xs">
-              Summer Sale For All Swim Suits And Free Express Delivery - OFF
-              50%!
-            </p>
-            <a className=" text-white text-xs underline ml-5" href="#">
-              ShopNow
-            </a>
-            <div className="dropdown dropdown-end ml-32 text-white text-xs items-center">
-              <div tabIndex={0} role="button" className="  rounded-btn">
-                English
-              </div>
-              <ul
-                tabIndex={0}
-                className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-22 mt-4"
-              >
-                <li>
-                  <a href="#" className="text-black">
-                    Thailand
-                  </a>
-                </li>
-              </ul>
+      <div className=" bg-zinc-800  flex items-center h-11 w-full">
+        <div className="h-5 flex  mx-auto">
+          <p className=" text-white text-xs">
+            Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
+          </p>
+          <a className=" text-white text-xs underline ml-5" href="#">
+            ShopNow
+          </a>
+          <div className="dropdown dropdown-end ml-32 text-white text-xs items-center">
+            <div tabIndex={0} role="button" className="  rounded-btn">
+              English
             </div>
+            <ul
+              tabIndex={0}
+              className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-22 mt-4"
+            >
+              <li>
+                <a href="#" className="text-black">
+                  Thailand
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
+      </div>
+      <div className="container">
         <div className="mx-auto navbar border-b-2 border-gray-200  text-black h-10 bg-white">
           <div className=" container mx-auto flex justify-between p-0  ">
             <div className="">
@@ -100,16 +118,10 @@ export default function Navbar() {
                   </li>
                 </ul>
               </div>
-              <Link to="/">
-                <a className="btn btn-ghost text-2xl font-bold text-red-500">FAIR</a>
+              <Link to="/home">
+                <a className="btn btn-ghost text-xl">FAIR</a>
               </Link>
             </div>
-            {/* <div className="">
-                        <ul className="menu menu-horizontal px-1">
-
-
-                        </ul>
-                    </div> */}
             <div className="w-3/5 relative flex items-center">
               <input
                 type="text"
@@ -140,10 +152,32 @@ export default function Navbar() {
                 </svg>
               </button>
             </div>
+            <div className="">
+              <ul className="menu menu-horizontal px-1"></ul>
+            </div>
             <div className="flex-none">
               <div className="dropdown dropdown-end flex">
                 <div>
                   <ul className="menu menu-horizontal px-1">
+                    <li className=" text-red-500 font-bold ">
+                      <Link to="/">
+                        <a>{user}</a>
+                      </Link>
+                    </li>
+                    {finalNav(user).map((el) => (
+                      <li key={el.to}>
+                        <Link to={el.to}>{el.text}</Link>
+                      </li>
+                    ))}
+
+                    {user && (
+                      <li>
+                        <Link to="/" onClick={hdlLogout}>
+                          ออกจากระบบ
+                        </Link>
+                      </li>
+                    )}
+
                     <li>
                       <Link to="/about">
                         <a>เกี่ยวกับ</a>
