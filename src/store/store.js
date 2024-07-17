@@ -1,23 +1,6 @@
 import create from "zustand";
 import axios from "axios";
 
-const useTodos = create((set) => ({
-  todos: [],
-  addTodo: (todo) => set((state) => ({ todos: [...state.todos, todo] })),
-  removeTodo: (id) =>
-    set((state) => ({ todos: state.todos.filter((todo) => todo.id !== id) })),
-  fetchTodos: async () => {
-    try {
-      const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/todos"
-      );
-      set({ todos: response.data });
-    } catch (error) {
-      console.error("Failed to fetch todos", error);
-    }
-  },
-}));
-
 const useUser = create((set) => ({
   user: {},
   resive_id: "",
@@ -38,6 +21,7 @@ const useChat = create((set) => ({
   conversations: [],
   activeConversation: {},
   messages: [],
+  messageSocket: {},
   getConversations: async (token) => {
     try {
       const response = await axios.get("http://localhost:8080/conversation", {
@@ -103,6 +87,7 @@ const useChat = create((set) => ({
       );
 
       set((state) => {
+        const msgSocket = response.data;
         const newMessage = response.data;
         const newMessages = [...state.messages, newMessage];
         const conversation = {
@@ -118,6 +103,7 @@ const useChat = create((set) => ({
         return {
           messages: newMessages,
           conversations: newConversations,
+          messageSocket: msgSocket,
         };
       });
 
@@ -167,4 +153,21 @@ const useProduct = create((set) => ({
   },
 }));
 
-export { useTodos, useUser, useChat, useProduct };
+export { useUser, useChat, useProduct };
+
+// const useTodos = create((set) => ({
+//   todos: [],
+//   addTodo: (todo) => set((state) => ({ todos: [...state.todos, todo] })),
+//   removeTodo: (id) =>
+//     set((state) => ({ todos: state.todos.filter((todo) => todo.id !== id) })),
+//   fetchTodos: async () => {
+//     try {
+//       const response = await axios.get(
+//         "https://jsonplaceholder.typicode.com/todos"
+//       );
+//       set({ todos: response.data });
+//     } catch (error) {
+//       console.error("Failed to fetch todos", error);
+//     }
+//   },
+// }));
