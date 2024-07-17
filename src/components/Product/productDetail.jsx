@@ -1,39 +1,37 @@
-// import React from "react";
+import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-// import useProductStore from "../../store/mocupstore/useProductStore";
 import { useChat, useProduct, useUser } from "../../store/store";
-import { useEffect } from "react";
 import axios from "axios";
 import useSocketStore from "../../store/storeSocket";
-
-// --------------- win ---------------------//
-import ReviewPage1 from "../../pages/review/ReviewId1";
-import ReviewPage2 from "../../pages/review/ReviewId2";
-import ReviewPage3 from "../../pages/review/ReviewId3";
-import ReviewPage4 from "../../pages/review/ReviewId4";
-import ReviewPage5 from "../../pages/review/ReviewId5";
-
 
 function ProductDetail() {
   const { product_id } = useParams();
   const navigate = useNavigate();
-  // const products = useProductStore((state) => state.products);
-  const { products } = useProduct();
-
-  // Mix Chat
-  // socket
+  const { products, getProducts } = useProduct();
   const { socket } = useSocketStore();
   const { resive_id, getStore_Id, user } = useUser();
   const { open_create_conversation, activeConversation } = useChat();
-  console.log("activeConversation = ", activeConversation);
 
-  console.log("resive_id = ", resive_id);
-  // Mix Chat
+  useEffect(() => {
+    const fetchData = async () => {
+      await getProducts();
+    };
+    fetchData();
+  }, [getProducts]);
+
+  useEffect(() => {
+    const product = products.find((p) => p.product_id === parseInt(product_id));
+    if (product) {
+      getStore_Id(product.store_id);
+    }
+  }, [products, product_id, getStore_Id]);
+
   const product = products.find((p) => p.product_id === parseInt(product_id));
 
   if (!product) {
     return <div>Product not found</div>;
   }
+
   const addproduct = async (id, quantity) => {
     try {
       const rs = await axios.post(
@@ -52,8 +50,6 @@ function ProductDetail() {
     console.log(id, quantity);
   };
 
-  console.log("product = ", product);
-
   function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -63,16 +59,7 @@ function ProductDetail() {
   let randomRating = getRandomInt(1, 5);
   let randomReview = getRandomInt(1, 150);
 
-  // Mix Chat
-  useEffect(() => {
-    const getStoreId = async (id) => {
-      await getStore_Id(id);
-    };
-    getStoreId(product.store_id);
-  }, []);
-
   const chat = async () => {
-    console.log("chat run");
     const { token } = user;
     const values = {
       receiver_id: resive_id.user_id,
@@ -82,7 +69,6 @@ function ProductDetail() {
     socket.emit("join conversation", activeConversation.id);
     navigate("/chat");
   };
-  // Mix Chat
 
   return (
     <div className="w-5/6 min-w-[600px] flex flex-col gap-3 mx-auto p-3">
@@ -104,16 +90,16 @@ function ProductDetail() {
             width="38px"
             height="38px"
             viewBox="0 0 1024 1024"
-            class="icon"
+            className="icon"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             fill="#000000"
           >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g
               id="SVGRepo_tracerCarrier"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></g>
             <g id="SVGRepo_iconCarrier">
               <path
@@ -178,7 +164,7 @@ function ProductDetail() {
                 </div>
               </div>
               <hr />
-            {/*  */}
+              {/*  */}
               <div className="flex gap-2 px-2 py-2">
                 <h1>Colors:</h1>
                 <input
@@ -224,14 +210,6 @@ function ProductDetail() {
               </div>
             </div>
           </div>
-
-          
-          <hr />
-          <ReviewPage1/>
-          <ReviewPage2/> 
-          <ReviewPage3/>
-          <ReviewPage4/>    
-          <ReviewPage5/>  
         </div>
       </section>
     </div>
