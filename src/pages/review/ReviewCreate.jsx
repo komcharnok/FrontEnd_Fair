@@ -40,7 +40,7 @@ function ReviewCreate() {
                 <div class="card text-primary-content w-auto ">
                     <div class="card-body">
                         <div class="card-review-user">
-                            <p class="text-black">Nattapong</p>
+                            <p class="text-black">win</p>
                         </div>
                         <div class="card-review-product">
                             <p class="text-black">Product : iPhone 13</p>
@@ -64,16 +64,14 @@ function ReviewCreate() {
                             placeholder="กรอกรีวิวของคุณลงที่นี่"
                         />
 
-                        <div className="flex justify-end mt-6">
+                        <div className="flex justify-between mt-6">
+
+                            <input type="file" className="file-input w-full max-w-xs text-black bg-gray-200" />  
                             <Link to="/home/productdetail/1">
-                                <button type="button" className='btn mt-4 w-32 bg-red-500 hover:bg-red-700 text-white rounded-3xl'>สร้างรีวิว</button>
+                                <button type="button" className='btn  w-32 bg-red-500 hover:bg-red-700 text-white rounded-3xl'>สร้างรีวิว</button>
                             </Link>  
-
-                          
+                      
                                 {/* <button onClick={()=>toProduct()} type="button" className='btn mt-4 w-32 bg-red-500 hover:bg-red-700 text-white rounded-3xl'>สร้างรีวิว</button>  */}
-                          
-
-
                         </div>
                         {/* </div> */}
                         {/* <div class="pic">
