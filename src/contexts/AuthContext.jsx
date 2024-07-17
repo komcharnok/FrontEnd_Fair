@@ -20,7 +20,7 @@ function AuthContextProvider({children}) {
         const rs = await axios.get('http://localhost:8080/auth/me', {
           headers : { Authorization : `Bearer ${token}`}
         })
-        setUser(rs.data.user)
+        setUser(rs.data.username)
       }catch(err) {
         alert(err.response?.data?.error)
       }finally {

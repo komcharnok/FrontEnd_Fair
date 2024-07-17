@@ -5,9 +5,11 @@ import Attachments from "./attachments/Attachments";
 import SendIcon from "../../../../svg/Send";
 import Input from "./Input";
 import EmojiPickerApp from "./EmojiPicker";
+import useSocketStore from "../../../../store/storeSocket";
 
 function ChatActions() {
-  const { activeConversation, sendMessage } = useChat();
+  const { socket } = useSocketStore();
+  const { activeConversation, sendMessage, messageSocket, messages } = useChat();
   const { user } = useUser();
   const { token } = user;
   const [message, setMessage] = useState("");
@@ -20,6 +22,8 @@ function ChatActions() {
   const SendMessageHandler = async (e) => {
     e.preventDefault();
     await sendMessage(values);
+    console.log("newMsg = ", messages);
+    socket.emit("send message", messageSocket);
     setMessage("");
   };
   return (

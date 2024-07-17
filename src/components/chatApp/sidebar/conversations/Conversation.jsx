@@ -6,9 +6,12 @@ import {
 import { useChat, useUser } from "../../../../store/store";
 import { capitalize } from "../../../../utils/string";
 import { dateHandler } from "../../../../utils/date";
+import useSocketStore from "../../../../store/storeSocket";
 
 function Conversation({ convo }) {
   const { open_create_conversation, activeConversation } = useChat();
+  // socket
+  const { socket } = useSocketStore();
   // console.log("activeConversation = ", activeConversation);
   console.log("convo = ", convo);
   const { user } = useUser();
@@ -19,6 +22,7 @@ function Conversation({ convo }) {
   };
   const openConversation = async () => {
     await open_create_conversation(values);
+    socket.emit("join conversation", activeConversation);
   };
 
   // console.log("user = ", user)
