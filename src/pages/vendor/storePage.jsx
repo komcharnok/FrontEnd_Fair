@@ -11,15 +11,17 @@ function StorePage() {
     const { store_id } = useParams();
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [selectedProduct, setSelectedProduct, setSelectedStoreId] = useState(null);
     const { products, getProductsByStoreId, deleteProduct, updateProduct } = useProduct();
   
     useEffect(() => {
       getProductsByStoreId(store_id);
     }, [store_id, getProductsByStoreId]);
   
-    const handleOpenCreateModal = () => {
+
+    const handleOpenCreateModal = (store_id) => {
       setIsCreateModalOpen(true);
+      setSelectedStoreId(store_id); // Assuming you have setSelectedStoreId in your component
     };
   
     const handleCloseCreateModal = () => {
@@ -51,7 +53,7 @@ function StorePage() {
       <div className="container flex flex-col gap-2 items-center mx-auto">
         <div className="flex justify-between w-full pt-3">
           <h1 className="text-2xl font-bold">My Products</h1>
-          <button className="btn btn-error btn-sm pt-2" onClick={handleOpenCreateModal}>
+          <button className="btn btn-error btn-sm pt-2" onClick={() => handleOpenCreateModal(store_id)}>
             + Add Product
           </button>
         </div>
@@ -61,7 +63,7 @@ function StorePage() {
             <div key={product.product_id} className="card card-compact bg-base-100 w-96 shadow-xl">
               <figure className="max-h-80">
                 <img
-                  src={product.product_pic || 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg'}
+                  src={product.product_pic || 'https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg?auto=compress&cs=tinysrgb&w=600'}
                   alt={product.product_title}
                 />
               </figure>
@@ -82,9 +84,9 @@ function StorePage() {
                       Delete
                     </button>
                   </div>
-                  <Link to={`/product/productdetail/${product.product_id}`} className="btn btn-primary">
-                    Visit
-                  </Link>
+                  <Link to={`/preoderhome/productdetail/${product.product_id}`} className="btn btn-primary">
+                  Visit
+                </Link>
                 </div>
               </div>
             </div>

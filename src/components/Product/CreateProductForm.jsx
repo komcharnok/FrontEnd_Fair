@@ -5,7 +5,7 @@ import axios from "axios"
 import { useProduct } from "../../store/productStore"
 import React from 'react'
 
-function CreateProductForm({ closeModal }) {
+function CreateProductForm({ closeModal, store_id }) {
     const {
       product_title,
       description,
@@ -13,11 +13,12 @@ function CreateProductForm({ closeModal }) {
       real_price,
       category,
       product_type,
-      store_id,
       setProductTitle,
       setDescription,
       setPrice,
       setRealPrice,
+      setCategory,
+      setProductType,
       resetForm,
       createProduct
     } = useProduct();
@@ -101,6 +102,31 @@ function CreateProductForm({ closeModal }) {
             value={real_price}
             onChange={(e) => setRealPrice(e.target.value)}
           />
+        </label>
+        <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Category</span>
+            </div>
+            <input 
+              type="text" 
+              placeholder="Type here"
+              className="input input-bordered w-full max-w-xs"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            />
+          </label>
+        <label className="form-control w-full max-w-xs">
+          <div className="label">
+            <span className="label-text">Product Type</span>
+          </div>
+          <select
+            className="select select-bordered w-full max-w-xs"
+            value={product_type}
+            onChange={(e) => setProductType(e.target.value)}
+          >
+            <option value="Normal">Normal</option>
+            <option value="PreOrder">PreOrder</option>
+          </select>
         </label>
         <button className="btn btn-outline btn-sm  bg-red-600 text-white mt-2" type="submit">Add Product</button>
       </form>

@@ -4,14 +4,14 @@ import React from 'react';
 import { useStore } from '../../store/storeStore';
 
 
-function CreateStoreForm({ closeModal, user_id }) { 
+function CreateStoreForm({ closeModal, user_id }) {  
     const {
         store_name,
         store_description,
         setStoreName,
         setStoreDescription,
         createStore,
-        resetForm
+        // fetchStores
     } = useStore();
 
     const handleSubmit = async (event) => {
@@ -24,7 +24,7 @@ function CreateStoreForm({ closeModal, user_id }) {
         };
 
         await createStore(storeData);
-        resetForm();
+        // fetchStores();
         closeModal(); // Close the modal after creating the store
     };
     
@@ -53,7 +53,7 @@ console.log(user_id);
                         <span className="label-text">Store Description</span>
                     </div>
                     <textarea
-                        className="textarea textarea-bordered h-24"
+                        className="textarea textarea-bordered h-16"
                         placeholder="Bio"
                         value={store_description}
                         onChange={(e) => setStoreDescription(e.target.value)}
