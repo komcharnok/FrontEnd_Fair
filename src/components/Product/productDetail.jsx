@@ -168,33 +168,6 @@ function ProductDetail() {
                     {/* {"★".repeat(product.rating)}
             {"☆".repeat(5 - product.rating)} */}
                   </span>
-<<<<<<< HEAD
-                  <span className="text-gray-500 ml-2">
-                    ({randomReview}){/* ({product.reviews}) */}
-                  </span>
-                </div>
-              </div>
-              <hr />
-              {/*  */}
-              <div className="flex gap-2 px-2 py-2">
-                <h1>Colors:</h1>
-                <input
-                  type="radio"
-                  name="radio-2"
-                  className="radio bg-red-400"
-                  defaultChecked
-                />
-                <input
-                  type="radio"
-                  name="radio-2"
-                  className="radio bg-orange-400"
-                />
-                <input
-                  type="radio"
-                  name="radio-2"
-                  className="radio bg-lime-500"
-                />
-=======
                  
                 </div>
               </div>
@@ -205,7 +178,6 @@ function ProductDetail() {
                 <div className="badge badge-primary badge-outline">FAST Delivery</div>
                 <div className="badge badge-secondary badge-outline">Super Sale</div>
                 <div className="badge badge-accent badge-outline">recommend</div>
->>>>>>> 6ae5fdbc1063c9cfd66954f38ccc944cad7345f3
               </div>
               <div className="flex gap-2 px-2 py-2">
                 <h1>Size:</h1>
