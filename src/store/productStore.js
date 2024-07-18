@@ -96,7 +96,7 @@ const productStore = (set) => ({
             console.error('Error fetching products by product_type', error);
         }
     },
-})
+}) 
 
 const useProduct = create(productStore)
 
