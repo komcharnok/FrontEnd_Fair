@@ -43,7 +43,7 @@ function VendorHome() {
     await deleteStore(store_id);
     await fetchStores(user.user_id); // รีเฟรชรายการร้านค้า
   };
-
+  console.log(user);
 
   return (
     <div className="container flex flex-col gap-2 items-center mx-auto">
@@ -76,7 +76,7 @@ function VendorHome() {
                       onClick={() => handleOpenEditModal(store.store_id)}
                     >
                       Edit
-                    </button>
+                    </button> 
                     <button
                       className="btn bg-red-600 text-white "
                       onClick={() => handleDeleteStore(store.store_id)}
@@ -84,7 +84,7 @@ function VendorHome() {
                       Delete
                     </button>
                   </div>
-                  <Link to={`/product/store/${store.store_id}`} className="btn btn-primary">Visit</Link>
+                  <Link to={`/product/store/${store.store_id}`} className="btn btn-primary">Visit store</Link>
                 </div>
               </div>
             </div>

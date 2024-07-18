@@ -134,7 +134,7 @@ function ProductDetail() {
         </span>
       </div>
 
-      <section className="border pt-6 pb-6 lg:py-32 flex items-center">
+      <section className="border pt-2 pb-3 lg:py-12 flex items-center">
         <div className="container mx-auto px-2">
           <div className="flex flex-col lg:flex-row items-center">
             <div className="flex flex-1 mb-8 lg:mb-0 justify-center items-center">
@@ -145,7 +145,7 @@ function ProductDetail() {
                 className="w-full h-80 object-cover"
               />
             </div>
-            <div className="flex-1 text-center lg:text-left border p-2 ">
+            <div className="flex-1 text-center lg:text-left  p-2 ">
               <h1 className="text-[26px] text-center font-medium mb-2 max-w-[450px] mx-auto">
                 {product.product_title}
               </h1>
@@ -168,6 +168,7 @@ function ProductDetail() {
                     {/* {"★".repeat(product.rating)}
             {"☆".repeat(5 - product.rating)} */}
                   </span>
+<<<<<<< HEAD
                   <span className="text-gray-500 ml-2">
                     ({randomReview}){/* ({product.reviews}) */}
                   </span>
@@ -193,6 +194,18 @@ function ProductDetail() {
                   name="radio-2"
                   className="radio bg-lime-500"
                 />
+=======
+                 
+                </div>
+              </div>
+              <hr />
+             
+              <div className="flex flex-wrap gap-3 py-4">
+                <div className="badge badge-outline">FREE Shipping</div>
+                <div className="badge badge-primary badge-outline">FAST Delivery</div>
+                <div className="badge badge-secondary badge-outline">Super Sale</div>
+                <div className="badge badge-accent badge-outline">recommend</div>
+>>>>>>> 6ae5fdbc1063c9cfd66954f38ccc944cad7345f3
               </div>
               <div className="flex gap-2 px-2 py-2">
                 <h1>Size:</h1>
@@ -221,9 +234,14 @@ function ProductDetail() {
             </div>
           </div>
 
+          <div className="flex mt-4">
+            <div className="text-xl text-gray-600">รีวิวจากลูกค้า</div>
+             <span className="text-gray-500 ml-2">
+                    ({randomReview}) 
+              </span>
+          </div>
           <hr />
-
-          <div className="mt-64">
+          <div className="mt-4">
             <ReviewPage11111 />
             <ReviewPage1 />
             <ReviewPage2 />
