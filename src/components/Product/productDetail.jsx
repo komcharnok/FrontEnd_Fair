@@ -88,8 +88,9 @@ function ProductDetail() {
             <a href="/">Home</a>
           </li>
           <li>
-          {product.product_title}
+            <a href="/">Documents</a>
           </li>
+          <li>Add Document</li>
         </ul>
         <span
           onClick={() => chat()}
@@ -167,25 +168,51 @@ function ProductDetail() {
                     {/* {"★".repeat(product.rating)}
             {"☆".repeat(5 - product.rating)} */}
                   </span>
-                  {/* <span className="text-gray-500 ml-2">
-                    ({randomReview}){/* ({product.reviews}) 
-                  </span> */}
+                  <span className="text-gray-500 ml-2">
+                    ({randomReview}){/* ({product.reviews}) */}
+                  </span>
                 </div>
               </div>
               <hr />
-             
-              <div className="flex flex-wrap gap-3 py-2">
-                <div className="badge badge-outline">FREE Shipping</div>
-                <div className="badge badge-primary badge-outline">FAST Delivery</div>
-                <div className="badge badge-secondary badge-outline">Super Sale</div>
-                <div className="badge badge-accent badge-outline">recommend</div>
+              {/*  */}
+              <div className="flex gap-2 px-2 py-2">
+                <h1>Colors:</h1>
+                <input
+                  type="radio"
+                  name="radio-2"
+                  className="radio bg-red-400"
+                  defaultChecked
+                />
+                <input
+                  type="radio"
+                  name="radio-2"
+                  className="radio bg-orange-400"
+                />
+                <input
+                  type="radio"
+                  name="radio-2"
+                  className="radio bg-lime-500"
+                />
               </div>
-           
+              <div className="flex gap-2 px-2 py-2">
+                <h1>Size:</h1>
+                <button className="btn btn-sm btn-outline btn-info">M</button>
+                <button className="btn btn-sm btn-outline btn-success">
+                  L
+                </button>
+                <button className="btn btn-sm btn-outline btn-warning">
+                  XL
+                </button>
+                <button className="btn btn-sm btn-outline btn-error">
+                  XXL
+                </button>
+              </div>
+              {/*  */}
               <div className="flex justify-center">
                 <div className="flex justify-center">
                   <button
                     onClick={() => addproduct(product.product_id, 1)}
-                    className="btn bg-red-500 px-20 text-white"
+                    className="bg-primary btn-sm px-20 text-white"
                   >
                     Add To Cart
                   </button>
