@@ -88,7 +88,6 @@ const guestRouter = createBrowserRouter([
       { path: "register", element: <RegisterForm /> },
       { path: "forgot-password", element: <ForgotPassword /> },
       { path: "reset-password/:token", element: <ResetPassword /> },
-      { path: "preoderhome", element: <PreOderHome /> },
       { path: "review", element: <ReviewPage /> },
       { path: "search/:keyword", element: <SearchProduct /> },
       { path: "search/category/:category", element: <searchProduct /> },

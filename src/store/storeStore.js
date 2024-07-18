@@ -47,6 +47,7 @@ const storeStore = (set, get) => ({
             console.error('Error creating store', error);
             // Handle error state
         }
+        
     },
     updateStore: async (store_id, storeData) => {
         try {

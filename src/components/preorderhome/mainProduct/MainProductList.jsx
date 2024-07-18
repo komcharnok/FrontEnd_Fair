@@ -1,19 +1,23 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "../ProductCard";
-import { useProduct } from "../../../store/store";
+import { useProduct } from "../../../store/productStore";
 // import useProductStore from "../../../store/mocupstore/useProductStore";
 
 function MainProductList() {
   const { products } = useProduct();
   const [itemsPerPage, setItemsPerPage] = useState(10);
   // const products = useProductStore((state) => state.products);
+
+   // Filter products by product_type "PreOrder"
+   const preOrderProducts = products.filter(product => product.product_type === 'PreOrder');
  
   const moreDataHandle = () => {
     setItemsPerPage((prevItemsPerPage) => prevItemsPerPage + 10);
   };
 
-  const displayedProducts = products.slice(0, itemsPerPage);
+  const displayedProducts = preOrderProducts.slice(0, itemsPerPage);
+  // const displayedProducts = products.slice(0, itemsPerPage);
 
 
   return (
