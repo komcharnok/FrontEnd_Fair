@@ -36,6 +36,11 @@ function ProductDetail() {
     }
   }, [products, product_id, getStore_Id]);
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const product = products.find((p) => p.product_id === parseInt(product_id));
 
   if (!product) {
