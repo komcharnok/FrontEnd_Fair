@@ -135,7 +135,7 @@ function ProductDetail() {
 
       <section className="border pt-2 pb-3 lg:py-12 flex items-center">
         <div className="container mx-auto px-2">
-          <div className="flex flex-col lg:flex-row items-center">
+          <div className="flex flex-col lg:flex-row items-cente mt-32">
             <div className="flex flex-1 mb-8 lg:mb-0 justify-center items-center">
               <img
                 // src={product.image}
@@ -172,7 +172,7 @@ function ProductDetail() {
               </div>
               <hr />
              
-              <div className="flex flex-wrap gap-3 py-4">
+              <div className="flex flex-wrap gap-3 py-4 justify-center">
                 <div className="badge badge-outline">FREE Shipping</div>
                 <div className="badge badge-primary badge-outline">FAST Delivery</div>
                 <div className="badge badge-secondary badge-outline">Super Sale</div>
@@ -192,7 +192,7 @@ function ProductDetail() {
             </div>
           </div>
 
-          <div className="flex mt-4">
+          <div className="flex mt-44">
             <div className="text-xl text-gray-600">รีวิวจากลูกค้า</div>
              <span className="text-gray-500 ml-2">
                     ({randomReview}) 
