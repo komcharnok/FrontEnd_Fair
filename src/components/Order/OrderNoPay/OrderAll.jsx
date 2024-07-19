@@ -32,9 +32,9 @@ function OrderAll({orderUser}) {
             </div>
           ))}
           <div className='h-12 flex justify-end  mx-auto items-center  gap-2  py-4 '>
-            <Link to="/pays">
+            {/* <Link to="/pays">
               <button type="button" className='btn mt-4 w-32 bg-red-500 hover:bg-red-700 text-white rounded-3xl' >ชำระตอนนี้</button>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

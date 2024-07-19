@@ -36,6 +36,11 @@ function ProductDetail() {
     }
   }, [products, product_id, getStore_Id]);
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const product = products.find((p) => p.product_id === parseInt(product_id));
 
   if (!product) {
@@ -88,9 +93,8 @@ function ProductDetail() {
             <a href="/">Home</a>
           </li>
           <li>
-            <a href="/">Documents</a>
+          {product.product_title}
           </li>
-          <li>Add Document</li>
         </ul>
         <span
           onClick={() => chat()}
@@ -134,9 +138,9 @@ function ProductDetail() {
         </span>
       </div>
 
-      <section className="border pt-6 pb-6 lg:py-32 flex items-center">
+      <section className="border pt-2 pb-3 lg:py-12 flex items-center">
         <div className="container mx-auto px-2">
-          <div className="flex flex-col lg:flex-row items-center">
+          <div className="flex flex-col lg:flex-row items-cente mt-32">
             <div className="flex flex-1 mb-8 lg:mb-0 justify-center items-center">
               <img
                 // src={product.image}
@@ -145,7 +149,7 @@ function ProductDetail() {
                 className="w-full h-80 object-cover"
               />
             </div>
-            <div className="flex-1 text-center lg:text-left border p-2 ">
+            <div className="flex-1 text-center lg:text-left  p-2 ">
               <h1 className="text-[26px] text-center font-medium mb-2 max-w-[450px] mx-auto">
                 {product.product_title}
               </h1>
@@ -168,51 +172,23 @@ function ProductDetail() {
                     {/* {"★".repeat(product.rating)}
             {"☆".repeat(5 - product.rating)} */}
                   </span>
-                  <span className="text-gray-500 ml-2">
-                    ({randomReview}){/* ({product.reviews}) */}
-                  </span>
+                 
                 </div>
               </div>
               <hr />
-              {/*  */}
-              <div className="flex gap-2 px-2 py-2">
-                <h1>Colors:</h1>
-                <input
-                  type="radio"
-                  name="radio-2"
-                  className="radio bg-red-400"
-                  defaultChecked
-                />
-                <input
-                  type="radio"
-                  name="radio-2"
-                  className="radio bg-orange-400"
-                />
-                <input
-                  type="radio"
-                  name="radio-2"
-                  className="radio bg-lime-500"
-                />
+             
+              <div className="flex flex-wrap gap-3 py-4 justify-center">
+                <div className="badge badge-outline">FREE Shipping</div>
+                <div className="badge badge-primary badge-outline">FAST Delivery</div>
+                <div className="badge badge-secondary badge-outline">Super Sale</div>
+                <div className="badge badge-accent badge-outline">recommend</div>
               </div>
-              <div className="flex gap-2 px-2 py-2">
-                <h1>Size:</h1>
-                <button className="btn btn-sm btn-outline btn-info">M</button>
-                <button className="btn btn-sm btn-outline btn-success">
-                  L
-                </button>
-                <button className="btn btn-sm btn-outline btn-warning">
-                  XL
-                </button>
-                <button className="btn btn-sm btn-outline btn-error">
-                  XXL
-                </button>
-              </div>
-              {/*  */}
+           
               <div className="flex justify-center">
                 <div className="flex justify-center">
                   <button
                     onClick={() => addproduct(product.product_id, 1)}
-                    className="bg-primary btn-sm px-20 text-white"
+                    className="btn bg-red-500 px-20 text-white"
                   >
                     Add To Cart
                   </button>
@@ -221,9 +197,14 @@ function ProductDetail() {
             </div>
           </div>
 
+          <div className="flex mt-44">
+            <div className="text-xl text-gray-600">รีวิวจากลูกค้า</div>
+             <span className="text-gray-500 ml-2">
+                    ({randomReview}) 
+              </span>
+          </div>
           <hr />
-
-          <div className="mt-64">
+          <div className="mt-4">
             <ReviewPage11111 />
             <ReviewPage1 />
             <ReviewPage2 />

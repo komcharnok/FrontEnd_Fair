@@ -2,19 +2,32 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "../ProductCard";
 import { useProduct } from "../../../store/store";
+import { useEffect } from "react";
 // import useProductStore from "../../../store/mocupstore/useProductStore";
 
 function MainProductList() {
-  const { products } = useProduct();
+  const { products, getProducts } = useProduct();
   const [itemsPerPage, setItemsPerPage] = useState(10);
   // const products = useProductStore((state) => state.products);
- 
+
+  useEffect(() => {
+    const getAll = () => {
+      getProducts();
+    };
+    getAll();
+  }, []);
+
+  // Filter products by product_type "PreOrder"
+  const preOrderProducts = products.filter(
+    (product) => product.product_type === "PreOrder"
+  );
+
   const moreDataHandle = () => {
     setItemsPerPage((prevItemsPerPage) => prevItemsPerPage + 10);
   };
 
-  const displayedProducts = products.slice(0, itemsPerPage);
-
+  const displayedProducts = preOrderProducts.slice(0, itemsPerPage);
+  // const displayedProducts = products.slice(0, itemsPerPage);
 
   return (
     <div className="px-4 py-12">
@@ -24,7 +37,10 @@ function MainProductList() {
       <hr className="my-10 border-b-4 border-red-500" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {displayedProducts.map((product) => (
-          <Link to={`/preoderhome/productdetail/${product.product_id}`} key={product.product_id}>
+          <Link
+            to={`/preoderhome/productdetail/${product.product_id}`}
+            key={product.product_id}
+          >
             <ProductCard product={product} />
           </Link>
         ))}
@@ -45,4 +61,3 @@ function MainProductList() {
 }
 
 export default MainProductList;
-

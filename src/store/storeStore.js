@@ -47,20 +47,11 @@ const storeStore = (set, get) => ({
             console.error('Error creating store', error);
             // Handle error state
         }
+        
     },
-    updateStore: async (store_id, ) => {
+    updateStore: async (store_id, storeData) => {
         try {
-            const { store_name, store_description } = get();
-            const response = await axios.put(`http://localhost:8080/store/${store_id}`, {
-                store_name,
-                store_description,
-            }, 
-            // {
-            //     headers: {
-            //         Authorization: `Bearer ${token}`,
-            //     },
-            // }
-        );
+            const response = await axios.put(`http://localhost:8080/store/${store_id}`, storeData);
             console.log('Store updated successfully', response.data);
             // Update the stores list or handle accordingly
         } catch (error) {
