@@ -1,10 +1,15 @@
 import React from 'react'
+import Navbar from './Navbar';
+import { Outlet } from 'react-router-dom';
+import { Toaster } from '@/components/ui/toaster';
 
 function Layout() {
   return (
-    <div>
-      Layout
-    </div>
+    <>
+      <Navbar />
+      <Outlet />
+      <Toaster/>
+    </>
   )
 }
 

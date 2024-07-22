@@ -1,11 +1,14 @@
-import React, { useContext } from 'react';
-import { ShopCardContext } from '../../contexts/ShopCard-context/ShopCard-context';
+import React, { useEffect } from 'react';
 
-const ShopCardList = () => {
-    const { hdlDelete, orderUser } = useContext(ShopCardContext);
+const ShopCardList = ({  hdlDelete,orderUser, getOrderId, handleQuantityChange }) => {
 
-    // Calculate total price
-   
+    useEffect(() => {
+        getOrderId();
+    }, [getOrderId]);    
+
+    if (!orderUser || orderUser.length === 0) {
+        return <p>ไม่มีสินค้าในตะกร้า.</p>;
+    }
 
     return (
         <>
@@ -23,7 +26,6 @@ const ShopCardList = () => {
                                 <p className='text-black'>{item.product.price} บาท</p>
                             </div>
                             <div className="flex items-center mt-2">
-                                {/* <p className='text-black'>{item.quantity}</p> */}
                                 <input
                                     type="number"
                                     className='w-16 p-2 border border-gray-300 rounded ml-5 text-black bg-white'
@@ -31,7 +33,6 @@ const ShopCardList = () => {
                                     onChange={(e) => handleQuantityChange(item.product_id, e.target.value)}
                                     min="1"
                                 />
-                                
                             </div>
                             <button
                                 className="btn btn-circle mt-14 float-right bg-slate-100"
@@ -45,7 +46,6 @@ const ShopCardList = () => {
                     </div>
                 </div>
             ))}
-           
         </>
     );
 };

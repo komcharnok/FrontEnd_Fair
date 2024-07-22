@@ -1,9 +1,26 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const ShopCardPay = ({ orderUser,calculateTotalPrice }) => {
-    
-    const totalPrice = calculateTotalPrice();  
-    
+const ShopCardPay = ({ orderUser, calculateTotalPrice }) => {
+    const navigate = useNavigate();
+    const totalPrice = calculateTotalPrice();
+
+
+    const loading = () => {
+        toast.promise(
+            new Promise(() => {
+                setTimeout(() => {
+                    navigate(`/address?data=${encodeURIComponent(JSON.stringify({ orderUser, totalPrice }))}`);
+                }, 2000); // 2-second delay
+            }),
+            {
+                pending: "กรุณารอสักครู่...",
+            },
+            {}
+        );
+    };
+
     return (
         <div className="mt-3">
             <div className='flex justify-between w-full mr-5 text-black'>
@@ -18,11 +35,15 @@ const ShopCardPay = ({ orderUser,calculateTotalPrice }) => {
                 <p>ยอดรวม</p>
                 <p className='font-semibold'>$ {totalPrice}</p>
             </div>
-            <Link to={`/address?data=${encodeURIComponent(JSON.stringify({ orderUser, totalPrice }))}`}>
-                <button className="btn btn-error hover:bg-red-700 w-full mt-3 text-white rounded-3xl">ทำการสั่งซื้อ</button>
-            </Link>
+            <button
+                onClick={loading}
+                className="btn btn-error hover:bg-red-700 w-full mt-3 text-white rounded-3xl">
+                ทำการสั่งซื้อ
+            </button>
+            <ToastContainer/>
         </div>
     );
 };
+
 
 export default ShopCardPay;

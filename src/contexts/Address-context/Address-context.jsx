@@ -27,19 +27,15 @@ const AddressProvider = ({ children }) => {
 
     const hdlDelete = async (e, id) => {
         try {
-            e.stopPropagation();
-            if (!confirm("Delete this address?")) {
-                return;
-            }
             const rs = await axios.delete(`http://localhost:8080/address/${id}`);
-            alert("Address deleted successfully.");
             apiAddress();
+         
 
         } catch (error) {
             console.error("Error deleting address:", error);
             alert('Error deleting address: ' + error.message);
         }
-    };  
+    };
 
     //เปิด-ปิด FormAddName
     const hdlOpenAddname = () => {

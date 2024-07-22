@@ -2,8 +2,38 @@ import React, { useState, useContext } from 'react';
 import { AddressContext } from '../../contexts/Address-context/Address-context';
 import axios from 'axios';
 import { province } from '../Address/province';
+import { ToastContainer, toast, Flip } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FormAddname = () => {
+    const notifySucess = () => {
+        toast.success('บันทึกข้อมูลสำเร็จ', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Flip,
+        });
+    };
+    const notifyError = () => {
+        toast.error('บันทึกข้อมูลผิดพลาด', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Flip,
+        });
+    }
+
+
     const { hdlCloseAddname, apiAddress } = useContext(AddressContext);
     const [errors, setErrors] = useState({});
     const [input, setInput] = useState({
@@ -35,12 +65,16 @@ const FormAddname = () => {
 
         try {
             const rs = await axios.post('http://localhost:8080/address', input);
-            hdlCloseAddname();
-            apiAddress();
-            alert('Create Success');
+            notifySucess();
+            setTimeout(() => {
+                hdlCloseAddname();
+                apiAddress();
+            }, 2000); // 2-second delay
+
+            // alert('Create Success');
         } catch (err) {
             console.log(err.message);
-            alert('Error: ' + err.message);
+            notifyError('Error: ' + err.message);
         }
     }
 
@@ -182,6 +216,8 @@ const FormAddname = () => {
 
                         <div className="flex mt-7 gap-6">
                             <button type="submit" className='btn btn-outline btn-success w-72 rounded-xl'>บันทึก</button>
+                            <ToastContainer />
+
                             <button type="button" className='btn btn-outline btn-error w-40 rounded-xl' onClick={hdlCloseAddname}>ยกเลิก</button>
                         </div>
                     </form>

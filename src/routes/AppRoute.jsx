@@ -5,7 +5,7 @@ import { createBrowserRouter } from "react-router-dom";
 import LoginForm from "../pages/LoginForm";
 import RegisterForm from "../pages/RegisterForm";
 import { RouterProvider } from "react-router-dom";
-import NavBar from "../layouts/Navbar";
+// import NavBar from "../layouts/Navbar";
 import useAuth from "../hooks/useAuth";
 import HomePage from "../pages/home/HomePage";
 
@@ -30,14 +30,15 @@ import OrderAll from "../components/Order/OrderNoPay/OrderAll";
 import StorePage from './../pages/vendor/storePage';
 import OrderSucess from "../pages/Order/OrderSucess/OrderSucess";
 import Order from "../pages/Order/OrderNoPay/Order";
+import Layout from "../layouts/Layout";
+import About from './../pages/About';
 
 const userRouter = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
-        <NavBar />
-        <Outlet />
+        <Layout />
       </>
     ),
     children: [
@@ -57,7 +58,7 @@ const userRouter = createBrowserRouter([
       { path: "reviewcreate", element: <ReviewCreate /> },
       { path: "search/:keyword", element: <SearchProduct /> },
       { path: "search/category/:category", element: <SearchProduct /> },
-      
+
       { path: "vendorhome/:user_id", element: <VendorHome /> },
       { path: "home/productdetail/:product_id", element: <ProductDetail /> },
       { path: "home", element: <HomePage /> },
@@ -79,8 +80,7 @@ const guestRouter = createBrowserRouter([
     path: "/",
     element: (
       <>
-        <NavBar />
-        <Outlet />
+        <Layout />
       </>
     ),
     children: [
@@ -99,6 +99,7 @@ const guestRouter = createBrowserRouter([
         element: <ProductDetail />,
       },
       { path: "best", element: <MainBestProduct /> },
+      { path: "about", element: <About /> },
       { path: "*", element: <h1>Page not found</h1> },
     ],
   },
