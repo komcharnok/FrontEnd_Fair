@@ -1,27 +1,42 @@
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function ForgotPassword() {
+function ForgotPassword({ onSuccess }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [countdown, setCountdown] = useState(0);
   const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(false); // New state variable for loading
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true when the form is submitted
+    setLoading(true);
     try {
       const response = await axios.post('http://localhost:8080/auth/forgot-password', {
         username,
         email
       });
+      toast.success(response.data.msg, { autoClose: 8000 }); // Set toast duration to 8 seconds
       setMessage(response.data.msg);
+      setCountdown(10); // Start countdown on success
     } catch (error) {
-      setMessage(error.response?.data?.message || 'Something went wrong');
+      toast.error(error.response?.data?.message || 'Something went wrong', { autoClose: 8000 }); // Set toast duration to 8 seconds
     } finally {
-      setLoading(false); // Set loading to false after the request is finished
+      setLoading(false);
     }
   };
+
+  useEffect(() => {
+    let timer;
+    if (countdown > 0) {
+      timer = setTimeout(() => setCountdown((prev) => prev - 1), 1000);
+    } else if (countdown === 0 && message) {
+      onSuccess(); // Call onSuccess callback to close the modal
+    }
+    return () => clearTimeout(timer);
+  }, [countdown, message, onSuccess]);
 
   return (
     <div className="flex flex-col p-5 shadow-2xl rounded-lg justify-center items-center w-[600px] h-[400px] mt-10 bg-white">
@@ -71,10 +86,24 @@ function ForgotPassword() {
           />
         </label>
         <button type="submit" className="btn bg-red-500 mt-4 text-white hover:bg-red-400">
-          {loading ? <span className="loading loading-spinner loading-sm"></span> : 'Submit'} {/* Display loading text when loading */}
+          {loading ? <span className="loading loading-spinner loading-sm"></span> : 'Submit'}
         </button>
       </form>
-      {message && <p className="pt-4">{message}</p>}
+      {countdown > 0 && (
+        <p className="pt-4">Redirecting in {countdown} seconds...</p>
+      )}
+      <ToastContainer
+        position="top-center"
+        autoClose={8000} // Set default duration to 8 seconds
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }
