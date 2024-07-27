@@ -3,11 +3,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useAuth from "./../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { useState ,useEffect } from "react";
+import { useState } from "react";
+import RegisterForm from './../pages/RegisterForm';
 
 const guestNav = [
   { to: "/", text: "เข้าสู่ระบบ" },
-  { to: "/register", text: "ลงทะเบียน" },
+  { text: "ลงทะเบียน" },
 ];
 
 const userNav = [];
@@ -19,6 +20,7 @@ const finalNav = (user) => {
 
 export default function Navbar() {
   const { user, logout } = useAuth();
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const hdlLogout = () => {
     logout();
@@ -42,6 +44,10 @@ export default function Navbar() {
     // await searchProduct(keyword);
     setKeyword("");
     navigator(`/search/${keyword}`);
+  };
+
+  const toggleModal = () => {
+    setModalOpen(!isModalOpen);
   };
 
 
@@ -173,11 +179,17 @@ export default function Navbar() {
                         <a>{user}</a>
                       </Link>
                     </li>
-                    {finalNav(user).map((el) => (
-                      <li key={el.to}>
-                        <Link to={el.to}>{el.text}</Link>
-                      </li>
-                    ))}
+                    {finalNav(user).map((el, index) =>
+                      el.text === "ลงทะเบียน" ? (
+                        <li key={index}>
+                          <button onClick={toggleModal}>{el.text}</button>
+                        </li>
+                      ) : (
+                        <li key={el.to}>
+                          <Link to={el.to}>{el.text}</Link>
+                        </li>
+                      )
+                    )}
 
                     {user && (
                       <li>
@@ -252,6 +264,35 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+      {isModalOpen && (
+        <div className="modal modal-open ">
+          <div className="modal-box w-[700px] h-[750px] max-w-4xl overflow-hidden">
+            <p className="py-4 overflow-y-auto">
+              <RegisterForm onSuccess={toggleModal} />
+            </p>
+            <div className="modal-action">
+              
+            </div>
+          </div>
+          <button className="btn btn-circle absolute mb-[750px] ml-[700px]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              onClick={toggleModal}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+      )}
     </>
   );
 }

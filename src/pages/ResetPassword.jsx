@@ -1,40 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ResetPassword() {
-  const { token } = useParams(); 
-  const navigate = useNavigate(); 
+  const { token } = useParams();
+  const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
-  const [message, setMessage] = useState('');
   const [countdown, setCountdown] = useState(5);
-  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true when form is submitted
+    setLoading(true);
     try {
       const response = await axios.post('http://localhost:8080/auth/reset-password', {
         token,
         newPassword,
         confirmNewPassword,
       });
-      setMessage(response.data.msg);
-      setError(false); // No error
-      setCountdown(5); // Reset the countdown
+      toast.success(response.data.msg, { autoClose: 8000 });
+      setIsSuccess(true); // Set success to true if request is successful
     } catch (error) {
-      console.error('Error occurred:', error);
-      setMessage(error.response?.data?.message || 'Something went wrong');
-      setError(true); // Set error
+      toast.error(error.response?.data?.message || 'Something went wrong', { autoClose: 8000 });
+      setIsSuccess(false); // Set success to false if request fails
     } finally {
-      setLoading(false); // Set loading to false when request is complete
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (message && !error) {
+    if (isSuccess && countdown > 0) {
       const timer = setInterval(() => {
         setCountdown((prevCountdown) => {
           if (prevCountdown === 1) {
@@ -44,9 +43,9 @@ function ResetPassword() {
           return prevCountdown - 1;
         });
       }, 1000);
-      return () => clearInterval(timer); // Cleanup interval on component unmount
+      return () => clearInterval(timer);
     }
-  }, [message, error, navigate]);
+  }, [isSuccess, countdown, navigate]);
 
   return (
     <div className='container mx-auto rounded-xl w-[550px] mt-[250px] h-[300px] shadow-2xl bg-white'>
@@ -87,19 +86,26 @@ function ResetPassword() {
               required
             />
           </label>
-          <button type="submit" className="btn bg-red-500 mt-4 text-white hover:bg-red-400 mt-4 w-full">
+          <button type="submit" className="btn bg-red-500 mt-4 text-white hover:bg-red-400 w-full">
             {loading ? <span className="loading loading-spinner loading-sm"></span> : 'Submit'}
           </button>
         </form>
         <div className='flex flex-col justify-center'>
-          {message && (
-            <>
-              <p className='text-center'>{message}</p>
-              {!error && <p className='text-center'>Redirecting in {countdown} seconds...</p>}
-            </>
-          )}
+          {/* Message handling is now done via toast */}
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={8000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }
